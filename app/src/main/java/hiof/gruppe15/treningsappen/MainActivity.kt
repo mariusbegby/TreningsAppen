@@ -96,6 +96,7 @@ fun WorkoutApp() {
 fun AppTopBar(){
     TopAppBar(
         title = { Text("Trennings App")},
+
         actions = {
             IconButton(onClick = { /* handle event*/})
             {
