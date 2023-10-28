@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import hiof.gruppe15.treningsappen.ui.Analytic
 import hiof.gruppe15.treningsappen.ui.Home
 import hiof.gruppe15.treningsappen.ui.LoginScreen
 import hiof.gruppe15.treningsappen.ui.Profile
@@ -57,11 +58,12 @@ fun NavigasjonApp() {
 
     NavHost(navController = navController, startDestination = "login") {
         composable("login") { LoginScreen(navController) }
-        composable("home") { Home() }
-        composable("profile") { Profile() }
-        composable("settings") { Settings() }
+        composable("home") { Home(navController) }
+        composable("profile") { Profile(navController) }
+        composable("settings") { Settings(navController) }
         composable("workoutplan") { WorkOutPlan(navController) }
-        composable("workoutsession") { WorkOutSession() }
+        composable("workoutsession") { WorkOutSession(navController) }
+        composable("Analytics") { Analytic(navController) }
     }
 }
 

@@ -43,7 +43,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import androidx.navigation.NavController
@@ -134,7 +133,7 @@ fun AppBottomBar(navController: NavController) {
 
             // Barbell/Dumbell Icon
             IconButton(onClick = {
-                Toast.makeText(context, "Barbell/Dumbell clicked", Toast.LENGTH_SHORT).show()
+                navController.navigate("workoutplan")
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.fitness),
@@ -145,7 +144,7 @@ fun AppBottomBar(navController: NavController) {
             Spacer(modifier = Modifier.width(12.dp))
             // Arrow Chart Increase Icon
             IconButton(onClick = {
-                Toast.makeText(context, "Arrow Chart Increase clicked", Toast.LENGTH_SHORT).show()
+                navController.navigate("Analytics")
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.trendingup),
@@ -156,7 +155,7 @@ fun AppBottomBar(navController: NavController) {
             Spacer(modifier = Modifier.width(12.dp))
             // Right Person Icon
             IconButton(onClick = {
-                Toast.makeText(context, "Person clicked", Toast.LENGTH_SHORT).show()
+                navController.navigate("Profile")
             }) {
                 Icon(
                     imageVector = Icons.Default.Person,
