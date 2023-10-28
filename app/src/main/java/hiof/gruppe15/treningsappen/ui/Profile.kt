@@ -12,10 +12,3 @@ fun Profile() {
         textAlign = TextAlign.Center)
 }
 
-@Preview
-@Composable
-fun ProfilePreview(){
-    Profile()
-
-    AppBottomBar()
-}

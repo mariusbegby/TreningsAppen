@@ -12,20 +12,3 @@ fun WorkOutSession() {
     Text(text = "you have just started your workout session",
         textAlign = TextAlign.Center)
 }
-@Preview
-@Composable
-fun AppTopBarPreview(){
-    AppTopBar()
-}
-
-@Preview
-@Composable
-fun WorkOutSessionPreview(){
-    WorkOutSession()
-}
-@Preview
-@Composable
-fun BottomBarPreview() {
-    AppBottomBar()
-
-}

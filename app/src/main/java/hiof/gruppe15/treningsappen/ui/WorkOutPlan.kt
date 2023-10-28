@@ -46,6 +46,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
+import androidx.navigation.NavController
 import com.example.treningsappen.R
 import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
@@ -53,13 +54,12 @@ import java.util.Locale
 
 
 @Composable
-fun WorkOutPlan() {
+fun WorkOutPlan(navController: NavController) {
     AppTopBar()
-    AppBottomBar()
-    WorkoutApp()
+    WorkoutApp(navController)
 }
 @Composable
-fun WorkoutApp() {
+fun WorkoutApp(navController: NavController) {
     val context = LocalContext.current
     val exercises = Datasource().loadExercisesFromJson(context)
 
@@ -67,7 +67,7 @@ fun WorkoutApp() {
         topBar = { AppTopBar() },
         floatingActionButton = { AppFloatingActionButton() },
         floatingActionButtonPosition = FabPosition.End,
-        bottomBar = { AppBottomBar() }
+        bottomBar = { AppBottomBar(navController) }
     ) { innerPadding ->
         Surface(
             modifier = Modifier
@@ -101,7 +101,7 @@ fun AppTopBar(){
     )
 }
 @Composable
-fun AppBottomBar() {
+fun AppBottomBar(navController: NavController) {
     val context = LocalContext.current
 
     BottomAppBar(
@@ -121,7 +121,7 @@ fun AppBottomBar() {
             ){
                 // Left Home Icon with Black Border Box
                 IconButton(onClick = {
-                    Toast.makeText(context, "Home clicked", Toast.LENGTH_SHORT).show()
+                    navController.navigate("home")
                 }) {
                     Icon(
                         imageVector = Icons.Default.Home,
@@ -285,14 +285,5 @@ fun DifficultyIndicator(difficulty: String) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun AppBottomBarPreview(){
-    AppTopBar()
-    AppBottomBar()
-    WorkoutApp()
-
 }
 
