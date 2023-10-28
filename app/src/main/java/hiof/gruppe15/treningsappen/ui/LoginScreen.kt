@@ -14,9 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 
 @Composable
-fun LoginScreen(login: () -> Unit) {
+fun LoginScreen(navController: NavController) {
     var password by remember { mutableStateOf("") }
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         OutlinedTextField(value = "Username", onValueChange = {})
@@ -26,15 +27,10 @@ fun LoginScreen(login: () -> Unit) {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
 
-        Button(onClick = { login() }) {
+        Button(onClick = { navController.navigate("WorkOutPlan") }) {
             Text(text = "Logg inn")
             
         }
 
     }
-}
-@Preview
-@Composable
-fun LoginPreview(){
-    LoginScreen(login = {})
 }

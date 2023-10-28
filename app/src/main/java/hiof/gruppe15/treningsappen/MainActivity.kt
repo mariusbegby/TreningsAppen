@@ -56,11 +56,11 @@ fun NavigasjonApp() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "login") {
-        composable("login") { LoginScreen(login = { navController.navigate("WorkOutPlan") }) }
+        composable("login") { LoginScreen(navController) }
         composable("home") { Home() }
         composable("profile") { Profile() }
         composable("settings") { Settings() }
-        composable("workoutplan") { WorkOutPlan() }
+        composable("workoutplan") { WorkOutPlan(navController) }
         composable("workoutsession") { WorkOutSession() }
     }
 }
