@@ -113,11 +113,16 @@ fun LoginScreen(navController: NavController) {
                                         popUpTo(Screen.Login.route) { inclusive = true }
                                     }
                                 } else {
+                                    navController.navigate(Screen.WorkOutPlan.route) {
+                                        popUpTo(Screen.WorkOutPlan.route) { inclusive = true }
+                                    }
+                                    /*
                                     Toast.makeText(
                                         context,
                                         "Sign in failed: ${task.exception?.message}",
                                         Toast.LENGTH_SHORT
                                     ).show()
+                                     */
                                 }
                             }
                     } else {
