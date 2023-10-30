@@ -46,6 +46,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.treningsappen.R
 import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
@@ -54,16 +55,19 @@ import java.util.Locale
 
 @Composable
 fun WorkOutPlan(navController: NavController) {
-    AppTopBar()
+    AppTopBar(navController)
     WorkoutApp(navController)
 }
+
 @Composable
 fun WorkoutApp(navController: NavController) {
     val context = LocalContext.current
     val exercises = Datasource().loadExercisesFromJson(context)
+    val navController = rememberNavController()
+
 
     Scaffold(
-        topBar = { AppTopBar() },
+        topBar = { AppTopBar(navController) },
         floatingActionButton = { AppFloatingActionButton() },
         floatingActionButtonPosition = FabPosition.End,
         bottomBar = { AppBottomBar(navController) }
@@ -81,13 +85,13 @@ fun WorkoutApp(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppTopBar(){
+fun AppTopBar(navController: NavController){
     TopAppBar(
+
         title = { Text("Work Out Plan") },
 
         actions = {
-            IconButton(onClick = { /* handle event*/})
-            {
+            IconButton(onClick = { navController.navigate(Screen.Profile.route)}) {
                 Icon(
                     Icons.Default.AccountCircle,
                     contentDescription = "Profile",
@@ -99,6 +103,7 @@ fun AppTopBar(){
         modifier = Modifier.background(Color.Transparent)
     )
 }
+
 @Composable
 fun AppBottomBar(navController: NavController) {
     val context = LocalContext.current
