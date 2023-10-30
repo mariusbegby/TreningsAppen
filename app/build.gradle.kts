@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -48,7 +50,20 @@ android {
         }
     }
 }
+
 dependencies {
+    implementation ("com.google.firebase:firebase-auth:latestVersion")
+
+    implementation ("com.google.firebase:firebase-auth:latest_version")
+    implementation ("com.google.firebase:firebase-firestore:latest_version")
+
+
+
+    implementation ("androidx.compose.ui:ui:<latest_version>")
+    implementation ("androidx.compose.material:material:<latest_version>")
+    implementation ("androidx.compose.ui:ui-tooling:<latest_version>")
+
+
     implementation ("androidx.compose.ui:ui:<latest_version>")
     implementation ("androidx.compose.material:material:<latest_version>")
     implementation ("androidx.compose.ui:ui-tooling:<latest_version>")
@@ -64,6 +79,11 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3:1.1.1")
     implementation("com.google.code.gson:gson:2.8.8")
+    implementation("com.google.firebase:firebase-crashlytics:18.5.1")
+    implementation("com.google.firebase:firebase-analytics:21.4.0")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+    implementation("com.google.firebase:firebase-auth-ktx:22.2.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.9.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

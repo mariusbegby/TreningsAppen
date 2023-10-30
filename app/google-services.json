@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1097418060887",
+    "project_id": "treningsappen-685ef",
+    "storage_bucket": "treningsappen-685ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097418060887:android:539d810dc9715332511f12",
+        "android_client_info": {
+          "package_name": "com.example.treningsappen"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ygU3v0v2aXEA4GaZrMAoCmZrAKKYKmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
