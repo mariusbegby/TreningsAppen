@@ -40,8 +40,8 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun LoginScreen(navController: NavController) {
 
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("test@example.com") }
+    var password by remember { mutableStateOf("passord123") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val auth: FirebaseAuth = FirebaseAuth.getInstance()
