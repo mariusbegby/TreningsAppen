@@ -20,7 +20,7 @@ import hiof.gruppe15.treningsappen.ui.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.Home
 import hiof.gruppe15.treningsappen.ui.LoginScreen
 import hiof.gruppe15.treningsappen.ui.Profile
-import hiof.gruppe15.treningsappen.ui.ProfileScreen
+import hiof.gruppe15.treningsappen.ui.RegisterScreen
 import hiof.gruppe15.treningsappen.ui.Screen
 import hiof.gruppe15.treningsappen.ui.Settings
 import hiof.gruppe15.treningsappen.ui.WorkOutPlan
@@ -55,7 +55,7 @@ fun NavigasjonApp() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Screen.Login.route) {
-        composable(Screen.Profile.route) { ProfileScreen(navController) }
+        composable(Screen.Register.route) { RegisterScreen(navController) }
         composable(Screen.Login.route) { LoginScreen(navController) }
         composable(Screen.Home.route) { Home(navController) }
         composable(Screen.Profile.route) { Profile(navController) }

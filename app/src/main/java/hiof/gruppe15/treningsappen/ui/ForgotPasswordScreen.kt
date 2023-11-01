@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -68,7 +69,15 @@ fun ForgotPasswordScreen(navController: NavController? = null) {
 }
 
     fun sendResetLink(email: String, context: Context) {
-        Toast.makeText(context, "Reset link sent to $email", Toast.LENGTH_SHORT).show()
+        val auth: FirebaseAuth = FirebaseAuth.getInstance()
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(context, "Reset link sent to $email", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
 fun requestPasswordReset(email: String) {
