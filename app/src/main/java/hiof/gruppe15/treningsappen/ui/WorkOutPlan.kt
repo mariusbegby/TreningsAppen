@@ -113,7 +113,9 @@ fun AppBottomBar(navController: NavController) {
             ){
                 // Left Home Icon with Black Border Box
                 IconButton(onClick = {
-                    navController.navigate("home")
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Home.route) { inclusive = true }
+                    }
                 }) {
                     Icon(
                         imageVector = Icons.Default.Home,
@@ -126,7 +128,9 @@ fun AppBottomBar(navController: NavController) {
 
             // Barbell/Dumbell Icon
             IconButton(onClick = {
-                navController.navigate("workoutplan")
+                navController.navigate(Screen.WorkOutPlan.route) {
+                    popUpTo(Screen.WorkOutPlan.route) { inclusive = true }
+                }
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.fitness),
@@ -137,7 +141,9 @@ fun AppBottomBar(navController: NavController) {
             Spacer(modifier = Modifier.width(12.dp))
             // Arrow Chart Increase Icon
             IconButton(onClick = {
-                navController.navigate("Analytics")
+                navController.navigate(Screen.Analytics.route) {
+                    popUpTo(Screen.Analytics.route) { inclusive = true }
+                }
             }) {
                 Icon(
                     painter = painterResource(id = R.drawable.trendingup),
@@ -148,7 +154,9 @@ fun AppBottomBar(navController: NavController) {
             Spacer(modifier = Modifier.width(12.dp))
             // Right Person Icon
             IconButton(onClick = {
-                navController.navigate("Profile")
+                navController.navigate(Screen.Profile.route) {
+                    popUpTo(Screen.Profile.route) { inclusive = true }
+                }
             }) {
                 Icon(
                     imageVector = Icons.Default.Person,
