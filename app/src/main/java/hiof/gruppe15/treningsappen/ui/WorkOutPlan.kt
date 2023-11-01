@@ -18,7 +18,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -90,17 +89,6 @@ fun AppTopBar(navController: NavController){
 
         title = { Text("Work Out Plan") },
 
-        actions = {
-            IconButton(onClick = { navController.navigate(Screen.Profile.route)}) {
-                Icon(
-                    Icons.Default.AccountCircle,
-                    contentDescription = "Profile",
-                    tint = Color.LightGray,
-                    modifier = Modifier.size(40.dp)
-                )
-            }
-        },
-        modifier = Modifier.background(Color.Transparent)
     )
 }
 

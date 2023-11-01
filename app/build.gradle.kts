@@ -51,7 +51,9 @@ android {
     }
 }
 
+
 dependencies {
+
     implementation ("com.google.firebase:firebase-auth:latestVersion")
 
     implementation ("com.google.firebase:firebase-auth:latest_version")

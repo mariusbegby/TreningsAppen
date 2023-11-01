@@ -2,10 +2,13 @@ package hiof.gruppe15.treningsappen.ui
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
@@ -31,6 +34,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -40,11 +44,12 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun LoginScreen(navController: NavController) {
 
-    var email by remember { mutableStateOf("test@example.com") }
-    var password by remember { mutableStateOf("passord123") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
 
     val emailFocusRequester = remember { FocusRequester() }
     val passwordFocusRequester = remember { FocusRequester() }
@@ -103,26 +108,22 @@ fun LoginScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(16.dp))
 
+
             Button(onClick = {
                 if (email.isNotEmpty() && password.isNotEmpty()) {
                     if (ValidationUtils.isValidEmail(email)) {
                         auth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    navController.navigate(Screen.Home.route) {
+                                    navController.navigate(Screen.WorkOutPlan.route) {
                                         popUpTo(Screen.Login.route) { inclusive = true }
                                     }
                                 } else {
-                                    navController.navigate(Screen.WorkOutPlan.route) {
-                                        popUpTo(Screen.WorkOutPlan.route) { inclusive = true }
-                                    }
-                                    /*
                                     Toast.makeText(
                                         context,
                                         "Sign in failed: ${task.exception?.message}",
                                         Toast.LENGTH_SHORT
                                     ).show()
-                                     */
                                 }
                             }
                     } else {
@@ -148,11 +149,27 @@ fun LoginScreen(navController: NavController) {
                     navController.navigate(Screen.ForgotPassword.route)
                 }
             )
+            Spacer(modifier = Modifier.height(16.dp))
 
-
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text("Don't have an account? ")
+                Text(
+                    text = "Sign Up",
+                    color = Color.Blue,
+                    textDecoration = TextDecoration.Underline,
+                    modifier = Modifier.clickable {
+                        navController.navigate("register")  // Adjust this route if it's different in your navigation setup
+                    }
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
+
 /*@Preview(showBackground = true)*/
 @Composable
 fun LoginScreenPreview() {
