@@ -116,7 +116,7 @@ fun LoginScreen(navController: NavController) {
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     navController.navigate(Screen.WorkOutPlan.route) {
-                                        popUpTo(Screen.Login.route) { inclusive = true }
+                                        popUpTo(Screen.WorkOutPlan.route) { inclusive = true }
                                     }
                                 } else {
                                     Toast.makeText(

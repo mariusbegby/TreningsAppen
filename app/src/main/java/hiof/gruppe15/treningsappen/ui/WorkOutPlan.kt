@@ -62,8 +62,6 @@ fun WorkOutPlan(navController: NavController) {
 fun WorkoutApp(navController: NavController) {
     val context = LocalContext.current
     val exercises = Datasource().loadExercisesFromJson(context)
-    val navController = rememberNavController()
-
 
     Scaffold(
         topBar = { AppTopBar(navController) },
