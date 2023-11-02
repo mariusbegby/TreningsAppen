@@ -1,6 +1,5 @@
 package hiof.gruppe15.treningsappen.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,15 +17,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -45,7 +41,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.treningsappen.R
 import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
@@ -65,8 +60,8 @@ fun WorkoutApp(navController: NavController) {
 
     Scaffold(
         topBar = { AppTopBar(navController) },
-        floatingActionButton = { AppFloatingActionButton() },
-        floatingActionButtonPosition = FabPosition.End,
+        //floatingActionButton = { AppFloatingActionButton() },
+        //floatingActionButtonPosition = FabPosition.End,
         bottomBar = { AppBottomBar(navController) }
     ) { innerPadding ->
         Surface(
@@ -92,7 +87,7 @@ fun AppTopBar(navController: NavController){
 
 @Composable
 fun AppBottomBar(navController: NavController) {
-    val context = LocalContext.current
+    //val context = LocalContext.current
 
     BottomAppBar(
         containerColor = Color.Unspecified,
@@ -166,7 +161,7 @@ fun AppBottomBar(navController: NavController) {
     }
 }
 
-@Composable
+/*@Composable
 fun AppFloatingActionButton() {
     val context = LocalContext.current
 
@@ -178,7 +173,7 @@ fun AppFloatingActionButton() {
     ) {
         Icon(Icons.Default.Add, contentDescription = "Add", tint = Color.Blue)
     }
-}
+}*/
 
 @Composable
 fun ExerciseList(exercises: List<Exercise>, modifier: Modifier = Modifier) {
