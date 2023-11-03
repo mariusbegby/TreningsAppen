@@ -29,31 +29,42 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.data.Datasource
+import hiof.gruppe15.treningsappen.model.Exercise
 import java.time.LocalTime
 
 @Composable
 fun Home(navController: NavController) {
     val currentTime = LocalTime.now()
-    val greeting = when {
-        currentTime.hour in 0..11 -> "Good Morning"
-        currentTime.hour in 12..16 -> "Good Afternoon"
+    val greeting = when (currentTime.hour) {
+        in 0..11 -> "Good Morning"
+        in 12..16 -> "Good Afternoon"
         else -> "Good Evening"
     }
+
+    var selectedExercises by remember { mutableStateOf(listOf<Exercise>()) }
     val context = LocalContext.current
     val loadedExercises = Datasource().loadExercisesFromJson(context)
     var searchText by remember { mutableStateOf(TextFieldValue()) }
     val filteredExercises = loadedExercises.filter {
         it.name.contains(searchText.text, true)
-    }
+   }
     Box(
         modifier = Modifier.fillMaxSize().padding(16.dp)
     ) {
-        // Place the greeting, welcome message, and search bar at the top
+
         Column(
             modifier = Modifier.align(Alignment.TopCenter)
         ) {
-            Text(text = greeting, textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.CenterHorizontally))
-            Text(text = "Welcome to the home page", textAlign = TextAlign.Center, modifier = Modifier.align(Alignment.CenterHorizontally))
+            Text(
+                text = greeting,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+            Text(
+                text = "Welcome to the home page",
+                textAlign = TextAlign.Center,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
             Spacer(modifier = Modifier.height(16.dp))
             TextField(
                 value = searchText,
@@ -64,16 +75,22 @@ fun Home(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             if (searchText.text.isNotEmpty()) {
                 Text(text = "Exercises", color = Color.Red, fontSize = 20.sp)
-                ExercisesWithCheckboxList(exercises = filteredExercises)
+                ExercisesWithCheckboxList(
+                    exercises = filteredExercises,
+                    onExerciseCheckedChange = { exercise, isChecked ->
+                        exercise.selected = isChecked
+                        selectedExercises = filteredExercises.filter { it.selected }
+                    }
+                )
             }
         }
 
-        // Place the FloatingActionButton at the bottom-right corner
         FloatingActionButton(
-            onClick = { /* Handle your FAB click logic here */ },
+            onClick = {  navController.navigate(Screen.SaveTrainingRoutine.route)},
             modifier = Modifier.align(Alignment.CenterEnd)
         ) {
             Icon(Icons.Default.Add, contentDescription = "Add")
         }
     }
 }
+
