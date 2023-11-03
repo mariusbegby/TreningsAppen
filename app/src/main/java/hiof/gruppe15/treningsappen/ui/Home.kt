@@ -1,5 +1,6 @@
 package hiof.gruppe15.treningsappen.ui
 
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,10 +21,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.data.Datasource
 import java.time.LocalTime
@@ -36,14 +39,12 @@ fun Home(navController: NavController) {
         currentTime.hour in 12..16 -> "Good Afternoon"
         else -> "Good Evening"
     }
-
     val context = LocalContext.current
-    val exercises = Datasource().loadExercisesFromJson(context)
+    val loadedExercises = Datasource().loadExercisesFromJson(context)
     var searchText by remember { mutableStateOf(TextFieldValue()) }
-    val filteredExercises = exercises.filter {
+    val filteredExercises = loadedExercises.filter {
         it.name.contains(searchText.text, true)
     }
-
     Box(
         modifier = Modifier.fillMaxSize().padding(16.dp)
     ) {
@@ -62,7 +63,8 @@ fun Home(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(16.dp))
             if (searchText.text.isNotEmpty()) {
-                ExerciseList(exercises = filteredExercises)
+                Text(text = "Exercises", color = Color.Red, fontSize = 20.sp)
+                ExercisesWithCheckboxList(exercises = filteredExercises)
             }
         }
 

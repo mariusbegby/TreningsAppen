@@ -12,6 +12,7 @@ class Datasource() {
         return listOf<Exercise>(
             Exercise(
                 "Barbell Curl",
+
                 "Barbell curl is a free weights exercise that primarily targets the biceps.",
                 listOf(
                     "Stand up straight while holding a barbell in a shoulder-width grip with the palms facing forward.",
@@ -26,6 +27,7 @@ class Datasource() {
             ),
             Exercise(
                 "Tricep Pushdown",
+
                 "Tricep pushdown is a exercise machine exercise that primarily targets the triceps.",
                 listOf(
                     "Attach a straight or angled bar to a high pulley and grab with an overhand grip (palms facing down) at shoulder width.",
