@@ -90,11 +90,18 @@ fun Home(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             if (searchText.text.isNotEmpty()) {
                 Text(text = "Exercises", color = Color.Red, fontSize = 20.sp)
+                val selectedExercises = remember { mutableStateOf(setOf<Exercise>()) }
+
                 ExercisesWithCheckboxList(
                     exercises = filteredExercises,
+                    selectedExercises = selectedExercises.value, // Pass the current value of selectedExercises
                     onExerciseCheckedChange = { exercise, isChecked ->
-                        exercise.selected = isChecked
-                        selectedExercises = filteredExercises.filter { it.selected }
+                        // Update the state
+                        selectedExercises.value = if (isChecked) {
+                            selectedExercises.value + exercise // Add the exercise if it's checked
+                        } else {
+                            selectedExercises.value - exercise // Remove the exercise if it's unchecked
+                        }
                     }
                 )
             }
