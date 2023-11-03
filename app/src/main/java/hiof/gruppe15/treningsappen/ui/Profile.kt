@@ -18,6 +18,9 @@ fun Profile(navController: NavController) {
         modifier = Modifier.fillMaxSize()
     ) {
         TopBarProfile(navController)
+
+        ProfileScreen(navController)
+
         Spacer(modifier = Modifier.weight(1f))
         AppBottomBar(navController)
     }
