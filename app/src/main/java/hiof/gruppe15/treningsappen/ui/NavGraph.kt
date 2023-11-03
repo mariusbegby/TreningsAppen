@@ -68,6 +68,9 @@ fun SaveTrainingRoutine(navController: NavController) {
                 Text("Cancel")
             }
         }
+
+        Spacer(modifier = Modifier.weight(1f))
+        AppBottomBar(navController)
     }
 
     @Composable

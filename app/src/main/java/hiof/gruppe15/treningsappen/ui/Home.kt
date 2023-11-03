@@ -33,7 +33,22 @@ import hiof.gruppe15.treningsappen.model.Exercise
 import java.time.LocalTime
 
 @Composable
+fun HomeNav(navController: NavController) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.weight(1f))
+        AppBottomBar(navController)
+    }
+}
+@Composable
 fun Home(navController: NavController) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.weight(1f))
+        AppBottomBar(navController)
+    }
     val currentTime = LocalTime.now()
     val greeting = when (currentTime.hour) {
         in 0..11 -> "Good Morning"

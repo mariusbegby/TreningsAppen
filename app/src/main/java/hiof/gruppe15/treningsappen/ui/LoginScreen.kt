@@ -115,8 +115,8 @@ fun LoginScreen(navController: NavController) {
                         auth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    navController.navigate(Screen.WorkOutPlan.route) {
-                                        popUpTo(Screen.WorkOutPlan.route) { inclusive = true }
+                                    navController.navigate(Screen.Home.route) {
+                                        popUpTo(Screen.Home.route) { inclusive = true }
                                     }
                                 } else {
                                     Toast.makeText(
