@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -167,18 +168,19 @@ fun AppBottomBar(navController: NavController) {
 @Composable
 fun ExercisesWithCheckboxList(
     exercises: List<Exercise>,
+    selectedExercises: Set<Exercise>,
     onExerciseCheckedChange: (Exercise, Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier
-    ) {
-        items(exercises.size) { index ->
-            val exercise = exercises[index]
+    LazyColumn(modifier = modifier) {
+        items(exercises) { exercise ->
+            val isChecked = selectedExercises.contains(exercise)
             ExerciseNameWithCheckbox(
                 exercise = exercise,
-                onCheckedChange = onExerciseCheckedChange
-                //exercise = exercises[index]
+                isChecked = isChecked,
+                onCheckedChange = { shouldCheck ->
+                    onExerciseCheckedChange(exercise, shouldCheck)
+                }
             )
         }
     }
@@ -187,7 +189,8 @@ fun ExercisesWithCheckboxList(
 @Composable
 fun ExerciseNameWithCheckbox(
     exercise: Exercise,
-    onCheckedChange: (Exercise, Boolean) -> Unit,
+    isChecked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -196,20 +199,19 @@ fun ExerciseNameWithCheckbox(
     ) {
         Text(text = exercise.name, style = MaterialTheme.typography.titleLarge)
         Checkbox(
-            checked = exercise.selected,
+            checked = isChecked,
             onCheckedChange = { checked ->
-                exercise.selected = checked
-                onCheckedChange(exercise, checked)
+                onCheckedChange(checked)
             }
         )
     }
 }
+
 @Composable
 fun ExerciseList(exercises: List<Exercise>, modifier: Modifier = Modifier) {
-    LazyColumn(userScrollEnabled = true,
-        modifier = modifier) {
-        items(exercises.size) { index ->
-            ExerciseCard(exercise = exercises[index])
+    LazyColumn(userScrollEnabled = true, modifier = modifier) {
+        items(exercises) { exercise ->
+            ExerciseCard(exercise = exercise)
         }
     }
 }
