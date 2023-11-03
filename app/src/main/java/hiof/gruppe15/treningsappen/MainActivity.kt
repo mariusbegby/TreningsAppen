@@ -21,6 +21,7 @@ import hiof.gruppe15.treningsappen.ui.Home
 import hiof.gruppe15.treningsappen.ui.LoginScreen
 import hiof.gruppe15.treningsappen.ui.Profile
 import hiof.gruppe15.treningsappen.ui.RegisterScreen
+import hiof.gruppe15.treningsappen.ui.SaveTrainingRoutine
 import hiof.gruppe15.treningsappen.ui.Screen
 import hiof.gruppe15.treningsappen.ui.Settings
 import hiof.gruppe15.treningsappen.ui.WorkOutPlan
@@ -66,8 +67,14 @@ fun NavigasjonApp() {
         composable(Screen.ForgotPassword.route) {
             ForgotPasswordScreen(navController)
         }
-        }
+        composable(Screen.SaveTrainingRoutine.route) { SaveTrainingRoutine(navController) }
+
     }
+    }
+
+
+
+
 
 
 

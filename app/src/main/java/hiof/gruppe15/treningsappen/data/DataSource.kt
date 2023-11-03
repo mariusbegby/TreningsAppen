@@ -7,9 +7,9 @@ import com.google.gson.reflect.TypeToken
 import hiof.gruppe15.treningsappen.model.Exercise
 import java.io.IOException
 
-class Datasource() {
+class Datasource {
     fun loadExercises(): List<Exercise> {
-        return listOf<Exercise>(
+        return listOf(
             Exercise(
                 "Barbell Curl",
 
@@ -59,14 +59,14 @@ class Datasource() {
 
     fun loadExercisesFromJson(context: Context): List<Exercise> {
         val json: String
-        try {
+        return try {
             val inputStream = context.resources.openRawResource(R.raw.exercises)
             json = inputStream.bufferedReader().use { it.readText() }
             val listType = object : TypeToken<List<Exercise>>() {}.type
-            return Gson().fromJson(json, listType)
+            Gson().fromJson(json, listType)
         } catch (ioException: IOException) {
             ioException.printStackTrace()
-            return emptyList()
+            emptyList()
         }
     }
 }

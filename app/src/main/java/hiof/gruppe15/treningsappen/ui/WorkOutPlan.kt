@@ -53,7 +53,6 @@ fun WorkOutPlan(navController: NavController) {
     AppTopBar(navController)
     WorkoutApp(navController)
 }
-
 @Composable
 fun WorkoutApp(navController: NavController) {
     val context = LocalContext.current
@@ -64,8 +63,6 @@ fun WorkoutApp(navController: NavController) {
         // Handle the exception appropriately. For simplicity, we're just returning an empty list.
         listOf<Exercise>()
     }
-
-
     Scaffold(
         topBar = { AppTopBar(navController) },
         bottomBar = { AppBottomBar(navController) }
@@ -80,7 +77,6 @@ fun WorkoutApp(navController: NavController) {
         }
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppTopBar(navController: NavController){
@@ -90,7 +86,6 @@ fun AppTopBar(navController: NavController){
 
         )
 }
-
 @Composable
 fun AppBottomBar(navController: NavController) {
     //val context = LocalContext.current
@@ -170,18 +165,31 @@ fun AppBottomBar(navController: NavController) {
 }
 
 @Composable
-fun ExercisesWithCheckboxList(exercises: List<Exercise>, modifier: Modifier = Modifier) {
+fun ExercisesWithCheckboxList(
+    exercises: List<Exercise>,
+    onExerciseCheckedChange: (Exercise, Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyColumn(
         modifier = modifier
     ) {
         items(exercises.size) { index ->
-            ExerciseNameWithCheckbox(exercise = exercises[index])
+            val exercise = exercises[index]
+            ExerciseNameWithCheckbox(
+                exercise = exercise,
+                onCheckedChange = onExerciseCheckedChange
+                //exercise = exercises[index]
+            )
         }
     }
 }
 
 @Composable
-fun ExerciseNameWithCheckbox(exercise: Exercise, modifier: Modifier = Modifier) {
+fun ExerciseNameWithCheckbox(
+    exercise: Exercise,
+    onCheckedChange: (Exercise, Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier.padding(8.dp).fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -191,6 +199,7 @@ fun ExerciseNameWithCheckbox(exercise: Exercise, modifier: Modifier = Modifier) 
             checked = exercise.selected,
             onCheckedChange = { checked ->
                 exercise.selected = checked
+                onCheckedChange(exercise, checked)
             }
         )
     }
@@ -307,223 +316,3 @@ fun DifficultyIndicator(difficulty: String) {
         }
     }
 }
-
-/*@Composable
-fun WorkOutPlan(navController: NavController) {
-    AppTopBar(navController)
-    WorkoutApp(navController)
-}
-
-@Composable
-fun WorkoutApp(navController: NavController) {
-    val context = LocalContext.current
-    val exercises = Datasource().loadExercisesFromJson(context)
-
-    Scaffold(
-        topBar = { AppTopBar(navController) },
-        //floatingActionButton = { AppFloatingActionButton() },
-        //floatingActionButtonPosition = FabPosition.End,
-        bottomBar = { AppBottomBar(navController) }
-    ) { innerPadding ->
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            ExerciseList(exercises = exercises)
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppTopBar(navController: NavController){
-    TopAppBar(
-
-        title = { Text("Work Out Plan") },
-
-    )
-}
-
-@Composable
-fun AppBottomBar(navController: NavController) {
-    //val context = LocalContext.current
-
-    BottomAppBar(
-        containerColor = Color.Unspecified,
-        modifier = Modifier.background(Color.White)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Box(
-                modifier = Modifier
-                    .size(30.dp)
-                    .background(Color.Black, shape = CircleShape)
-                    .padding(1.dp)
-            ){
-                // Left Home Icon with Black Border Box
-                IconButton(onClick = {
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Home.route) { inclusive = true }
-                    }
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Home,
-                        contentDescription = "Home Icon",
-                        tint = Color.White
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.width(12.dp))
-
-            // Barbell/Dumbell Icon
-            IconButton(onClick = {
-                navController.navigate(Screen.WorkOutPlan.route) {
-                    popUpTo(Screen.WorkOutPlan.route) { inclusive = true }
-                }
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.fitness),
-                    contentDescription = "Barbell Dumbell Icon",
-                    tint = Color.Black
-                )
-            }
-            Spacer(modifier = Modifier.width(12.dp))
-            // Arrow Chart Increase Icon
-            IconButton(onClick = {
-                navController.navigate(Screen.Analytics.route) {
-                    popUpTo(Screen.Analytics.route) { inclusive = true }
-                }
-            }) {
-                Icon(
-                    painter = painterResource(id = R.drawable.trendingup),
-                    contentDescription = "Arrow Chart Increase Icon",
-                    tint = Color.Black
-                )
-            }
-            Spacer(modifier = Modifier.width(12.dp))
-            // Right Person Icon
-            IconButton(onClick = {
-                navController.navigate(Screen.Profile.route) {
-                    popUpTo(Screen.Profile.route) { inclusive = true }
-                }
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = "Person Icon",
-                    tint = Color.Black
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun ExerciseList(exercises: List<Exercise>, modifier: Modifier = Modifier) {
-    LazyColumn(userScrollEnabled = true,
-        modifier = modifier) {
-        items(exercises.size) { index ->
-            ExerciseCard(exercise = exercises[index])
-        }
-    }
-}
-
-@Composable
-fun ExerciseCard(exercise: Exercise, modifier: Modifier = Modifier) {
-    Card(
-        modifier = modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = exercise.name,
-                style = MaterialTheme.typography.titleLarge,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = exercise.description.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(
-                        Locale.ROOT
-                    ) else it.toString()
-                },
-                style = MaterialTheme.typography.bodyMedium,
-                maxLines = 3,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = exercise.muscleGroup.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    },
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.secondary
-                )
-
-                DifficultyIndicator(difficulty = exercise.difficulty)
-            }
-        }
-    }
-}
-
-@Composable
-fun DifficultyIndicator(difficulty: String) {
-    val dashLength = 20.dp
-    val dashWidth = 6.dp
-    val dashSpacing = 4.dp
-    val dashColor = when (difficulty.lowercase(Locale.ROOT)) {
-        "easy" -> Color.hsl(111f, 1f, 0.4f)
-        "medium" -> Color.hsl(210f, 1f, 0.4f)
-        "hard" -> Color.hsl(0f, 1f, 0.4f)
-        else -> MaterialTheme.colorScheme.onSurface // Default color if none matches
-    }
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ){
-        Text(
-            text = "Difficulty:",
-            style = MaterialTheme.typography.bodySmall
-        )
-
-        Canvas(
-            modifier = Modifier.size((3 * (dashLength + dashSpacing) - dashSpacing).value.dp, dashWidth)
-        ) {
-            val numberOfDashes = when (difficulty.lowercase(Locale.ROOT)) {
-                "easy" -> 1
-                "medium" -> 2
-                "hard" -> 3
-                else -> 0
-            }
-
-            for (i in 0 until numberOfDashes) {
-                val startX = i * (dashLength.value + dashSpacing.value)
-                drawLine(
-                    color = dashColor,
-                    start = Offset(startX, size.height / 2),
-                    end = Offset(startX + dashLength.value, size.height / 2),
-                    strokeWidth = dashWidth.value
-                )
-            }
-        }
-    }
-}*/
-
