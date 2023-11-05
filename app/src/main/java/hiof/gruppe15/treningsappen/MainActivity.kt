@@ -15,17 +15,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.FirebaseApp
-import hiof.gruppe15.treningsappen.ui.Analytic
-import hiof.gruppe15.treningsappen.ui.ForgotPasswordScreen
-import hiof.gruppe15.treningsappen.ui.Home
-import hiof.gruppe15.treningsappen.ui.LoginScreen
-import hiof.gruppe15.treningsappen.ui.Profile
-import hiof.gruppe15.treningsappen.ui.RegisterScreen
-import hiof.gruppe15.treningsappen.ui.SaveTrainingRoutine
-import hiof.gruppe15.treningsappen.ui.Screen
-import hiof.gruppe15.treningsappen.ui.Settings
-import hiof.gruppe15.treningsappen.ui.WorkOutPlan
-import hiof.gruppe15.treningsappen.ui.WorkOutSession
+import hiof.gruppe15.treningsappen.ui.component.auth.ForgotPasswordScreen
+import hiof.gruppe15.treningsappen.ui.component.auth.LoginScreen
+import hiof.gruppe15.treningsappen.ui.component.auth.RegisterScreen
+import hiof.gruppe15.treningsappen.ui.component.home.Analytic
+import hiof.gruppe15.treningsappen.ui.component.home.Home
+import hiof.gruppe15.treningsappen.ui.component.navigation.SaveTrainingRoutine
+import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
+import hiof.gruppe15.treningsappen.ui.component.profile.Profile
+import hiof.gruppe15.treningsappen.ui.component.settings.Settings
+import hiof.gruppe15.treningsappen.ui.component.workout.WorkOutPlan
+import hiof.gruppe15.treningsappen.ui.component.workout.WorkOutSession
 import hiof.gruppe15.treningsappen.ui.theme.TreningsAppenTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

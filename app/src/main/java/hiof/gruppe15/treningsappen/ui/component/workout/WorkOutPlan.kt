@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui
+package hiof.gruppe15.treningsappen.ui.component.workout
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -46,6 +46,7 @@ import androidx.navigation.NavController
 import com.example.treningsappen.R
 import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
+import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import java.util.Locale
 
 
