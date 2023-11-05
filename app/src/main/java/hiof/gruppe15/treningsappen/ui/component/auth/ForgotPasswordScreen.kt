@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui
+package hiof.gruppe15.treningsappen.ui.component.auth
 
 import android.content.Context
 import android.os.Bundle

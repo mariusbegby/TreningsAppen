@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui
+package hiof.gruppe15.treningsappen.utils
 
 // ValidationUtils.kt
 object ValidationUtils {

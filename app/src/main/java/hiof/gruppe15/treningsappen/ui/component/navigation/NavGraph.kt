@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui
+package hiof.gruppe15.treningsappen.ui.component.navigation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import hiof.gruppe15.treningsappen.ui.component.workout.AppBottomBar
 
 sealed class Screen(val route: String) {
     object Login : Screen("login")

@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui
+package hiof.gruppe15.treningsappen.ui.component.auth
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.treningsappen.R
 import com.google.firebase.auth.FirebaseAuth
+import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
+import hiof.gruppe15.treningsappen.utils.ValidationUtils
 
 @Composable
 fun RegisterScreen(navController: NavController) {

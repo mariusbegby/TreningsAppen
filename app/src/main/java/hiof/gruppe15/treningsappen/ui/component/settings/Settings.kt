@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui
+package hiof.gruppe15.treningsappen.ui.component.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +8,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import hiof.gruppe15.treningsappen.ui.component.workout.AppBottomBar
 
 
 @Composable
