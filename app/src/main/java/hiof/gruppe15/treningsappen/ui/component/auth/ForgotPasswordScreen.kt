@@ -81,7 +81,7 @@ fun ForgotPasswordScreen(navController: NavController? = null) {
     }
 
 fun requestPasswordReset(email: String) {
-    val urlString = "https://yourbackendapi.com/password-reset" // replace with your backend API endpoint
+    val urlString = "https://yourbackendapi.com/password-reset"
     val url = URL(urlString)
     val connection = url.openConnection() as HttpURLConnection
 
@@ -100,7 +100,6 @@ fun requestPasswordReset(email: String) {
 
         val responseCode = connection.responseCode
         if(responseCode == HttpURLConnection.HTTP_OK) {
-            // Password reset request was successful
         } else {
             // Handle error
         }

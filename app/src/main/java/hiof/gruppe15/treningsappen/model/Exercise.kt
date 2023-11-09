@@ -6,5 +6,5 @@ data class Exercise(
     val steps: List<String>,
     val difficulty: String,
     val muscleGroup: String,
-    var selected: Boolean = false  // Set default value as false
+    var selected: Boolean = false
 )

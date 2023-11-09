@@ -1,6 +1,6 @@
 package hiof.gruppe15.treningsappen.utils
 
-// ValidationUtils.kt
+
 object ValidationUtils {
     fun isValidEmail(target: CharSequence?): Boolean {
         return if (target == null || target.isEmpty()) {
@@ -11,7 +11,6 @@ object ValidationUtils {
     }
 
     fun isPasswordStrong(password: String?): Boolean {
-        // This is a basic check. You can enhance this to include checks for special characters, uppercase, etc.
         return password != null && password.length >= 8 && password.any { it.isDigit() } && password.any { it.isLetter() }
     }
 }

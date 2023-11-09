@@ -42,7 +42,6 @@ sealed class Screen(val route: String) {
 @Composable
 fun SaveTrainingRoutine(navController: NavController) {
     var routineName by remember { mutableStateOf("") }
-    // UI for user to input routine name and save
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Center,
@@ -76,7 +75,6 @@ fun SaveTrainingRoutine(navController: NavController) {
 
     @Composable
     fun DisplayTrainingRoutine(navController: NavController) {
-        // Retrieve the saved routine and display it
     }
 }
 

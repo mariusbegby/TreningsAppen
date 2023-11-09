@@ -47,8 +47,6 @@ fun RegisterScreen(navController: NavController) {
     val emailFocusRequester = remember { FocusRequester() }
     val passwordFocusRequester = remember { FocusRequester() }
 
-
-    // UI for entering email and password, similar to LoginScreen
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,

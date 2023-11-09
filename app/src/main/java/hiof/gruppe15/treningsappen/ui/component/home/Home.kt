@@ -1,23 +1,27 @@
 package hiof.gruppe15.treningsappen.ui.component.home
 
-
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,9 +34,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
+import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import hiof.gruppe15.treningsappen.ui.component.workout.AppBottomBar
 import hiof.gruppe15.treningsappen.ui.component.workout.ExercisesWithCheckboxList
-import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
+import kotlinx.coroutines.launch
 import java.time.LocalTime
 
 @Composable
@@ -46,12 +51,6 @@ fun HomeNav(navController: NavController) {
 }
 @Composable
 fun Home(navController: NavController) {
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Spacer(modifier = Modifier.weight(1f))
-        AppBottomBar(navController)
-    }
     val currentTime = LocalTime.now()
     val greeting = when (currentTime.hour) {
         in 0..11 -> "Good Morning"
@@ -59,15 +58,19 @@ fun Home(navController: NavController) {
         else -> "Good Evening"
     }
 
-    var selectedExercises by remember { mutableStateOf(listOf<Exercise>()) }
     val context = LocalContext.current
     val loadedExercises = Datasource().loadExercisesFromJson(context)
     var searchText by remember { mutableStateOf(TextFieldValue()) }
     val filteredExercises = loadedExercises.filter {
         it.name.contains(searchText.text, true)
-   }
+    }
+    val selectedExercises = remember { mutableStateOf(setOf<Exercise>()) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
     Box(
-        modifier = Modifier.fillMaxSize().padding(16.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
 
         Column(
@@ -83,38 +86,57 @@ fun Home(navController: NavController) {
                 textAlign = TextAlign.Center,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
-            Spacer(modifier = Modifier.height(16.dp))
-            TextField(
-                value = searchText,
-                onValueChange = { searchText = it },
-                label = { Text("Search...") },
-                modifier = Modifier.fillMaxWidth()
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                TextField(
+                    value = searchText,
+                    onValueChange = { searchText = it },
+                    label = { Text("Search Exercise type...") },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 8.dp)
+                )
+                FloatingActionButton(
+                    onClick = {
+                        if (selectedExercises.value.isNotEmpty()) {
+                            navController.navigate(Screen.SaveTrainingRoutine.route)
+                        } else {
+                            coroutineScope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "Select the exercises",
+                                    actionLabel = "Dismiss"
+                                )
+                            }
+                        }
+                    },
+                    modifier = Modifier.padding(start = 8.dp)
+                ) {
+                    Icon(Icons.Default.Check, contentDescription = "Save")
+                }
+            }
             Spacer(modifier = Modifier.height(16.dp))
             if (searchText.text.isNotEmpty()) {
                 Text(text = "Exercises", color = Color.Red, fontSize = 20.sp)
-                val selectedExercises = remember { mutableStateOf(setOf<Exercise>()) }
 
                 ExercisesWithCheckboxList(
                     exercises = filteredExercises,
-                    selectedExercises = selectedExercises.value, // Pass the current value of selectedExercises
+                    selectedExercises = selectedExercises.value,
                     onExerciseCheckedChange = { exercise, isChecked ->
-                        // Update the state
+
                         selectedExercises.value = if (isChecked) {
-                            selectedExercises.value + exercise // Add the exercise if it's checked
+                            selectedExercises.value + exercise
                         } else {
-                            selectedExercises.value - exercise // Remove the exercise if it's unchecked
+                            selectedExercises.value - exercise
                         }
                     }
                 )
             }
         }
-
-        FloatingActionButton(
-            onClick = {  navController.navigate(Screen.SaveTrainingRoutine.route)},
-            modifier = Modifier.align(Alignment.CenterEnd)
-        ) {
-            Icon(Icons.Default.Add, contentDescription = "Add")
+        SnackbarHost(hostState = snackbarHostState) { data ->
+            Snackbar(snackbarData = data)
         }
     }
 }
