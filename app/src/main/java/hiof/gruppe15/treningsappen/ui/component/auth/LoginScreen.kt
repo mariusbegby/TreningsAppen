@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -163,7 +164,7 @@ fun LoginScreen(navController: NavController) {
                     color = Color.Blue,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier.clickable {
-                        navController.navigate("register")  // Adjust this route if it's different in your navigation setup
+                        navController.navigate("register")
                     }
                 )
             }
@@ -172,7 +173,7 @@ fun LoginScreen(navController: NavController) {
     }
 }
 
-/*@Preview(showBackground = true)*/
+@Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
     LoginScreen(navController = rememberNavController())

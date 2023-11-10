@@ -54,7 +54,6 @@ fun TopBarAnalytic(navController: NavController){
 }
 @Composable
 fun BottomBarAnalytic(navController: NavController) {
-    //val context = LocalContext.current
 
     BottomAppBar(
         containerColor = Color.Unspecified,
@@ -73,7 +72,6 @@ fun BottomBarAnalytic(navController: NavController) {
                     .background(Color.Black, shape = CircleShape)
                     .padding(1.dp)
             ){
-                // Left Home Icon with Black Border Box
                 IconButton(onClick = {
                     navController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Home.route) { inclusive = true }
@@ -88,7 +86,6 @@ fun BottomBarAnalytic(navController: NavController) {
             }
             Spacer(modifier = Modifier.width(12.dp))
 
-            // Barbell/Dumbell Icon
             IconButton(onClick = {
                 navController.navigate(Screen.WorkOutPlan.route) {
                     popUpTo(Screen.WorkOutPlan.route) { inclusive = true }
@@ -101,7 +98,6 @@ fun BottomBarAnalytic(navController: NavController) {
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
-            // Arrow Chart Increase Icon
             IconButton(onClick = {
                 navController.navigate(Screen.Analytics.route) {
                     popUpTo(Screen.Analytics.route) { inclusive = true }
@@ -114,7 +110,6 @@ fun BottomBarAnalytic(navController: NavController) {
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
-            // Right Person Icon
             IconButton(onClick = {
                 navController.navigate(Screen.Profile.route) {
                     popUpTo(Screen.Profile.route) { inclusive = true }
