@@ -1,5 +1,7 @@
 package hiof.gruppe15.treningsappen.ui.component.home
+//
 
+//
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,9 +11,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -75,7 +79,20 @@ fun Home(navController: NavController) {
 
         Column(
             modifier = Modifier.align(Alignment.TopCenter)
-        ) {
+        ){
+        //
+        IconButton(onClick = {
+                navController.navigate(Screen.Login.route) {
+                popUpTo(navController.graph.startDestinationId) {
+                    inclusive = true
+                }
+            }
+        }) {
+            Icon(Icons.Default.ArrowBack, contentDescription = "Go back")
+        }
+
+        //
+
             Text(
                 text = greeting,
                 textAlign = TextAlign.Center,
