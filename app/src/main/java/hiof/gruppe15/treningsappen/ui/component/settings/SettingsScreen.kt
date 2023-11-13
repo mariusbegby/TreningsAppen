@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.ui.component.workout.AppBottomBar
 
-
 @Composable
 fun SettingsScreen(navController: NavController) {
     Column(
@@ -27,5 +26,3 @@ fun SettingsScreen(navController: NavController) {
 fun TopBarSettings(navController: NavController) {
     TopAppBar(title = { androidx.compose.material3.Text("Settings") })
 }
-
-

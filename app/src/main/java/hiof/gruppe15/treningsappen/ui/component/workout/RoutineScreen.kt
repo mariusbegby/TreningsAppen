@@ -49,7 +49,6 @@ import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import java.util.Locale
 
-
 @Composable
 fun RoutineScreen(navController: NavController) {
     AppTopBar(navController)

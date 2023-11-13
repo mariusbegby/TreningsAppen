@@ -1,7 +1,5 @@
 package hiof.gruppe15.treningsappen.ui.component.home
-//
 
-//
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -92,8 +90,6 @@ fun HomeScreen(navController: NavController) {
                 Icon(Icons.Default.ArrowBack, contentDescription = "Go back")
             }
 
-            //
-
             Text(
                 text = greeting,
                 textAlign = TextAlign.Center,
@@ -154,4 +150,3 @@ fun HomeScreen(navController: NavController) {
         }
     }
 }
-

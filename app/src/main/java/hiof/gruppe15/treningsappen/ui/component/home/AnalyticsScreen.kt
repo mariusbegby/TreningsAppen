@@ -31,7 +31,6 @@ import androidx.navigation.NavController
 import com.example.treningsappen.R
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 
-
 @Composable
 fun AnalyticsScreen(navController: NavController) {
     Column(
@@ -124,4 +123,3 @@ fun BottomBarAnalytic(navController: NavController) {
         }
     }
 }
-

@@ -1,6 +1,5 @@
 package hiof.gruppe15.treningsappen.ui.component.home
 
-
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -73,9 +72,9 @@ fun SaveRoutineScreen(navController: NavController) {
                 Button(onClick = {
                     if (routineName.isNotEmpty()) {
                         scope.launch {
+                            /*
                             val routine = Routine(name = routineName)
 
-                            /*
                             viewModel.saveRoutine(routine) { isSuccess, message ->
                                 if (isSuccess) {
                                     navController.navigate(Screen.SavedRoutinesList.route)
@@ -102,4 +101,3 @@ fun SaveRoutineScreen(navController: NavController) {
         }
     }
 }
-
