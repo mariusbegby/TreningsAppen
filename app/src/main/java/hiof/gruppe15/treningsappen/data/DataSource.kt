@@ -24,8 +24,7 @@ class Datasource {
                 ),
                 "easy",
                 "Biceps"
-            ),
-            Exercise(
+            ), Exercise(
                 "Tricep Pushdown",
 
                 "Tricep pushdown is a exercise machine exercise that primarily targets the triceps.",
@@ -39,8 +38,7 @@ class Datasource {
                 ),
                 "medium",
                 "Triceps"
-            ),
-            Exercise(
+            ), Exercise(
                 "Tricep Pushdown",
                 "Tricep pushdown is a exercise machine exercise that primarily targets the triceps.",
                 listOf(

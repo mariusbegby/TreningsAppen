@@ -38,6 +38,7 @@ class ForgotPasswordActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun ForgotPasswordScreen(navController: NavController? = null) {
     val context = LocalContext.current
@@ -49,11 +50,7 @@ fun ForgotPasswordScreen(navController: NavController? = null) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        TextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Enter email") }
-        )
+        TextField(value = email, onValueChange = { email = it }, label = { Text("Enter email") })
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             shouldSendReset = true
@@ -68,17 +65,17 @@ fun ForgotPasswordScreen(navController: NavController? = null) {
     }
 }
 
-    fun sendResetLink(email: String, context: Context) {
-        val auth: FirebaseAuth = FirebaseAuth.getInstance()
-        auth.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(context, "Reset link sent to $email", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                }
+fun sendResetLink(email: String, context: Context) {
+    val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(context, "Reset link sent to $email", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
-    }
+        }
+}
 
 fun requestPasswordReset(email: String) {
     val urlString = "https://yourbackendapi.com/password-reset"
@@ -99,7 +96,7 @@ fun requestPasswordReset(email: String) {
         }
 
         val responseCode = connection.responseCode
-        if(responseCode == HttpURLConnection.HTTP_OK) {
+        if (responseCode == HttpURLConnection.HTTP_OK) {
         } else {
             // Handle error
         }

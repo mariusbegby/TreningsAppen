@@ -17,12 +17,8 @@ object ValidationUtils {
 
 fun isPasswordStrong(password: String?): Boolean {
     return password?.let {
-        it.length >= 8 &&
-                it.any { char -> char.isDigit() } &&
-                it.any { char -> char.isUpperCase() } &&
-                it.any { char -> char.isLowerCase() } &&
-                it.contains(Regex("[!@#$%^&*]"))
+        it.length >= 8 && it.any { char -> char.isDigit() } && it.any { char -> char.isUpperCase() } && it.any { char -> char.isLowerCase() } && it.contains(
+            Regex("[!@#$%^&*]")
+        )
     } ?: false
 }
-
-

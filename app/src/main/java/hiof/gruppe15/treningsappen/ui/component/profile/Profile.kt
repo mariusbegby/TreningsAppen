@@ -29,12 +29,8 @@ fun Profile(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarProfile(navController: NavController){
-    TopAppBar(
-
-        title = { Text("Profil side") },
-
-        )
+fun TopBarProfile(navController: NavController) {
+    TopAppBar(title = { Text("Profil side") })
 }
 
 

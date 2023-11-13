@@ -45,19 +45,19 @@ fun Analytic(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarAnalytic(navController: NavController){
+fun TopBarAnalytic(navController: NavController) {
     TopAppBar(
 
         title = { Text("Analytic Page") },
 
         )
 }
+
 @Composable
 fun BottomBarAnalytic(navController: NavController) {
 
     BottomAppBar(
-        containerColor = Color.Unspecified,
-        modifier = Modifier.background(Color.White)
+        containerColor = Color.Unspecified, modifier = Modifier.background(Color.White)
     ) {
         Row(
             modifier = Modifier
@@ -65,13 +65,13 @@ fun BottomBarAnalytic(navController: NavController) {
                 .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Box(
                 modifier = Modifier
                     .size(30.dp)
                     .background(Color.Black, shape = CircleShape)
                     .padding(1.dp)
-            ){
+            ) {
                 IconButton(onClick = {
                     navController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Home.route) { inclusive = true }

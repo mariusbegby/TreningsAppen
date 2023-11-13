@@ -55,19 +55,17 @@ fun WorkOutPlan(navController: NavController) {
     AppTopBar(navController)
     WorkoutApp(navController)
 }
+
 @Composable
 fun WorkoutApp(navController: NavController) {
     val context = LocalContext.current
-    val exercises = try{
+    val exercises = try {
         Datasource().loadExercisesFromJson(context)
-    }
-    catch (e: Exception) {
+    } catch (e: Exception) {
         listOf<Exercise>()
     }
-    Scaffold(
-        topBar = { AppTopBar(navController) },
-        bottomBar = { AppBottomBar(navController) }
-    ) { innerPadding ->
+    Scaffold(topBar = { AppTopBar(navController) },
+        bottomBar = { AppBottomBar(navController) }) { innerPadding ->
         Surface(
             modifier = Modifier
                 .fillMaxSize()
@@ -78,21 +76,22 @@ fun WorkoutApp(navController: NavController) {
         }
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppTopBar(navController: NavController){
+fun AppTopBar(navController: NavController) {
     TopAppBar(
 
         title = { Text("Work Out Plan") },
 
         )
 }
+
 @Composable
 fun AppBottomBar(navController: NavController) {
 
     BottomAppBar(
-        containerColor = Color.Unspecified,
-        modifier = Modifier.background(Color.White)
+        containerColor = Color.Unspecified, modifier = Modifier.background(Color.White)
     ) {
         Row(
             modifier = Modifier
@@ -100,13 +99,13 @@ fun AppBottomBar(navController: NavController) {
                 .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Box(
                 modifier = Modifier
                     .size(30.dp)
                     .background(Color.Black, shape = CircleShape)
                     .padding(1.dp)
-            ){
+            ) {
                 IconButton(onClick = {
                     navController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Home.route) { inclusive = true }
@@ -175,8 +174,7 @@ fun ExercisesWithCheckboxList(
                 isChecked = isChecked,
                 onCheckedChange = { shouldCheck ->
                     onExerciseCheckedChange(exercise, shouldCheck)
-                }
-            )
+                })
         }
     }
 }
@@ -189,16 +187,15 @@ fun ExerciseNameWithCheckbox(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier.padding(8.dp).fillMaxWidth(),
+        modifier = modifier
+            .padding(8.dp)
+            .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(text = exercise.name, style = MaterialTheme.typography.titleLarge)
-        Checkbox(
-            checked = isChecked,
-            onCheckedChange = { checked ->
-                onCheckedChange(checked)
-            }
-        )
+        Checkbox(checked = isChecked, onCheckedChange = { checked ->
+            onCheckedChange(checked)
+        })
     }
 }
 
@@ -244,8 +241,7 @@ fun ExerciseCard(exercise: Exercise, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = exercise.muscleGroup.replaceFirstChar {
@@ -284,14 +280,12 @@ fun DifficultyIndicator(difficulty: String) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Difficulty:",
-            style = MaterialTheme.typography.bodySmall
+            text = "Difficulty:", style = MaterialTheme.typography.bodySmall
         )
 
         Canvas(
             modifier = Modifier.size(
-                (3 * (dashLength + dashSpacing) - dashSpacing).value.dp,
-                dashWidth
+                (3 * (dashLength + dashSpacing) - dashSpacing).value.dp, dashWidth
             )
         ) {
             val numberOfDashes = when (difficulty.lowercase(Locale.ROOT)) {

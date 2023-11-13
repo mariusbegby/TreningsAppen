@@ -21,14 +21,11 @@ fun Settings(navController: NavController) {
         AppBottomBar(navController)
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarSettings(navController: NavController){
-    TopAppBar(
-
-        title = { androidx.compose.material3.Text("Settings") },
-
-        )
+fun TopBarSettings(navController: NavController) {
+    TopAppBar(title = { androidx.compose.material3.Text("Settings") })
 }
 
 

@@ -53,6 +53,7 @@ fun HomeNav(navController: NavController) {
         AppBottomBar(navController)
     }
 }
+
 @Composable
 fun Home(navController: NavController) {
     val currentTime = LocalTime.now()
@@ -79,19 +80,19 @@ fun Home(navController: NavController) {
 
         Column(
             modifier = Modifier.align(Alignment.TopCenter)
-        ){
-        //
-        IconButton(onClick = {
+        ) {
+            //
+            IconButton(onClick = {
                 navController.navigate(Screen.Login.route) {
-                popUpTo(navController.graph.startDestinationId) {
-                    inclusive = true
+                    popUpTo(navController.graph.startDestinationId) {
+                        inclusive = true
+                    }
                 }
+            }) {
+                Icon(Icons.Default.ArrowBack, contentDescription = "Go back")
             }
-        }) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Go back")
-        }
 
-        //
+            //
 
             Text(
                 text = greeting,
@@ -123,13 +124,11 @@ fun Home(navController: NavController) {
                         } else {
                             coroutineScope.launch {
                                 snackbarHostState.showSnackbar(
-                                    message = "Select the exercises",
-                                    actionLabel = "Dismiss"
+                                    message = "Select the exercises", actionLabel = "Dismiss"
                                 )
                             }
                         }
-                    },
-                    modifier = Modifier.padding(start = 8.dp)
+                    }, modifier = Modifier.padding(start = 8.dp)
                 ) {
                     Icon(Icons.Default.Check, contentDescription = "Save")
                 }
@@ -138,8 +137,7 @@ fun Home(navController: NavController) {
             if (searchText.text.isNotEmpty()) {
                 Text(text = "Exercises", color = Color.Red, fontSize = 20.sp)
 
-                ExercisesWithCheckboxList(
-                    exercises = filteredExercises,
+                ExercisesWithCheckboxList(exercises = filteredExercises,
                     selectedExercises = selectedExercises.value,
                     onExerciseCheckedChange = { exercise, isChecked ->
 
@@ -148,8 +146,7 @@ fun Home(navController: NavController) {
                         } else {
                             selectedExercises.value - exercise
                         }
-                    }
-                )
+                    })
             }
         }
         SnackbarHost(hostState = snackbarHostState) { data ->

@@ -42,21 +42,15 @@ fun SaveTrainingRoutine(navController: NavController) {
     var routineName by remember { mutableStateOf("") }
     val context = LocalContext.current
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("") },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        navController.navigateUp()
-                    }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
-                    }
-                }
-            )
-        },
-        bottomBar = { AppBottomBar(navController) }
-    ) { innerPadding ->
+    Scaffold(topBar = {
+        TopAppBar(title = { Text("") }, navigationIcon = {
+            IconButton(onClick = {
+                navController.navigateUp()
+            }) {
+                Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
+            }
+        })
+    }, bottomBar = { AppBottomBar(navController) }) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -74,8 +68,7 @@ fun SaveTrainingRoutine(navController: NavController) {
             Spacer(modifier = Modifier.height(8.dp))
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(onClick = {
                     if (routineName.isNotEmpty()) {
@@ -94,7 +87,8 @@ fun SaveTrainingRoutine(navController: NavController) {
                              */
                         }
                     } else {
-                        Toast.makeText(context, "Routine name cannot be empty", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Routine name cannot be empty", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }) {
                     Text("Save")

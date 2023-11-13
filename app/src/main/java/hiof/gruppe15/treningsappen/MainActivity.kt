@@ -80,9 +80,8 @@ fun NavigasjonApp() {
             ForgotPasswordScreen(navController)
         }
         composable(Screen.SaveTrainingRoutine.route) { SaveTrainingRoutine(navController) }
-
     }
-    }
+}
 
 
 
