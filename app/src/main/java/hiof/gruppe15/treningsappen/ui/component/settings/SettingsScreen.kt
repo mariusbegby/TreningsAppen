@@ -12,7 +12,7 @@ import hiof.gruppe15.treningsappen.ui.component.workout.AppBottomBar
 
 
 @Composable
-fun Settings(navController: NavController) {
+fun SettingsScreen(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {

@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 
 @Composable
-fun WorkOutSession(navController: NavController) {
+fun WorkoutSessionScreen(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {

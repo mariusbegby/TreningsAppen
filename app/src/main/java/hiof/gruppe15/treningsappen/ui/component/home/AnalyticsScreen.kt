@@ -33,7 +33,7 @@ import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 
 
 @Composable
-fun Analytic(navController: NavController) {
+fun AnalyticsScreen(navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {

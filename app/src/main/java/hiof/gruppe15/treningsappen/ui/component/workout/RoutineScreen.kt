@@ -51,7 +51,7 @@ import java.util.Locale
 
 
 @Composable
-fun WorkOutPlan(navController: NavController) {
+fun RoutineScreen(navController: NavController) {
     AppTopBar(navController)
     WorkoutApp(navController)
 }

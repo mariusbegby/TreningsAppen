@@ -55,7 +55,7 @@ fun HomeNav(navController: NavController) {
 }
 
 @Composable
-fun Home(navController: NavController) {
+fun HomeScreen(navController: NavController) {
     val currentTime = LocalTime.now()
     val greeting = when (currentTime.hour) {
         in 0..11 -> "Good Morning"

@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SaveTrainingRoutine(navController: NavController) {
+fun SaveRoutineScreen(navController: NavController) {
     val scope = rememberCoroutineScope()
     var routineName by remember { mutableStateOf("") }
     val context = LocalContext.current

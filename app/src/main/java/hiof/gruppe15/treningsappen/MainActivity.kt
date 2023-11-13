@@ -22,14 +22,14 @@ import hiof.gruppe15.treningsappen.data.RoutineRepository
 import hiof.gruppe15.treningsappen.ui.component.auth.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.auth.LoginScreen
 import hiof.gruppe15.treningsappen.ui.component.auth.RegisterScreen
-import hiof.gruppe15.treningsappen.ui.component.home.Analytic
-import hiof.gruppe15.treningsappen.ui.component.home.Home
-import hiof.gruppe15.treningsappen.ui.component.home.SaveTrainingRoutine
+import hiof.gruppe15.treningsappen.ui.component.home.AnalyticsScreen
+import hiof.gruppe15.treningsappen.ui.component.home.HomeScreen
+import hiof.gruppe15.treningsappen.ui.component.home.SaveRoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import hiof.gruppe15.treningsappen.ui.component.profile.Profile
-import hiof.gruppe15.treningsappen.ui.component.settings.Settings
-import hiof.gruppe15.treningsappen.ui.component.workout.WorkOutPlan
-import hiof.gruppe15.treningsappen.ui.component.workout.WorkOutSession
+import hiof.gruppe15.treningsappen.ui.component.settings.SettingsScreen
+import hiof.gruppe15.treningsappen.ui.component.workout.RoutineScreen
+import hiof.gruppe15.treningsappen.ui.component.workout.WorkoutSessionScreen
 import hiof.gruppe15.treningsappen.ui.theme.TreningsAppenTheme
 import hiof.gruppe15.treningsappen.viewmodel.RoutineViewModel
 
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             TreningsAppenTheme {
-                NavigasjonApp()
+                WorkoutApp()
             }
         }
     }
@@ -64,22 +64,22 @@ fun AppFloatingActionButton() {
 
 
 @Composable
-fun NavigasjonApp() {
+fun WorkoutApp() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Screen.Login.route) {
         composable(Screen.Register.route) { RegisterScreen(navController) }
         composable(Screen.Login.route) { LoginScreen(navController) }
-        composable(Screen.Home.route) { Home(navController) }
+        composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Profile.route) { Profile(navController) }
-        composable(Screen.Settings.route) { Settings(navController) }
-        composable(Screen.WorkOutPlan.route) { WorkOutPlan(navController) }
-        composable(Screen.WorkOutSession.route) { WorkOutSession(navController) }
-        composable(Screen.Analytics.route) { Analytic(navController) }
+        composable(Screen.Settings.route) { SettingsScreen(navController) }
+        composable(Screen.WorkOutPlan.route) { RoutineScreen(navController) }
+        composable(Screen.WorkOutSession.route) { WorkoutSessionScreen(navController) }
+        composable(Screen.Analytics.route) { AnalyticsScreen(navController) }
         composable(Screen.ForgotPassword.route) {
             ForgotPasswordScreen(navController)
         }
-        composable(Screen.SaveTrainingRoutine.route) { SaveTrainingRoutine(navController) }
+        composable(Screen.SaveTrainingRoutine.route) { SaveRoutineScreen(navController) }
     }
 }
 
