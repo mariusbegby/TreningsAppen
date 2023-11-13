@@ -13,7 +13,7 @@ import hiof.gruppe15.treningsappen.ui.component.auth.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.auth.LoginScreen
 import hiof.gruppe15.treningsappen.ui.component.auth.RegisterScreen
 import hiof.gruppe15.treningsappen.ui.component.home.AnalyticsScreen
-import hiof.gruppe15.treningsappen.ui.component.home.HomeScreen
+import hiof.gruppe15.treningsappen.ui.component.home.HomeNav
 import hiof.gruppe15.treningsappen.ui.component.home.SaveRoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import hiof.gruppe15.treningsappen.ui.component.profile.Profile
@@ -43,7 +43,7 @@ fun WorkoutApp() {
     NavHost(navController = navController, startDestination = Screen.Login.route) {
         composable(Screen.Register.route) { RegisterScreen(navController) }
         composable(Screen.Login.route) { LoginScreen(navController) }
-        composable(Screen.Home.route) { HomeScreen(navController) }
+        composable(Screen.Home.route) { HomeNav(navController) }
         composable(Screen.Profile.route) { Profile(navController) }
         composable(Screen.Settings.route) { SettingsScreen(navController) }
         composable(Screen.WorkOutPlan.route) { RoutineScreen(navController) }
