@@ -1,24 +1,14 @@
 package hiof.gruppe15.treningsappen
 
-
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
-import hiof.gruppe15.treningsappen.data.RoutineRepository
 import hiof.gruppe15.treningsappen.ui.component.auth.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.auth.LoginScreen
 import hiof.gruppe15.treningsappen.ui.component.auth.RegisterScreen
@@ -31,17 +21,12 @@ import hiof.gruppe15.treningsappen.ui.component.settings.SettingsScreen
 import hiof.gruppe15.treningsappen.ui.component.workout.RoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.workout.WorkoutSessionScreen
 import hiof.gruppe15.treningsappen.ui.theme.TreningsAppenTheme
-import hiof.gruppe15.treningsappen.viewmodel.RoutineViewModel
 
 class MainActivity : ComponentActivity() {
-    private val routineViewModel by viewModels<RoutineViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
-
-        val repository = RoutineRepository()
-        val viewModel = RoutineViewModel(repository)
 
         setContent {
             TreningsAppenTheme {
@@ -50,18 +35,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-fun AppFloatingActionButton() {
-    val context = LocalContext.current
-
-    FloatingActionButton(onClick = {
-        Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
-    }) {
-        Icon(Icons.Default.Add, contentDescription = "Add", tint = Color.Blue)
-    }
-}
-
 
 @Composable
 fun WorkoutApp() {
@@ -82,12 +55,3 @@ fun WorkoutApp() {
         composable(Screen.SaveTrainingRoutine.route) { SaveRoutineScreen(navController) }
     }
 }
-
-
-
-
-
-
-
-
-
