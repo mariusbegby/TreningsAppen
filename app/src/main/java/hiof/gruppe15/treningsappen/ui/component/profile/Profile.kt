@@ -1,6 +1,5 @@
 package hiof.gruppe15.treningsappen.ui.component.profile
 
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.ui.component.workout.AppBottomBar
-
 
 @Composable
 fun Profile(navController: NavController) {
@@ -29,13 +27,6 @@ fun Profile(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBarProfile(navController: NavController){
-    TopAppBar(
-
-        title = { Text("Profil side") },
-
-        )
+fun TopBarProfile(navController: NavController) {
+    TopAppBar(title = { Text("Profil side") })
 }
-
-
-

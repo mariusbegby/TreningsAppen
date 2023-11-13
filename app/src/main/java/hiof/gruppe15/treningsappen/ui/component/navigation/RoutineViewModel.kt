@@ -16,4 +16,3 @@ class RoutineViewModel(private val repository: RoutineRepository) : ViewModel() 
         }
     }
 }
-

@@ -1,6 +1,5 @@
 package hiof.gruppe15.treningsappen.ui.component.home
 
-
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,26 +36,20 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SaveTrainingRoutine(navController: NavController) {
+fun SaveRoutineScreen(navController: NavController) {
     val scope = rememberCoroutineScope()
     var routineName by remember { mutableStateOf("") }
     val context = LocalContext.current
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("") },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        navController.navigateUp()
-                    }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
-                    }
-                }
-            )
-        },
-        bottomBar = { AppBottomBar(navController) }
-    ) { innerPadding ->
+    Scaffold(topBar = {
+        TopAppBar(title = { Text("") }, navigationIcon = {
+            IconButton(onClick = {
+                navController.navigateUp()
+            }) {
+                Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
+            }
+        })
+    }, bottomBar = { AppBottomBar(navController) }) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -74,15 +67,14 @@ fun SaveTrainingRoutine(navController: NavController) {
             Spacer(modifier = Modifier.height(8.dp))
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(onClick = {
                     if (routineName.isNotEmpty()) {
                         scope.launch {
+                            /*
                             val routine = Routine(name = routineName)
 
-                            /*
                             viewModel.saveRoutine(routine) { isSuccess, message ->
                                 if (isSuccess) {
                                     navController.navigate(Screen.SavedRoutinesList.route)
@@ -94,7 +86,8 @@ fun SaveTrainingRoutine(navController: NavController) {
                              */
                         }
                     } else {
-                        Toast.makeText(context, "Routine name cannot be empty", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Routine name cannot be empty", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }) {
                     Text("Save")
@@ -108,4 +101,3 @@ fun SaveTrainingRoutine(navController: NavController) {
         }
     }
 }
-

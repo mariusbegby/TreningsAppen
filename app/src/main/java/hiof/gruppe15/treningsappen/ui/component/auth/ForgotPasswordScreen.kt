@@ -22,13 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
-import java.net.HttpURLConnection
-import java.net.URL
 
 class ForgotPasswordActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +34,7 @@ class ForgotPasswordActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun ForgotPasswordScreen(navController: NavController? = null) {
     val context = LocalContext.current
@@ -49,11 +46,7 @@ fun ForgotPasswordScreen(navController: NavController? = null) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        TextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text("Enter email") }
-        )
+        TextField(value = email, onValueChange = { email = it }, label = { Text("Enter email") })
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             shouldSendReset = true
@@ -68,50 +61,14 @@ fun ForgotPasswordScreen(navController: NavController? = null) {
     }
 }
 
-    fun sendResetLink(email: String, context: Context) {
-        val auth: FirebaseAuth = FirebaseAuth.getInstance()
-        auth.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(context, "Reset link sent to $email", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                }
+fun sendResetLink(email: String, context: Context) {
+    val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(context, "Reset link sent to $email", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
-    }
-
-fun requestPasswordReset(email: String) {
-    val urlString = "https://yourbackendapi.com/password-reset"
-    val url = URL(urlString)
-    val connection = url.openConnection() as HttpURLConnection
-
-    connection.requestMethod = "POST"
-    connection.setRequestProperty("Content-Type", "application/json; utf-8")
-    connection.setRequestProperty("Accept", "application/json")
-    connection.doOutput = true
-
-    val jsonInputString = "{\"email\": \"$email\"}"
-
-    try {
-        connection.outputStream.use { os ->
-            val input = jsonInputString.toByteArray(Charsets.UTF_8)
-            os.write(input, 0, input.size)
         }
-
-        val responseCode = connection.responseCode
-        if(responseCode == HttpURLConnection.HTTP_OK) {
-        } else {
-            // Handle error
-        }
-    } finally {
-        connection.disconnect()
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun ForgotPasswordScreenPreview() {
-    val navController = rememberNavController()
-    ForgotPasswordScreen()
 }

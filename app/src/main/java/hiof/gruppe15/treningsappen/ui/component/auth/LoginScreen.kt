@@ -35,10 +35,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.treningsappen.R
 import com.google.firebase.auth.FirebaseAuth
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
@@ -58,12 +56,10 @@ fun LoginScreen(navController: NavController) {
     val passwordFocusRequester = remember { FocusRequester() }
 
     Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(16.dp)
+            horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(16.dp)
         ) {
             Text(text = "Sign in", style = MaterialTheme.typography.h4, color = Color.Black)
             Text(
@@ -75,22 +71,19 @@ fun LoginScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            OutlinedTextField(
-                value = email,
+            OutlinedTextField(value = email,
                 onValueChange = { email = it },
                 label = { Text("Email address") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email,
-                    imeAction = ImeAction.Next
+                    keyboardType = KeyboardType.Email, imeAction = ImeAction.Next
                 ),
                 keyboardActions = KeyboardActions(onNext = { passwordFocusRequester.requestFocus() }),
                 modifier = Modifier.focusRequester(emailFocusRequester)
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedTextField(
-                value = password,
+            OutlinedTextField(value = password,
                 onValueChange = { password = it },
                 label = { Text("Password") },
                 singleLine = true,
@@ -100,12 +93,10 @@ fun LoginScreen(navController: NavController) {
                 ),
                 visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
                 trailingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_eye_24),
+                    Icon(painter = painterResource(id = R.drawable.baseline_eye_24),
                         contentDescription = "Toggle password visibility",
                         tint = Color.Gray,
-                        modifier = Modifier.clickable { passwordVisibility = !passwordVisibility }
-                    )
+                        modifier = Modifier.clickable { passwordVisibility = !passwordVisibility })
                 },
                 modifier = Modifier.focusRequester(passwordFocusRequester)
             )
@@ -131,50 +122,34 @@ fun LoginScreen(navController: NavController) {
                             }
                     } else {
                         Toast.makeText(
-                            context,
-                            "Please enter a valid email address",
-                            Toast.LENGTH_SHORT
+                            context, "Please enter a valid email address", Toast.LENGTH_SHORT
                         ).show()
                     }
                 } else {
                     Toast.makeText(
-                        context,
-                        "Please enter your email and password",
-                        Toast.LENGTH_SHORT
+                        context, "Please enter your email and password", Toast.LENGTH_SHORT
                     ).show()
                 }
             }) {
                 Text(text = "Sign in")
             }
-            Text(
-                text = "Forgot Password?",
-                modifier = Modifier.clickable {
-                    navController.navigate(Screen.ForgotPassword.route)
-                }
-            )
+            Text(text = "Forgot Password?", modifier = Modifier.clickable {
+                navController.navigate(Screen.ForgotPassword.route)
+            })
             Spacer(modifier = Modifier.height(16.dp))
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
             ) {
                 Text("Don't have an account? ")
-                Text(
-                    text = "Sign Up",
+                Text(text = "Sign Up",
                     color = Color.Blue,
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier.clickable {
                         navController.navigate("register")
-                    }
-                )
+                    })
             }
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen(navController = rememberNavController())
 }

@@ -10,9 +10,5 @@ sealed class Screen(val route: String) {
     object WorkOutSession : Screen(route = "workOutSession")
     object Analytics : Screen(route = "analytics")
     object Register : Screen("register")
-    object SaveTrainingRoutine: Screen("savetrainingroutine")
-    object SavedRoutinesList: Screen("Savedroutineslist")
-
+    object SaveTrainingRoutine : Screen("savetrainingroutine")
 }
-
-

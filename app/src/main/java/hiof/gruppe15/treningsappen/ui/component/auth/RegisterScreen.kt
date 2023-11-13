@@ -52,22 +52,19 @@ fun RegisterScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier.padding(16.dp)
     ) {
-        OutlinedTextField(
-            value = email,
+        OutlinedTextField(value = email,
             onValueChange = { email = it },
             label = { Text("Email address") },
             singleLine = true,
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next
+                keyboardType = KeyboardType.Email, imeAction = ImeAction.Next
             ),
             keyboardActions = KeyboardActions(onNext = { passwordFocusRequester.requestFocus() }),
             modifier = Modifier.focusRequester(emailFocusRequester)
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
-            value = password,
+        OutlinedTextField(value = password,
             onValueChange = { password = it },
             label = { Text("Password") },
             singleLine = true,
@@ -77,12 +74,10 @@ fun RegisterScreen(navController: NavController) {
             ),
             visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.baseline_eye_24),
+                Icon(painter = painterResource(id = R.drawable.baseline_eye_24),
                     contentDescription = "Toggle password visibility",
                     tint = Color.Gray,
-                    modifier = Modifier.clickable { passwordVisibility = !passwordVisibility }
-                )
+                    modifier = Modifier.clickable { passwordVisibility = !passwordVisibility })
             },
             modifier = Modifier.focusRequester(passwordFocusRequester)
         )
@@ -96,9 +91,7 @@ fun RegisterScreen(navController: NavController) {
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     Toast.makeText(
-                                        context,
-                                        "Registration successful",
-                                        Toast.LENGTH_SHORT
+                                        context, "Registration successful", Toast.LENGTH_SHORT
                                     ).show()
                                     navController.navigate(Screen.Login.route) {
                                         popUpTo(Screen.Register.route) { inclusive = true }
@@ -120,9 +113,7 @@ fun RegisterScreen(navController: NavController) {
                     }
                 } else {
                     Toast.makeText(
-                        context,
-                        "Please enter a valid email address",
-                        Toast.LENGTH_SHORT
+                        context, "Please enter a valid email address", Toast.LENGTH_SHORT
                     ).show()
                 }
             } else {

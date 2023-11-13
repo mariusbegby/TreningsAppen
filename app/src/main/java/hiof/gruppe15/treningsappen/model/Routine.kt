@@ -6,4 +6,3 @@ data class Routine(
     val exercises: List<Exercise>? = null,
     val time: Long? = null
 )
-
