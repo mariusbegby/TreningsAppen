@@ -23,12 +23,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.treningsappen.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,6 +71,8 @@ fun AppScaffold(
 
 @Composable
 private fun BottomNavigationRow(navController: NavController) {
+    val currentRoute = getCurrentRoute(navController)
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -74,82 +80,113 @@ private fun BottomNavigationRow(navController: NavController) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        HomeNavButton(navController)
+        HomeNavButton(navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Home))
         Spacer(modifier = Modifier.width(12.dp))
 
-        WorkoutPlanNavButton(navController)
+        WorkoutPlanNavButton(navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Workout))
         Spacer(modifier = Modifier.width(12.dp))
 
-        AnalyticsNavButton(navController)
+        AnalyticsNavButton(navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Analytics))
         Spacer(modifier = Modifier.width(12.dp))
 
-        ProfileNavButton(navController)
+        ProfileNavButton(navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Profile))
     }
 }
 
 @Composable
-private fun ProfileNavButton(navController: NavController) {
-    IconButton(onClick = {
-        navController.navigate(Screen.Profile.route) {
-            popUpTo(Screen.Profile.route) { inclusive = true }
-        }
-    }) {
-        Icon(
-            imageVector = Icons.Default.Person,
-            contentDescription = "Person Icon",
-            tint = Color.Black
-        )
-    }
+private fun HomeNavButton(navController: NavController, isSelected: Boolean) {
+    NavButton(
+        navController = navController,
+        isSelected = isSelected,
+        iconWrapper = IconWrapper.ImageVectorIcon(Icons.Default.Home),
+        contentDescription = "Home Icon",
+        route = Screen.Home.route
+    )
 }
 
 @Composable
-private fun AnalyticsNavButton(navController: NavController) {
-    IconButton(onClick = {
-        navController.navigate(Screen.Analytics.route) {
-            popUpTo(Screen.Analytics.route) { inclusive = true }
-        }
-    }) {
-        Icon(
-            painter = painterResource(id = R.drawable.trendingup),
-            contentDescription = "Arrow Chart Increase Icon",
-            tint = Color.Black
-        )
-    }
+private fun WorkoutPlanNavButton(navController: NavController, isSelected: Boolean) {
+    NavButton(
+        navController = navController,
+        isSelected = isSelected,
+        iconWrapper = IconWrapper.PainterIcon(painterResource(id = R.drawable.fitness)),
+        contentDescription = "Barbell Dumbell Icon",
+        route = Screen.WorkoutPlan.route
+    )
+}
+
+
+@Composable
+private fun AnalyticsNavButton(navController: NavController, isSelected: Boolean) {
+    NavButton(
+        navController = navController,
+        isSelected = isSelected,
+        iconWrapper = IconWrapper.PainterIcon(painterResource(id = R.drawable.trendingup)),
+        contentDescription = "Arrow Chart Increase Icon",
+        route = Screen.Analytics.route
+    )
 }
 
 @Composable
-private fun WorkoutPlanNavButton(navController: NavController) {
-    IconButton(onClick = {
-        navController.navigate(Screen.WorkoutPlan.route) {
-            popUpTo(Screen.WorkoutPlan.route) { inclusive = true }
-        }
-    }) {
-        Icon(
-            painter = painterResource(id = R.drawable.fitness),
-            contentDescription = "Barbell Dumbell Icon",
-            tint = Color.Black
-        )
-    }
+private fun ProfileNavButton(navController: NavController, isSelected: Boolean) {
+    NavButton(
+        navController = navController,
+        isSelected = isSelected,
+        iconWrapper = IconWrapper.ImageVectorIcon(Icons.Default.Person),
+        contentDescription = "Person Icon",
+        route = Screen.Profile.route
+    )
 }
 
 @Composable
-private fun HomeNavButton(navController: NavController) {
+private fun NavButton(
+    navController: NavController,
+    isSelected: Boolean,
+    iconWrapper: IconWrapper,
+    contentDescription: String,
+    route: String
+) {
+    val backgroundColor = if (isSelected) Color.Black else Color.White
+    val iconColor = if (isSelected) Color.White else Color.Black
+
     Box(
         modifier = Modifier
             .size(30.dp)
-            .background(Color.Black, shape = CircleShape)
+            .background(backgroundColor, shape = CircleShape)
             .padding(1.dp)
     ) {
         IconButton(onClick = {
-            navController.navigate(Screen.Home.route) {
-                popUpTo(Screen.Home.route) { inclusive = true }
+            navController.navigate(route) {
+                popUpTo(route) { inclusive = true }
             }
         }) {
-            Icon(
-                imageVector = Icons.Default.Home,
-                contentDescription = "Home Icon",
-                tint = Color.White
-            )
+            when (iconWrapper) {
+                is IconWrapper.ImageVectorIcon -> Icon(
+                    imageVector = iconWrapper.imageVector,
+                    contentDescription = contentDescription,
+                    tint = iconColor
+                )
+                is IconWrapper.PainterIcon -> Icon(
+                    painter = iconWrapper.painter,
+                    contentDescription = contentDescription,
+                    tint = iconColor
+                )
+            }
         }
     }
+}
+
+@Composable
+fun getCurrentRoute(navController: NavController): String? {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    return navBackStackEntry?.destination?.route
+}
+
+fun isRouteSelected(currentRoute: String?, category: ScreenCategory): Boolean {
+    return currentRoute in category.routes
+}
+
+sealed class IconWrapper {
+    data class ImageVectorIcon(val imageVector: ImageVector) : IconWrapper()
+    data class PainterIcon(val painter: Painter) : IconWrapper()
 }
