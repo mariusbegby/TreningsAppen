@@ -20,12 +20,19 @@ sealed class Screen(val route: String) {
     object Register : Screen("register")
     object ForgotPassword : Screen("forgotPassword")
     object Home : Screen("home")
+    object SaveTrainingRoutine : Screen("saveTrainingRoutine")
     object Profile : Screen("profile")
     object Settings : Screen(route = "settings")
     object WorkoutPlan : Screen(route = "workoutPlan")
     object WorkoutSession : Screen(route = "workoutSession")
     object Analytics : Screen(route = "analytics")
-    object SaveTrainingRoutine : Screen("saveTrainingRoutine")
+}
+
+sealed class ScreenCategory(val routes: List<String>) {
+    object Home : ScreenCategory(listOf("home", "saveTrainingRoutine"))
+    object Workout : ScreenCategory(listOf("workoutPlan", "workoutSession"))
+    object Analytics : ScreenCategory(listOf("analytics"))
+    object Profile : ScreenCategory(listOf("profile", "settings"))
 }
 
 @Composable
