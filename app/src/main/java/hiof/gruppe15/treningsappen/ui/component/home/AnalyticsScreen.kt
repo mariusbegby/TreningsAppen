@@ -11,7 +11,7 @@ import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 
 @Composable
 fun AnalyticsScreen(navController: NavController) {
-    AppScaffold(navController = navController, title = "AnalyticsScreen") {
+    AppScaffold(navController = navController, title = "Analytics") {
         Column(
             modifier = Modifier
                 .fillMaxSize()
