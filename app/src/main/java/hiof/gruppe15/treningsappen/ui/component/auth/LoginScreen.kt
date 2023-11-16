@@ -227,7 +227,6 @@ fun LoginButton(onSignInClick: () -> Unit) {
     ) {
         Text(
             text = "Login",
-            color = Color.White,
             style = MaterialTheme.typography.titleMedium
         )
     }
