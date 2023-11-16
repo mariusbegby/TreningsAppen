@@ -9,7 +9,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.database.FirebaseDatabase
 import hiof.gruppe15.treningsappen.ui.component.navigation.NavGraph
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
-import hiof.gruppe15.treningsappen.ui.theme.TreningsAppenTheme
+import hiof.gruppe15.treningsappen.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     lateinit var navController: NavHostController
@@ -21,14 +21,13 @@ class MainActivity : ComponentActivity() {
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
         setContent {
-            TreningsAppenTheme {
+            AppTheme {
                 navController = rememberNavController()
 
                 NavGraph(
                     navController = navController,
                     startDestination = Screen.Login.route
                 )
-
             }
         }
     }
