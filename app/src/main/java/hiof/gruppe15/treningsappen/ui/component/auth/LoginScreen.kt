@@ -13,9 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,13 +44,11 @@ import hiof.gruppe15.treningsappen.utils.ValidationUtils
 
 @Composable
 fun LoginScreen(navController: NavController) {
-
     var email by remember { mutableStateOf("mariusbegby@gmail.com") }
     var password by remember { mutableStateOf("123abc123") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
 
     val emailFocusRequester = remember { FocusRequester() }
     val passwordFocusRequester = remember { FocusRequester() }
@@ -61,10 +59,10 @@ fun LoginScreen(navController: NavController) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(16.dp)
         ) {
-            Text(text = "Sign in", style = MaterialTheme.typography.h4, color = Color.Black)
+            Text(text = "Sign in", style = MaterialTheme.typography.titleLarge)
             Text(
                 text = "Access your account",
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.titleLarge,
                 color = Color.Gray,
                 modifier = Modifier.padding(top = 4.dp)
             )
@@ -102,7 +100,6 @@ fun LoginScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-
             Button(onClick = {
                 if (email.isNotEmpty() && password.isNotEmpty()) {
                     if (ValidationUtils.isValidEmail(email)) {
@@ -131,7 +128,7 @@ fun LoginScreen(navController: NavController) {
                     ).show()
                 }
             }) {
-                Text(text = "Sign in")
+                Text(text = "Sign in", color = Color.White, style = MaterialTheme.typography.titleMedium)
             }
             Text(text = "Forgot Password?", modifier = Modifier.clickable {
                 navController.navigate(Screen.ForgotPassword.route)
