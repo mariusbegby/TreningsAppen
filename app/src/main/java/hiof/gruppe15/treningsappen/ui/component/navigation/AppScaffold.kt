@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -44,13 +45,24 @@ fun AppScaffold(
     navController: NavController, title: String, content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(topBar = {
-        TopAppBar(title = { Text(title) }, navigationIcon = {
-            IconButton(onClick = {
-                navController.navigateUp()
-            }) {
-                Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
+        TopAppBar(
+            title = {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            navigationIcon = {
+                if (title != "Home" && title != "Profile" && title != "Analytics" && title != "Routines") {
+                    IconButton(onClick = {
+                        navController.navigateUp()
+                    }) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
+                    }
+                }
             }
-        })
+        )
     }, bottomBar = {
         BottomAppBar(
             containerColor = MaterialTheme.colorScheme.background
@@ -162,17 +174,14 @@ private fun NavButton(
     val selectedColor =
         if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimaryContainer
 
-    Box(
-        modifier = Modifier
-            .clip(RoundedCornerShape(12.dp))
-            .clickable {
-                navController.navigate(route) {
-                    popUpTo(route) { inclusive = true }
-                }
+    Box(modifier = Modifier
+        .clip(RoundedCornerShape(12.dp))
+        .clickable {
+            navController.navigate(route) {
+                popUpTo(route) { inclusive = true }
             }
-            .padding(8.dp),
-        contentAlignment = Alignment.Center
-    ) {
+        }
+        .padding(8.dp), contentAlignment = Alignment.Center) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -184,6 +193,7 @@ private fun NavButton(
                     tint = selectedColor,
                     modifier = Modifier.size(24.dp) // Control the size of the Icon
                 )
+
                 is IconWrapper.PainterIcon -> Icon(
                     painter = iconWrapper.painter,
                     contentDescription = contentDescription,
@@ -195,9 +205,7 @@ private fun NavButton(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = label,
-                style = MaterialTheme.typography.labelMedium,
-                color = selectedColor
+                text = label, style = MaterialTheme.typography.labelMedium, color = selectedColor
             )
         }
     }

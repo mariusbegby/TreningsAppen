@@ -72,8 +72,7 @@ fun HomeScreen(navController: NavController) {
                     .fillMaxWidth()
                     .padding(top = 16.dp)
             ) {
-                TextField(
-                    value = searchText,
+                TextField(value = searchText,
                     onValueChange = { searchText = it },
                     label = { Text("Search Exercise type...") },
                     modifier = Modifier
@@ -108,7 +107,20 @@ fun HomeScreen(navController: NavController) {
                         } else {
                             selectedExercises.value - exercise
                         }
-                    })
+                    }
+                )
+            } else {
+                ExercisesWithCheckboxList(exercises = loadedExercises,
+                    selectedExercises = selectedExercises.value,
+                    onExerciseCheckedChange = { exercise, isChecked ->
+
+                        selectedExercises.value = if (isChecked) {
+                            selectedExercises.value + exercise
+                        } else {
+                            selectedExercises.value - exercise
+                        }
+                    }
+                )
             }
 
         }

@@ -48,7 +48,7 @@ fun WorkoutApp(navController: NavController) {
         listOf<Exercise>()
     }
 
-    AppScaffold(navController = navController, title = "RoutineScreen") {
+    AppScaffold(navController = navController, title = "Routines") {
         Surface(
             modifier = Modifier
                 .fillMaxSize()
