@@ -66,6 +66,8 @@ fun SaveRoutineScreen(navController: NavController) {
                             }
 
                              */
+
+                            // TODO: Save routine to Firebase on the logged in user.
                         }
                     } else {
                         Toast.makeText(context, "Routine name cannot be empty", Toast.LENGTH_SHORT)

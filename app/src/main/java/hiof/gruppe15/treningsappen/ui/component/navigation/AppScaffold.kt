@@ -98,7 +98,7 @@ private fun BottomNavigationRow(navController: NavController) {
         Spacer(modifier = Modifier.width(12.dp))
 
         WorkoutPlanNavButton(
-            navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Workout)
+            navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Routines)
         )
         Spacer(modifier = Modifier.width(12.dp))
 
@@ -132,7 +132,7 @@ private fun WorkoutPlanNavButton(navController: NavController, isSelected: Boole
         isSelected = isSelected,
         iconWrapper = IconWrapper.PainterIcon(painterResource(id = R.drawable.fitness)),
         contentDescription = "Barbell Dumbell Icon",
-        route = Screen.WorkoutPlan.route,
+        route = Screen.Routines.route,
         label = "Routines"
     )
 }

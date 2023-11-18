@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui.component.auth
+package hiof.gruppe15.treningsappen.ui.component.login
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -47,7 +47,7 @@ import hiof.gruppe15.treningsappen.utils.ValidationUtils
 
 @Composable
 fun LoginScreen(navController: NavController) {
-    var email by remember { mutableStateOf("mariusbegby@gmail.com") }
+    var email by remember { mutableStateOf("user@example.com") }
     var password by remember { mutableStateOf("123abc123") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val context = LocalContext.current

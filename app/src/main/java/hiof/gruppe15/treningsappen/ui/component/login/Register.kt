@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui.component.auth
+package hiof.gruppe15.treningsappen.ui.component.login
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box

@@ -2,7 +2,7 @@ package hiof.gruppe15.treningsappen.utils
 
 object ValidationUtils {
     fun isValidEmail(target: CharSequence?): Boolean {
-        return if (target == null || target.isEmpty()) {
+        return if (target.isNullOrEmpty()) {
             false
         } else {
             android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches()

@@ -34,11 +34,11 @@ import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
-import hiof.gruppe15.treningsappen.ui.component.workout.ExercisesWithCheckboxList
+import hiof.gruppe15.treningsappen.ui.component.routines.ExercisesWithCheckboxList
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun CreateRoutineScreen(navController: NavController) {
     val context = LocalContext.current
     val loadedExercises = Datasource().loadExercisesFromJson(context)
     var searchText by remember { mutableStateOf(TextFieldValue()) }
@@ -49,7 +49,7 @@ fun HomeScreen(navController: NavController) {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
-    AppScaffold(navController = navController, title = "Home") {
+    AppScaffold(navController = navController, title = "SaveRoutine") {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -82,7 +82,7 @@ fun HomeScreen(navController: NavController) {
                 FloatingActionButton(
                     onClick = {
                         if (selectedExercises.value.isNotEmpty()) {
-                            navController.navigate(Screen.SaveTrainingRoutine.route)
+                            navController.navigate(Screen.SaveNewRoutine.route)
                         } else {
                             coroutineScope.launch {
                                 snackbarHostState.showSnackbar(
@@ -122,7 +122,6 @@ fun HomeScreen(navController: NavController) {
                     }
                 )
             }
-
         }
     }
 }

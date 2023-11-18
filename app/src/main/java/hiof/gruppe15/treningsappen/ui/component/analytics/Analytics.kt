@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui.component.settings
+package hiof.gruppe15.treningsappen.ui.component.analytics
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,12 +10,14 @@ import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 
 @Composable
-fun SettingsScreen(navController: NavController) {
-    AppScaffold(navController = navController, title = "SettingsScreen") {
+fun AnalyticsScreen(navController: NavController) {
+    AppScaffold(navController = navController, title = "Analytics") {
         Column(
-            modifier = Modifier.fillMaxSize().padding(it)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
         ) {
-            Text("Settings")
+            Text("Analytics")
         }
     }
 }
