@@ -98,7 +98,7 @@ private fun BottomNavigationRow(navController: NavController) {
         Spacer(modifier = Modifier.width(12.dp))
 
         WorkoutPlanNavButton(
-            navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Workout)
+            navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Routines)
         )
         Spacer(modifier = Modifier.width(12.dp))
 
