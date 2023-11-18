@@ -34,7 +34,7 @@ import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
-import hiof.gruppe15.treningsappen.ui.component.workout.ExercisesWithCheckboxList
+import hiof.gruppe15.treningsappen.ui.component.routines.ExercisesWithCheckboxList
 import kotlinx.coroutines.launch
 
 @Composable
@@ -82,7 +82,7 @@ fun HomeScreen(navController: NavController) {
                 FloatingActionButton(
                     onClick = {
                         if (selectedExercises.value.isNotEmpty()) {
-                            navController.navigate(Screen.SaveTrainingRoutine.route)
+                            navController.navigate(Screen.CreateNewRoutine.route)
                         } else {
                             coroutineScope.launch {
                                 snackbarHostState.showSnackbar(

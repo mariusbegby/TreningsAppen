@@ -132,7 +132,7 @@ private fun WorkoutPlanNavButton(navController: NavController, isSelected: Boole
         isSelected = isSelected,
         iconWrapper = IconWrapper.PainterIcon(painterResource(id = R.drawable.fitness)),
         contentDescription = "Barbell Dumbell Icon",
-        route = Screen.WorkoutPlan.route,
+        route = Screen.Routines.route,
         label = "Routines"
     )
 }

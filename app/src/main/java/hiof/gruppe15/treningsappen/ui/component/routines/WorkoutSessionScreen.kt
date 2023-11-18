@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui.component.workout
+package hiof.gruppe15.treningsappen.ui.component.routines
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
