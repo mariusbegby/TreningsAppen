@@ -58,7 +58,7 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:YOUR_VERSION")
 
-
+    implementation ("com.google.firebase:firebase-firestore-ktx")
     implementation ("com.google.firebase:firebase-auth:latestVersion")
 
     implementation ("com.google.firebase:firebase-auth:latest_version")

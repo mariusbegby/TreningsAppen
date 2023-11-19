@@ -5,4 +5,5 @@ data class Routine(
     val name: String,
     val exercises: List<Exercise>? = null,
     val time: Long? = null
-)
+) {
+}

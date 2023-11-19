@@ -65,6 +65,7 @@ fun SaveRoutineScreen(
                                     Toast.makeText(context, "Exercise routine has been saved", Toast.LENGTH_SHORT).show()
                                     navController.popBackStack()
                                 } else {
+                                    Toast.makeText(context, "SaveNewRoutine.kt RoutineRepository.kt saveRoutine", Toast.LENGTH_SHORT).show()
                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                                 }
 
