@@ -54,8 +54,8 @@ fun NavGraph(
 
         composable(Screen.Routines.route) { RoutineScreen(navController) }
         composable(Screen.WorkoutSession.route) { WorkoutSessionScreen(navController) }
-        composable(Screen.CreateNewRoutine.route) { CreateRoutineScreen(navController) }
-        composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController) }
+        composable(Screen.CreateNewRoutine.route) { CreateRoutineScreen(navController, sharedViewModel) }
+        composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController, sharedViewModel) }
 
         composable(Screen.Analytics.route) { AnalyticsScreen(navController) }
 

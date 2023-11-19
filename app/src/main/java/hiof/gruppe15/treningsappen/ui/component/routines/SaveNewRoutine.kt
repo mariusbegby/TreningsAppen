@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.data.RoutineRepository
 import hiof.gruppe15.treningsappen.model.Routine
@@ -31,12 +30,11 @@ import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 @Composable
 fun SaveRoutineScreen(
     navController: NavController,
-    sharedViewModel: SharedViewModel = viewModel()
+    sharedViewModel: SharedViewModel
 ) {
     var routineName by remember { mutableStateOf("") }
     val context = LocalContext.current
     val selectedExercises = sharedViewModel.selectedExercises.value
-    val sharedViewModel: SharedViewModel = viewModel()
 
     AppScaffold(navController = navController, title = "SaveRoutine") {
         Column(
@@ -59,7 +57,17 @@ fun SaveRoutineScreen(
             ) {
                 Button(onClick = {
                     if (routineName.isNotEmpty()) {
-                        val routine = Routine(name = routineName, exercises = selectedExercises)
+                        if (selectedExercises.isEmpty()) {
+                            Toast.makeText(context, "No exercises selected", Toast.LENGTH_SHORT).show()
+                            return@Button
+                        }
+
+                        val routine = Routine(
+                            id = "1",
+                            name = routineName,
+                            exercises = selectedExercises
+                        )
+
                         RoutineRepository().saveRoutine(routine) { isSuccess, message ->
                                 if (isSuccess) {
                                     Toast.makeText(context, "Exercise routine has been saved", Toast.LENGTH_SHORT).show()
