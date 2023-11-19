@@ -10,15 +10,28 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
+import hiof.gruppe15.treningsappen.viewmodel.RoutineViewModel
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, routineViewModel: RoutineViewModel = viewModel()) {
+    // Retrieve the list of routines from the viewmodel
+    val routines by routineViewModel.routines.collectAsState()
+    val error by routineViewModel.errorState.collectAsState()
+    val routineViewModel: RoutineViewModel = viewModel()
+    val errorMessage by routineViewModel.errorState.collectAsState()
+    error?.let {
+        Text(text = it, color = MaterialTheme.colorScheme.error)
+    }
+
     AppScaffold(navController = navController, title = "Home") {
         Column(
             modifier = Modifier
@@ -43,18 +56,25 @@ fun HomeScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.padding(8.dp))
 
+            if (errorMessage != null) {
+                Text(text = errorMessage!!, color = MaterialTheme.colorScheme.error)
+            }
+
             Box(modifier = Modifier.fillMaxSize()) {
                 Column {
                     Text(
                         text = "Saved Routines",
                         style = MaterialTheme.typography.titleMedium,
                     )
+                    routines.forEach { routine ->
+                        Text(text = routine.name)
 
-                    // Retrieve routines from database and display them here
-                    // You can just display the name of the routine in a Text() composable.
-                    // Just so we know that it is retrieved from Firebase successfully
+                        // Retrieve routines from database and display them here
+                        // You can just display the name of the routine in a Text() composable.
+                        // Just so we know that it is retrieved from Firebase successfully
 
-                    // TODO: Implement the above logic
+                        // TODO: Implement the above logic
+                    }
                 }
             }
         }

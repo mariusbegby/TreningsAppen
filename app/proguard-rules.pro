@@ -11,6 +11,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keepclassmembers class hiof.gruppe15.treningsappen.model.** {
+<init>();
+}
+
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
