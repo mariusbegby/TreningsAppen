@@ -1,6 +1,5 @@
 package hiof.gruppe15.treningsappen.viewmodel
 
-import androidx.activity.viewModels
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel

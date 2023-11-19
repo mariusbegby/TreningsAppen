@@ -42,7 +42,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
@@ -53,7 +52,10 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 
 @Composable
-fun CreateRoutineScreen(navController: NavController) {
+fun CreateRoutineScreen(
+    navController: NavController,
+    sharedViewModel: SharedViewModel
+) {
     val context = LocalContext.current
     val loadedExercises = Datasource().loadExercisesFromJson(context)
     var searchText by remember { mutableStateOf(TextFieldValue()) }
@@ -63,7 +65,6 @@ fun CreateRoutineScreen(navController: NavController) {
     val selectedExercises = remember { mutableStateOf(setOf<Exercise>()) }
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
-    val sharedViewModel: SharedViewModel = viewModel()
 
     AppScaffold(navController = navController, title = "SaveRoutine") {
         Column(
