@@ -15,6 +15,7 @@ import hiof.gruppe15.treningsappen.ui.component.home.TestingScreen
 import hiof.gruppe15.treningsappen.ui.component.profile.ProfileScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.RoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.WorkoutSessionScreen
+import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
 sealed class Screen(val route: String) {
     object Login : Screen("login")
@@ -39,7 +40,7 @@ sealed class ScreenCategory(val routes: List<String>) {
 
 @Composable
 fun NavGraph(
-    navController: NavHostController, startDestination: String = Screen.Login.route
+    navController: NavHostController, startDestination: String = Screen.Login.route, sharedViewModel: SharedViewModel
 ) {
     NavHost(
         navController = navController, startDestination = startDestination
@@ -54,7 +55,12 @@ fun NavGraph(
         composable(Screen.Routines.route) { RoutineScreen(navController) }
         composable(Screen.WorkoutSession.route) { WorkoutSessionScreen(navController) }
         composable(Screen.CreateNewRoutine.route) { CreateRoutineScreen(navController) }
-        composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController) }
+        //composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController) }
+        composable(route = Screen.SaveNewRoutine.route) {
+            SaveRoutineScreen(navController)
+        }
+
+
 
         composable(Screen.Analytics.route) { AnalyticsScreen(navController) }
 

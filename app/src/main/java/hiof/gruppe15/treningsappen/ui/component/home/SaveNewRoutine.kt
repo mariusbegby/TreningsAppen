@@ -16,21 +16,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import hiof.gruppe15.treningsappen.data.RoutineRepository
+import hiof.gruppe15.treningsappen.model.Routine
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
-import kotlinx.coroutines.launch
+import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
+
 
 @Composable
-fun SaveRoutineScreen(navController: NavController) {
-    val scope = rememberCoroutineScope()
+fun SaveRoutineScreen(navController: NavController,
+                      sharedViewModel: SharedViewModel = viewModel()) {
     var routineName by remember { mutableStateOf("") }
     val context = LocalContext.current
+    val selectedExercises = sharedViewModel.selectedExercises.value
+    val sharedViewModel: SharedViewModel = viewModel()
 
     AppScaffold(navController = navController, title = "SaveRoutine") {
         Column(
@@ -53,19 +58,14 @@ fun SaveRoutineScreen(navController: NavController) {
             ) {
                 Button(onClick = {
                     if (routineName.isNotEmpty()) {
-                        scope.launch {
-                            /*
-                            val routine = Routine(name = routineName)
-
-                            viewModel.saveRoutine(routine) { isSuccess, message ->
+                        val routine = Routine(name = routineName, exercises = selectedExercises)
+                        RoutineRepository().saveRoutine(routine) { isSuccess, message ->
                                 if (isSuccess) {
-                                    navController.navigate(Screen.SavedRoutinesList.route)
+                                    Toast.makeText(context, "Exercise routine has been saved", Toast.LENGTH_SHORT).show()
+                                    navController.popBackStack()
                                 } else {
                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                                 }
-                            }
-
-                             */
 
                             // TODO: Save routine to Firebase on the logged in user.
                         }
