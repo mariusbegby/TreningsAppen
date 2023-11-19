@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui.component.home
+package hiof.gruppe15.treningsappen.ui.component.routines
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -28,10 +28,11 @@ import hiof.gruppe15.treningsappen.model.Routine
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
-
 @Composable
-fun SaveRoutineScreen(navController: NavController,
-                      sharedViewModel: SharedViewModel = viewModel()) {
+fun SaveRoutineScreen(
+    navController: NavController,
+    sharedViewModel: SharedViewModel = viewModel()
+) {
     var routineName by remember { mutableStateOf("") }
     val context = LocalContext.current
     val selectedExercises = sharedViewModel.selectedExercises.value
