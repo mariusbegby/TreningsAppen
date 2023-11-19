@@ -1,10 +1,12 @@
 package hiof.gruppe15.treningsappen.ui.component.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -12,6 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -31,6 +36,8 @@ fun HomeScreen(navController: NavController, routineViewModel: RoutineViewModel 
     error?.let {
         Text(text = it, color = MaterialTheme.colorScheme.error)
     }
+
+    var expandedRoutineIds by remember { mutableStateOf(setOf<String>()) }
 
     AppScaffold(navController = navController, title = "Home") {
         Column(
@@ -67,16 +74,35 @@ fun HomeScreen(navController: NavController, routineViewModel: RoutineViewModel 
                         style = MaterialTheme.typography.titleMedium,
                     )
                     routines.forEach { routine ->
-                        Text(text = routine.name)
-
-                        // Retrieve routines from database and display them here
-                        // You can just display the name of the routine in a Text() composable.
-                        // Just so we know that it is retrieved from Firebase successfully
-
-                        // TODO: Implement the above logic
+                        Text(
+                            text = routine.name,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    // Toggle the expanded state for this routine
+                                    expandedRoutineIds = if (routine.id in expandedRoutineIds) {
+                                        expandedRoutineIds - routine.id
+                                    } else {
+                                        expandedRoutineIds + routine.id
+                                    }
+                                }
+                                .padding(8.dp)
+                        )
+                        if (routine.id in expandedRoutineIds) {
+                            routine.exercises.forEach { exercise ->
+                                Text(
+                                    text = " - ${exercise.name}",
+                                    modifier = Modifier.padding(start = 16.dp)
+                                )
+                            }
+                        }
                     }
+                    error?.let {
+                        Text(text = it, color = MaterialTheme.colorScheme.error)
+                    }
+                }
                 }
             }
         }
     }
-}
+
