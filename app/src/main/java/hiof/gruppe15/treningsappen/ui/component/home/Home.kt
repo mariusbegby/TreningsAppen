@@ -41,6 +41,7 @@ fun HomeScreen(navController: NavController) {
                     style = MaterialTheme.typography.titleMedium,
                 )
 
+
                 // Retrieve routines from database and display them here
                 // You can just display the name of the routine in a Text() composable.
                 // Just so we know that it is retrieved from Firebase successfully
