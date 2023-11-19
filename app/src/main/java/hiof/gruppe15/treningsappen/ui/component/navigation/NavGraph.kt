@@ -11,6 +11,7 @@ import hiof.gruppe15.treningsappen.ui.component.analytics.AnalyticsScreen
 import hiof.gruppe15.treningsappen.ui.component.home.CreateRoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.home.HomeScreen
 import hiof.gruppe15.treningsappen.ui.component.home.SaveRoutineScreen
+import hiof.gruppe15.treningsappen.ui.component.home.TestingScreen
 import hiof.gruppe15.treningsappen.ui.component.profile.ProfileScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.RoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.WorkoutSessionScreen
@@ -26,10 +27,11 @@ sealed class Screen(val route: String) {
     object SaveNewRoutine : Screen("saveNewRoutine")
     object Analytics : Screen(route = "analytics")
     object Profile : Screen("profile")
+    object Testing : Screen("testing")
 }
 
 sealed class ScreenCategory(val routes: List<String>) {
-    object Home : ScreenCategory(listOf("home"))
+    object Home : ScreenCategory(listOf("home", "testing"))
     object Routines : ScreenCategory(listOf("workoutPlan", "workoutSession", "createNewRoutine", "saveNewRoutine"))
     object Analytics : ScreenCategory(listOf("analytics"))
     object Profile : ScreenCategory(listOf("profile"))
@@ -47,6 +49,7 @@ fun NavGraph(
         composable(Screen.ForgotPassword.route) { ForgotPasswordScreen(navController) }
 
         composable(Screen.Home.route) { HomeScreen(navController) }
+        composable(Screen.Testing.route) { TestingScreen(navController) }
 
         composable(Screen.Routines.route) { RoutineScreen(navController) }
         composable(Screen.WorkoutSession.route) { WorkoutSessionScreen(navController) }

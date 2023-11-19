@@ -170,10 +170,10 @@ fun DifficultyIndicator(difficulty: String) {
     val mediumColor = Color(0xFF6A7FDB)
     val hardColor = Color(0xFFD32F2F)
 
-    val dashColor = when (difficulty.lowercase(Locale.ROOT)) {
-        "easy" -> easyColor
-        "medium" -> mediumColor
-        "hard" -> hardColor
+    val dashColor = when (difficulty) {
+        "Easy" -> easyColor
+        "Medium" -> mediumColor
+        "Hard" -> hardColor
         else -> MaterialTheme.colorScheme.onSurface // Default color if none matches
     }
 
@@ -189,14 +189,11 @@ fun DifficultyIndicator(difficulty: String) {
                 (3 * (dashLength + dashSpacing) - dashSpacing).value.dp, dashWidth
             )
         ) {
-            val numberOfDashes = when (difficulty.lowercase(Locale.ROOT)) {
-                "easy" -> 1
-                "medium" -> 2
-                "hard" -> 3
-                else -> 0
-            }
+            val difficultyNumber = difficulty.replace("Easy", "1")
+                .replace("Medium", "2")
+                .replace("Hard", "3")
 
-            for (i in 0 until numberOfDashes) {
+            for (i in 0 until difficultyNumber.toInt()) {
                 val startX = i * (dashLength.value + dashSpacing.value)
                 drawLine(
                     color = dashColor,

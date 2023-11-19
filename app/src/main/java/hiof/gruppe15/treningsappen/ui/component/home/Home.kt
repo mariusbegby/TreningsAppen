@@ -35,17 +35,27 @@ fun HomeScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.padding(8.dp))
 
+            Button(onClick = {
+                navController.navigate(Screen.Testing.route)
+            }) {
+                Text("Testing")
+            }
+
+            Spacer(modifier = Modifier.padding(8.dp))
+
             Box(modifier = Modifier.fillMaxSize()) {
-                Text(
-                    text = "Saved Routines",
-                    style = MaterialTheme.typography.titleMedium,
-                )
+                Column {
+                    Text(
+                        text = "Saved Routines",
+                        style = MaterialTheme.typography.titleMedium,
+                    )
 
-                // Retrieve routines from database and display them here
-                // You can just display the name of the routine in a Text() composable.
-                // Just so we know that it is retrieved from Firebase successfully
+                    // Retrieve routines from database and display them here
+                    // You can just display the name of the routine in a Text() composable.
+                    // Just so we know that it is retrieved from Firebase successfully
 
-                // TODO: Implement the above logic
+                    // TODO: Implement the above logic
+                }
             }
         }
     }

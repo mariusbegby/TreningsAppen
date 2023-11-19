@@ -59,7 +59,7 @@ dependencies {
     implementation ("com.google.firebase:firebase-auth:latest_version")
     implementation ("com.google.firebase:firebase-firestore:latest_version")
 
-
+    implementation ("io.coil-kt:coil-compose:2.1.0")
 
     implementation ("androidx.compose.ui:ui:<latest_version>")
     implementation ("androidx.compose.material:material:<latest_version>")
