@@ -8,9 +8,9 @@ import hiof.gruppe15.treningsappen.ui.component.login.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.login.LoginScreen
 import hiof.gruppe15.treningsappen.ui.component.login.RegisterScreen
 import hiof.gruppe15.treningsappen.ui.component.analytics.AnalyticsScreen
-import hiof.gruppe15.treningsappen.ui.component.home.CreateRoutineScreen
+import hiof.gruppe15.treningsappen.ui.component.routines.CreateRoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.home.HomeScreen
-import hiof.gruppe15.treningsappen.ui.component.home.SaveRoutineScreen
+import hiof.gruppe15.treningsappen.ui.component.routines.SaveRoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.home.TestingScreen
 import hiof.gruppe15.treningsappen.ui.component.profile.ProfileScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.RoutineScreen
