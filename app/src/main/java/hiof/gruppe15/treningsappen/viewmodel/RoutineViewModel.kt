@@ -25,10 +25,9 @@ class RoutineViewModel : ViewModel() {
 
     private fun fetchRoutines() {
         viewModelScope.launch {
-            val user = FirebaseAuth.getInstance().currentUser // Get the current authenticated user
+            val user = FirebaseAuth.getInstance().currentUser
             if (user != null) {
                 try {
-                    // Fetch routines from the sub-collection under the user's document
                     val snapshot = db.collection("users").document(user.uid)
                         .collection("routines").get().await()
                     val routines = snapshot.documents.mapNotNull { doc ->
