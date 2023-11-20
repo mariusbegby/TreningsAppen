@@ -31,7 +31,6 @@ fun HomeScreen(navController: NavController, routineViewModel: RoutineViewModel 
     // Retrieve the list of routines from the viewmodel
     val routines by routineViewModel.routines.collectAsState()
     val error by routineViewModel.errorState.collectAsState()
-    val routineViewModel: RoutineViewModel = viewModel()
     val errorMessage by routineViewModel.errorState.collectAsState()
     error?.let {
         Text(text = it, color = MaterialTheme.colorScheme.error)
@@ -91,7 +90,7 @@ fun HomeScreen(navController: NavController, routineViewModel: RoutineViewModel 
                         if (routine.id in expandedRoutineIds) {
                             routine.exercises.forEach { exercise ->
                                 Text(
-                                    text = " - ${exercise.name}",
+                                    text = " - ${exercise.exercise.name} - ${exercise.repetitions} reps",
                                     modifier = Modifier.padding(start = 16.dp)
                                 )
                             }

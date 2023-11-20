@@ -8,5 +8,10 @@ data class Exercise(
     val muscleGroup: String="",
     var selected: Boolean = false,
     val imageUrl: String? = null,
-) {
-}
+)
+
+data class RoutineExercise(
+    val exercise: Exercise = Exercise(),
+    val repetitions: Int = 1,
+    val note: String = ""
+)

@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.data.RoutineRepository
 import hiof.gruppe15.treningsappen.model.Routine
+import hiof.gruppe15.treningsappen.model.RoutineExercise
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
@@ -62,10 +63,16 @@ fun SaveRoutineScreen(
                             return@Button
                         }
 
+                        val routineExercises = selectedExercises.map { exercise ->
+                            RoutineExercise(
+                                exercise = exercise,
+                                repetitions = 3
+                            )
+                        }
+
                         val routine = Routine(
-                            id = "1",
                             name = routineName,
-                            exercises = selectedExercises
+                            exercises = routineExercises
                         )
 
                         RoutineRepository().saveRoutine(routine) { isSuccess, message ->
