@@ -26,6 +26,7 @@ import hiof.gruppe15.treningsappen.data.RoutineRepository
 import hiof.gruppe15.treningsappen.model.Routine
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
+import java.util.UUID
 
 @Composable
 fun SaveRoutineScreen(
@@ -63,7 +64,7 @@ fun SaveRoutineScreen(
                         }
 
                         val routine = Routine(
-                            id = "1",
+                            id = UUID.randomUUID().toString(),
                             name = routineName,
                             exercises = selectedExercises
                         )
