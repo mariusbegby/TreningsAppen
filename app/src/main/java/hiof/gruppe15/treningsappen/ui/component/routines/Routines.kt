@@ -42,7 +42,7 @@ fun RoutineScreen(navController: NavController, routineViewModel: RoutineViewMod
 
             Spacer(modifier = Modifier.padding(8.dp))
 
-            CreateRoutineButton(onSignInClick = {
+            CreateRoutineButton(onClick = {
                 navController.navigate(Screen.CreateNewRoutine.route)
             })
 
@@ -59,7 +59,7 @@ fun RoutineScreen(navController: NavController, routineViewModel: RoutineViewMod
 }
 
 @Composable
-fun Description() {
+private fun Description() {
     Text(
         text = "View and edit your routines",
         style = MaterialTheme.typography.bodyLarge,
@@ -68,9 +68,9 @@ fun Description() {
 }
 
 @Composable
-fun CreateRoutineButton(onSignInClick: () -> Unit) {
+fun CreateRoutineButton(onClick: () -> Unit) {
     Button(
-        onClick = onSignInClick,
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)

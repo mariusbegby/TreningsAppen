@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -42,42 +43,49 @@ import com.example.treningsappen.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
-    navController: NavController, title: String, content: @Composable (PaddingValues) -> Unit
+    navController: NavController,
+    title: String,
+    content: @Composable (PaddingValues) -> Unit
 ) {
-    Scaffold(topBar = {
-        TopAppBar(
-            title = {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
-            },
-            navigationIcon = {
-                if (title != "Home" && title != "Profile" && title != "Analytics" && title != "Routines") {
-                    IconButton(onClick = {
-                        navController.navigateUp()
-                    }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
+                navigationIcon = {
+                    if (title != "Home" && title != "Profile" && title != "Analytics" && title != "Routines") {
+                        IconButton(onClick = {
+                            navController.navigateUp()
+                        }) {
+                            Icon(Icons.Filled.ArrowBack, contentDescription = "Go back")
+                        }
                     }
                 }
-            }
-        )
-    }, bottomBar = {
-        BottomAppBar(
-            containerColor = MaterialTheme.colorScheme.background
-        ) {
-            BottomNavigationRow(navController)
-        }
-    }) { innerPadding ->
-        content(
-            PaddingValues(
-                top = innerPadding.calculateTopPadding(),
-                bottom = innerPadding.calculateBottomPadding(),
-                start = 16.dp,
-                end = 16.dp
             )
-        )
+        },
+        bottomBar = {
+            BottomAppBar(
+                containerColor = MaterialTheme.colorScheme.background
+            ) {
+                BottomNavigationRow(navController)
+            }
+        },
+    ) { innerPadding ->
+        Box(modifier = Modifier.fillMaxSize()) {
+            content(
+                PaddingValues(
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = innerPadding.calculateBottomPadding(),
+                    start = 16.dp,
+                    end = 16.dp
+                )
+            )
+        }
     }
 }
 

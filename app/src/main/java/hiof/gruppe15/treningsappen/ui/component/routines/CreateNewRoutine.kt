@@ -1,7 +1,7 @@
 package hiof.gruppe15.treningsappen.ui.component.routines
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,23 +9,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActionScope
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,14 +33,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.times
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
@@ -49,101 +45,142 @@ import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 @Composable
 fun CreateRoutineScreen(
-    navController: NavController,
-    sharedViewModel: SharedViewModel
+    navController: NavController, sharedViewModel: SharedViewModel
 ) {
     val context = LocalContext.current
     val loadedExercises = Datasource().loadExercisesFromJson(context)
-    var searchText by remember { mutableStateOf(TextFieldValue()) }
+    var searchText by remember { mutableStateOf(String()) }
     val filteredExercises = loadedExercises.filter {
-        it.name.contains(searchText.text, true)
+        it.name.contains(searchText, true)
     }
     val selectedExercises = remember { mutableStateOf(setOf<Exercise>()) }
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
-    AppScaffold(navController = navController, title = "SaveRoutine") {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            SnackbarHost(hostState = snackbarHostState) { data ->
-                Snackbar(snackbarData = data)
-            }
-
-            Text(
-                text = "Search and select exercises",
-                textAlign = TextAlign.Center,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
-
-            Row(
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        AppScaffold(navController = navController, title = "Create new routine") {
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp)
+                    .fillMaxSize()
+                    .padding(it)
             ) {
-                TextField(value = searchText,
-                    onValueChange = { searchText = it },
-                    label = { Text("Search Exercise type...") },
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(end = 8.dp)
-                )
-                FloatingActionButton(
-                    onClick = {
-                        if (selectedExercises.value.isNotEmpty()) {
-                            sharedViewModel.setSelectedExercises(selectedExercises.value.toList())
-                            navController.navigate(Screen.SaveNewRoutine.route)
-                        } else {
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "Select the exercises", actionLabel = "Dismiss"
-                                )
-                            }
+
+                Description()
+
+                Spacer(modifier = Modifier.padding(8.dp))
+
+                ExerciseSearchInputField(exerciseName = searchText, onNext = {
+                    if (selectedExercises.value.isNotEmpty()) {
+                        sharedViewModel.setSelectedExercises(selectedExercises.value.toList())
+                        navController.navigate(Screen.SaveNewRoutine.route)
+                    } else {
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = "Select the exercises", actionLabel = "Dismiss"
+                            )
                         }
-                    }, modifier = Modifier.padding(start = 8.dp)
-                ) {
-                    Icon(Icons.Default.Check, contentDescription = "Save")
+                    }
+                }, onValueChange = { searchText = it })
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                if (searchText.isNotEmpty()) {
+                    ExercisesWithCheckboxList(exercises = filteredExercises,
+                        selectedExercises = selectedExercises.value,
+                        onExerciseCheckedChange = { exercise, isChecked ->
+
+                            selectedExercises.value = if (isChecked) {
+                                selectedExercises.value + exercise
+                            } else {
+                                selectedExercises.value - exercise
+                            }
+                        })
+                } else {
+                    ExercisesWithCheckboxList(exercises = loadedExercises,
+                        selectedExercises = selectedExercises.value,
+                        onExerciseCheckedChange = { exercise, isChecked ->
+
+                            selectedExercises.value = if (isChecked) {
+                                selectedExercises.value + exercise
+                            } else {
+                                selectedExercises.value - exercise
+                            }
+                        })
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-            if (searchText.text.isNotEmpty()) {
-                ExercisesWithCheckboxList(exercises = filteredExercises,
-                    selectedExercises = selectedExercises.value,
-                    onExerciseCheckedChange = { exercise, isChecked ->
-
-                        selectedExercises.value = if (isChecked) {
-                            selectedExercises.value + exercise
-                        } else {
-                            selectedExercises.value - exercise
-                        }
+            FloatingCreateRoutineButton(onClick = {
+                if (selectedExercises.value.isNotEmpty()) {
+                    sharedViewModel.setSelectedExercises(selectedExercises.value.toList())
+                    navController.navigate(Screen.SaveNewRoutine.route)
+                } else {
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "You must select at least one exercise",
+                            actionLabel = "Dismiss"
+                        )
                     }
-                )
-            } else {
-                ExercisesWithCheckboxList(exercises = loadedExercises,
-                    selectedExercises = selectedExercises.value,
-                    onExerciseCheckedChange = { exercise, isChecked ->
+                }
+            })
 
-                        selectedExercises.value = if (isChecked) {
-                            selectedExercises.value + exercise
-                        } else {
-                            selectedExercises.value - exercise
-                        }
-                    }
-                )
+            SnackbarHost(
+                hostState = snackbarHostState,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = 56.dp)
+            ) { data ->
+                Snackbar(snackbarData = data)
             }
         }
     }
 }
 
+@Composable
+private fun Description() {
+    Text(
+        text = "Search and select exercises to add to your routine.",
+        style = MaterialTheme.typography.bodyLarge,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
+}
+
+@Composable
+fun ExerciseSearchInputField(
+    exerciseName: String, onNext: (KeyboardActionScope.() -> Unit), onValueChange: (String) -> Unit
+) {
+    OutlinedTextField(
+        value = exerciseName,
+        onValueChange = onValueChange,
+        label = { Text("Search exercise name...") },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Text, imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(onNext = onNext),
+        modifier = Modifier.fillMaxWidth()
+    )
+}
+
+@Composable
+fun FloatingCreateRoutineButton(onClick: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        FloatingActionButton(
+            onClick = onClick,
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(bottom = 96.dp, end = 16.dp)
+        ) {
+            Icon(Icons.Default.Create, contentDescription = "Save")
+        }
+    }
+}
 
 @Composable
 fun ExercisesWithCheckboxList(
@@ -160,7 +197,8 @@ fun ExercisesWithCheckboxList(
                 isChecked = isChecked,
                 onCheckedChange = { shouldCheck ->
                     onExerciseCheckedChange(exercise, shouldCheck)
-                })
+                }
+            )
         }
     }
 }
@@ -173,12 +211,15 @@ fun ExerciseNameWithCheckbox(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = exercise.name, style = MaterialTheme.typography.titleLarge)
+        Text(
+            text = exercise.name,
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold
+        )
         Checkbox(checked = isChecked, onCheckedChange = { checked ->
             onCheckedChange(checked)
         })
@@ -190,103 +231,6 @@ fun ExerciseList(exercises: List<Exercise>, modifier: Modifier = Modifier) {
     LazyColumn(userScrollEnabled = true, modifier = modifier) {
         items(exercises) { exercise ->
             hiof.gruppe15.treningsappen.ui.component.home.ExerciseCard(exercise = exercise)
-        }
-    }
-}
-
-@Composable
-fun ExerciseCard(exercise: Exercise, modifier: Modifier = Modifier) {
-    Card(
-        modifier = modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = exercise.name,
-                style = MaterialTheme.typography.titleLarge,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = exercise.description.replaceFirstChar {
-                    if (it.isLowerCase()) it.titlecase(
-                        Locale.ROOT
-                    ) else it.toString()
-                },
-                style = MaterialTheme.typography.bodyMedium,
-                maxLines = 3,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(
-                    text = exercise.muscleGroup.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    },
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.secondary
-                )
-
-                DifficultyIndicator(difficulty = exercise.difficulty)
-            }
-        }
-    }
-}
-
-@Composable
-fun DifficultyIndicator(difficulty: String) {
-    val dashLength = 20.dp
-    val dashWidth = 6.dp
-    val dashSpacing = 4.dp
-
-    val easyColor = Color(0xFF71CEAC)
-    val mediumColor = Color(0xFF6A7FDB)
-    val hardColor = Color(0xFFD32F2F)
-
-    val dashColor = when (difficulty) {
-        "Easy" -> easyColor
-        "Medium" -> mediumColor
-        "Hard" -> hardColor
-        else -> MaterialTheme.colorScheme.onSurface // Default color if none matches
-    }
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = "Difficulty:", style = MaterialTheme.typography.bodySmall
-        )
-
-        Canvas(
-            modifier = Modifier.size(
-                (3 * (dashLength + dashSpacing) - dashSpacing).value.dp, dashWidth
-            )
-        ) {
-            val difficultyNumber = difficulty.replace("Easy", "1")
-                .replace("Medium", "2")
-                .replace("Hard", "3")
-
-            for (i in 0 until difficultyNumber.toInt()) {
-                val startX = i * (dashLength.value + dashSpacing.value)
-                drawLine(
-                    color = dashColor,
-                    start = Offset(startX, size.height / 2),
-                    end = Offset(startX + dashLength.value, size.height / 2),
-                    strokeWidth = dashWidth.value
-                )
-            }
         }
     }
 }
