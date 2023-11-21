@@ -42,25 +42,25 @@ fun TestingScreen(navController: NavController) {
                     difficulty = "Medium",
                     muscleGroup = "Chest",
                     selected = false,
-                    imageUrl = "https://www.inspireusafoundation.org/wp-content/uploads/2023/02/negative-push-up-starting-position-1024x837.png"
+                    imageUrl = "https://i.imgur.com/CJrwwGH_d.webp?maxwidth=760&fidelity=grand"
                 ),
                 Exercise(
                     name = "Squats",
                     description = "Effective for building lower body strength.",
                     steps = listOf("Stand with feet a little wider than shoulder-width", "Bend your knees and lower your body", "Keep your back straight", "Return to standing position"),
                     difficulty = "Easy",
-                    muscleGroup = "Legs",
+                    muscleGroup = "Quads",
                     selected = false,
-                    imageUrl = "https://s3assets.skimble.com/assets/2288729/image_iphone.jpg"
+                    imageUrl = "https://i.imgur.com/MnFaNO9_d.webp?maxwidth=760&fidelity=grand"
                 ),
                 Exercise(
                     name = "Deadlift",
                     description = "A compound exercise for overall strength.",
                     steps = listOf("Stand with feet hip-width apart", "Bend and grab the barbell", "Lift the barbell by straightening your legs", "Lower the barbell to the ground"),
                     difficulty = "Hard",
-                    muscleGroup = "Back",
+                    muscleGroup = "Hamstrings",
                     selected = false,
-                    imageUrl = "https://www.kettlebellkings.com/cdn/shop/articles/barbell-deadlift-movement_1200x1200_crop_center.gif?v=1692228918"
+                    imageUrl = "https://i.imgur.com/Ki2cxni.png"
                 )
             )
 
