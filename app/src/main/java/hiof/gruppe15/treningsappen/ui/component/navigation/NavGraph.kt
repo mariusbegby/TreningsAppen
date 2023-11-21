@@ -81,6 +81,6 @@ fun NavGraph(
 
         composable(Screen.Analytics.route) { AnalyticsScreen(navController) }
 
-        composable(Screen.Profile.route) { ProfileScreen(navController) }
+        composable(Screen.Profile.route) { ProfileScreen(navController, sharedViewModel) }
     }
 }
