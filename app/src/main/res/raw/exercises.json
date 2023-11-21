@@ -328,18 +328,6 @@
     "muscleGroup": "Quads"
   },
   {
-    "name": "Stiff-Legged Deadlift",
-    "description": "Deadlift variation focusing on hamstrings.",
-    "steps": [
-      "Stand, feet shoulder-width.",
-      "Hold barbell in front.",
-      "Bend at hips, lower bar.",
-      "Lift back to starting position."
-    ],
-    "difficulty": "Medium",
-    "muscleGroup": "Hamstrings"
-  },
-  {
     "name": "Tricep Dip",
     "description": "Bodyweight exercise for triceps.",
     "steps": [
