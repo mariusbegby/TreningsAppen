@@ -1,8 +1,9 @@
 package hiof.gruppe15.treningsappen.ui.component.routines
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import hiof.gruppe15.treningsappen.viewmodel.RoutineViewModel
 
 @Composable
 fun RoutineScreen(navController: NavController, routineViewModel: RoutineViewModel) {
+    routineViewModel.fetchRoutines()
     val routines by routineViewModel.routines.collectAsState()
     val error by routineViewModel.errorState.collectAsState()
     error?.let {
@@ -22,12 +24,9 @@ fun RoutineScreen(navController: NavController, routineViewModel: RoutineViewMod
     }
 
     AppScaffold(navController = navController, title = "Routines") {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-        ) {
-            routines.forEach { routine ->
+
+        LazyColumn(modifier = Modifier.fillMaxSize().padding(it)) {
+            items(routines) { routine ->
                 RoutineCard(navController = navController, routine = routine)
             }
         }

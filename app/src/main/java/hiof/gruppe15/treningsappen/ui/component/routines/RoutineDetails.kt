@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -60,8 +62,10 @@ fun RoutineDetailsScreen(navController: NavController, routineId: String, routin
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                routine.exercises.forEach() { exercise ->
-                    RoutineExerciseCard(exercise)
+                LazyColumn {
+                    items(it.exercises) { exercise ->
+                        RoutineExerciseCard(exercise)
+                    }
                 }
             } ?: Text("Routine was not found")
         }

@@ -58,7 +58,7 @@ fun NavGraph(
     NavHost(
         navController = navController, startDestination = startDestination
     ) {
-        composable(Screen.Login.route) { LoginScreen(navController) }
+        composable(Screen.Login.route) { LoginScreen(navController, sharedViewModel) }
         composable(Screen.Register.route) { RegisterScreen(navController) }
         composable(Screen.ForgotPassword.route) { ForgotPasswordScreen(navController) }
 
