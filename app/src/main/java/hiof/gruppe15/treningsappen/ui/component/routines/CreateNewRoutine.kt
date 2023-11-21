@@ -1,6 +1,6 @@
 package hiof.gruppe15.treningsappen.ui.component.routines
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActionScope
@@ -34,11 +36,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
+import com.example.treningsappen.R
 import hiof.gruppe15.treningsappen.data.Datasource
 import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
@@ -212,14 +217,32 @@ fun ExerciseNameWithCheckbox(
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        if(exercise.imageUrl.isNullOrEmpty()) { // If no image is provided, use the default logo
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Muscle Group Image",
+                modifier = Modifier.size(40.dp)
+            )
+        } else {
+            Image(
+                painter = rememberAsyncImagePainter(exercise.imageUrl),
+                contentDescription = "Muscle Group Image",
+                modifier = Modifier.size(40.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.width(16.dp))
+
         Text(
             text = exercise.name,
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold
         )
+
+        Spacer(modifier = Modifier.weight(1f))
+
         Checkbox(checked = isChecked, onCheckedChange = { checked ->
             onCheckedChange(checked)
         })
