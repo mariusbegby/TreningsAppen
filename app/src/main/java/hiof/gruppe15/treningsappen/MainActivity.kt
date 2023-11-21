@@ -26,9 +26,10 @@ class MainActivity : ComponentActivity() {
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
         setContent {
-            AppTheme {
+            // Observe the dark mode state and apply the theme accordingly
+            val darkTheme = sharedViewModel.isDarkModeEnabled.value
+            AppTheme(useDarkTheme = darkTheme) {
                 navController = rememberNavController()
-
                 NavGraph(
                     navController = navController,
                     startDestination = Screen.Login.route,

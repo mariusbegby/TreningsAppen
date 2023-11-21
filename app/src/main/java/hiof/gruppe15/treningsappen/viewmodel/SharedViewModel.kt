@@ -11,7 +11,14 @@ class SharedViewModel : ViewModel() {
 
     val routineViewModel = RoutineViewModel()
 
+    private val _isDarkModeEnabled = mutableStateOf(false)
+    val isDarkModeEnabled: State<Boolean> = _isDarkModeEnabled
+
     fun setSelectedExercises(exercises: List<Exercise>) {
         _selectedExercises.value = exercises
+    }
+
+    fun toggleDarkMode() {
+        _isDarkModeEnabled.value = !isDarkModeEnabled.value
     }
 }

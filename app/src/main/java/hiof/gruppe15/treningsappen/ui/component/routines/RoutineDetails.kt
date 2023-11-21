@@ -39,21 +39,13 @@ import hiof.gruppe15.treningsappen.viewmodel.RoutineViewModel
 fun RoutineDetailsScreen(navController: NavController, routineId: String, routineViewModel: RoutineViewModel) {
     val routine = routineViewModel.getRoutineById(routineId)
 
-    AppScaffold(navController = navController, title = "") {
+    AppScaffold(navController = navController, title = routine?.name ?: "Routine") {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
             routine?.let {
-                Text(
-                    text = it.name,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
                 StartRoutineButton(onClick = {
                 })
 
