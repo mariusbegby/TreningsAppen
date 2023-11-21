@@ -75,7 +75,7 @@ fun SaveRoutineScreen(
                             exercises = routineExercises
                         )
 
-                        RoutineRepository().saveRoutine(routine) { isSuccess, message ->
+                        RoutineRepository().createRoutine(routine) { isSuccess, message ->
                                 if (isSuccess) {
                                     Toast.makeText(context, "Exercise routine has been saved", Toast.LENGTH_SHORT).show()
                                     navController.popBackStack()
