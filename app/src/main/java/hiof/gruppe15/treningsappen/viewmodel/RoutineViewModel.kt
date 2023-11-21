@@ -31,7 +31,7 @@ class RoutineViewModel : ViewModel() {
                     val snapshot = db.collection("users").document(user.uid)
                         .collection("routines").get().await()
                     val routines = snapshot.documents.mapNotNull { doc ->
-                        doc.toObject(Routine::class.java) // Assuming you have a Routine data class
+                        doc.toObject(Routine::class.java)?.copy(id = doc.id)
                     }
                     _routines.value = routines
                     _errorState.value = null

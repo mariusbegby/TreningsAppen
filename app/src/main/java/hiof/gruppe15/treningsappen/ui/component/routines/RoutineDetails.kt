@@ -1,5 +1,6 @@
 package hiof.gruppe15.treningsappen.ui.component.routines
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.treningsappen.R
+import hiof.gruppe15.treningsappen.data.RoutineRepository
 import hiof.gruppe15.treningsappen.model.RoutineExercise
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.viewmodel.RoutineViewModel
@@ -58,6 +60,15 @@ fun RoutineDetailsScreen(navController: NavController, routineId: String, routin
                 Spacer(modifier = Modifier.height(8.dp))
 
                 DeleteRoutineButton(onClick = {
+                    RoutineRepository().deleteRoutine(routine) { isSuccess, message ->
+                        if (isSuccess) {
+                            routineViewModel.fetchRoutines()
+                            Toast.makeText(navController.context, message, Toast.LENGTH_SHORT).show()
+                            navController.popBackStack()
+                        } else {
+                            Toast.makeText(navController.context, message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 })
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -96,7 +107,7 @@ fun DeleteRoutineButton(onClick: () -> Unit) {
             .height(48.dp)
     ) {
         Text(
-            text = "Delete routine (TODO)",
+            text = "Delete routine",
             style = MaterialTheme.typography.titleMedium
         )
     }
