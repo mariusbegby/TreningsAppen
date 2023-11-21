@@ -1,19 +1,19 @@
 [
   {
     "name": "Barbell Curl",
-    "description": "barbell curl is a free weights exercise that primarily targets the biceps.",
+    "description": "Barbell curl is a free weights exercise that primarily targets the biceps.",
     "steps": [
       "1. Stand up straight while holding a barbell in a shoulder-width grip.",
       "2. Contract your biceps to curl the weight forward. Your upper arms should remain stationary during this process.",
       "3. Continue moving the barbell until the biceps are fully contracted and the bar is at shoulder height. Hold this position for a second and then squeeze your biceps.",
       "4. Bring the barbell back to the starting position. Repeat for the desired number of reps."
     ],
-    "difficulty": "easy",
-    "muscleGroup": "bicep"
+    "difficulty": "Easy",
+    "muscleGroup": "Bicep"
   },
   {
     "name": "Hammer Curl",
-    "description": "hammer curl is a free weights exercise that primarily targets the biceps.",
+    "description": "Hammer curl is a free weights exercise that primarily targets the biceps.",
     "steps": [
       "1. Stand up straight with your torso upright. Hold a dumbbell in each hand at arms-length. Your elbows should be close to your torso.",
       "2. The palms of your hands should be facing your torso. This is the starting position for the exercise.",
@@ -21,12 +21,12 @@
       "4. Inhale and slowly start to bring the dumbbells back to the starting position.",
       "5. Repeat for the desired number of reps."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "bicep"
+    "difficulty": "Medium",
+    "muscleGroup": "Bicep"
   },
   {
     "name": "Incline Seated Dumbbell Curl",
-    "description": "incline seated dumbbell curl is a free weights exercise that primarily targets the biceps.",
+    "description": "Incline seated dumbbell curl is a free weights exercise that primarily targets the biceps.",
     "steps": [
       "1. Sit on an incline bench that is positioned at a 45-degree angle. Hold a dumbbell in each hand.",
       "2. Hold a dumbbell and perform an incline bicep curl, keeping your wrists as far back as possible. This will neutralize any stress placed on them.",
@@ -35,8 +35,8 @@
       "5. Move back to the starting position.",
       "6. Repeat for the number of reps in your set."
     ],
-    "difficulty": "hard",
-    "muscleGroup": "bicep"
+    "difficulty": "Hard",
+    "muscleGroup": "Bicep"
   },
   {
     "name": "Bench Dips",
@@ -46,24 +46,24 @@
       "2. Lower your body by bending at the elbows until you have moved down far enough so that the angle between your upper arm and forearm is just under 90 degrees.",
       "3. Using your triceps, lift yourself back up into the starting position."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "triceps"
+    "difficulty": "Medium",
+    "muscleGroup": "Triceps"
   },
   {
     "name": "Tricep Pushdown",
-    "description": "tricep pushdown is a exercise machine exercise that primarily targets the triceps.",
+    "description": "Tricep pushdown is a exercise machine exercise that primarily targets the triceps.",
     "steps": [
       "1. Feet shoulder width apart, face a high pulley machine with an attached bar at shoulder level height and grasp it with your palms facing down (pronated). Hold the bar close to your chest for your starting position.",
       "2. Keeping your body stationary, exhale as you lower the bar by completely extending your arms downward until the bar touches your thighs.",
       "3. Hold for a moment and then inhale as you slowly return the bar to shoulder level.",
       "4. Repeat for a complete set."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "triceps"
+    "difficulty": "Medium",
+    "muscleGroup": "Triceps"
   },
   {
     "name": "Behind Head Skull Crushers",
-    "description": "behind head skull crusher is a free weights exercise that primarily targets the triceps.",
+    "description": "Behind head skull crusher is a free weights exercise that primarily targets the triceps.",
     "steps": [
       "1. Lie on your back on a flat bench. Your head should be close to the end of the bench. Grasp a an EZ-bar with your palms facing forward.",
       "2. Extend your arms in front of you and bring the bar back in a semi-circular motion to a position over your head. Your arms should be over your head and parallel to the floor when you complete this step.",
@@ -71,12 +71,12 @@
       "4. Bring the bar back up to the starting position, exhaling as you do so. Contract your triceps when you get to the top of the movement.",
       "5. Repeat for the number of reps in your set."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "triseps"
+    "difficulty": "Medium",
+    "muscleGroup": "Triseps"
   },
   {
     "name": "Bench Press",
-    "description": "bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
+    "description": "Bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
     "steps": [
       "1. Lie on your back on a flat bench. Lift the bar off the rack and hold it straight over you, keeping your arms locked. This is the starting position.",
       "2. Next, inhale and bring the barbell down in a slow and controlled manner until it reaches your mid-chest.",
@@ -84,12 +84,12 @@
       "4. Repeat the movement for the desired number of repetitions.",
       "5. The final step in the exercise is to place the barbell on the rack."
     ],
-    "difficulty": "medium",
+    "difficulty": "Medium",
     "muscleGroup": "Chest"
   },
   {
     "name": "Push Up",
-    "description": "push-up is a exercise that primarily targets the chest and to a lesser degree also targets the shoulders, triceps and abs.",
+    "description": "Push-up is a exercise that primarily targets the chest and to a lesser degree also targets the shoulders, triceps and abs.",
     "steps": [
       "1. Lie on an exercise floor mat, face down.",
       "2. Press your toes against the floor and place your hands flat on the ground shoulder width apart, fingers extended forward.",
@@ -98,12 +98,12 @@
       "5. Exhaling, contract your chest as you push off the ground and return to the starting position.",
       "6. Pause for a moment and then repeat for a full set."
     ],
-    "difficulty": "medium",
+    "difficulty": "Medium",
     "muscleGroup": "Chest"
   },
   {
     "name": "Incline Bench Press",
-    "description": "incline bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
+    "description": "Incline bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
     "steps": [
       "1. Lie down on an incline bench. Gripping the bar with a medium-width grip, lift the bar off the rack. Hold it straight over your head, keeping your arms locked. This is the starting position for the exercise.",
       "2. Inhaling slowly, move the bar down toward your upper chest.",
@@ -111,12 +111,12 @@
       "4. Repeat the process for the desired number of repetitions.",
       "5. Place bar back on rack when the exercise has been completed."
     ],
-    "difficulty": "medium",
+    "difficulty": "Medium",
     "muscleGroup": "Chest"
   },
   {
     "name": "Incline Dumbbell Bench Press",
-    "description": "incline dumbbell bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
+    "description": "Incline dumbbell bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
     "steps": [
       "1. Lie down on an incline bench. Grasp a dumbbell in each hand on top of your thighs. The palms of your hands should be facing each other.",
       "2. Use your thighs to help you push the dumbbells up. Lift them one at a time so that you can hold them shoulder width apart.",
@@ -126,7 +126,7 @@
       "6. Repeat the movement for the number of reps in your set.",
       "7. When you have finished your set, put the dumbbells on your thighs and then move the weights to the floor. This is the safest way to bring do so."
     ],
-    "difficulty": "medium",
+    "difficulty": "Medium",
     "muscleGroup": "Chest"
   },
   {

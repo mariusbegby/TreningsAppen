@@ -66,7 +66,7 @@ fun SaveRoutineScreen(
                         val routineExercises = selectedExercises.map { exercise ->
                             RoutineExercise(
                                 exercise = exercise,
-                                repetitions = 3
+                                sets = 3
                             )
                         }
 

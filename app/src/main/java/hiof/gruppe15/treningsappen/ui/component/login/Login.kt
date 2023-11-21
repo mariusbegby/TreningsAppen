@@ -44,9 +44,10 @@ import com.example.treningsappen.R
 import com.google.firebase.auth.FirebaseAuth
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import hiof.gruppe15.treningsappen.utils.ValidationUtils
+import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(navController: NavController, sharedViewModel: SharedViewModel) {
     var email by remember { mutableStateOf("user@example.com") }
     var password by remember { mutableStateOf("123abc123") }
     var passwordVisibility by remember { mutableStateOf(false) }
@@ -96,6 +97,8 @@ fun LoginScreen(navController: NavController) {
             LoginButton(onSignInClick = {
                 if (email.isNotEmpty() && password.isNotEmpty()) {
                     if (ValidationUtils.isValidEmail(email)) {
+                        sharedViewModel.routineViewModel.clearRoutines()
+
                         auth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {

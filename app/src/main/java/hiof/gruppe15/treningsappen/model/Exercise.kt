@@ -12,6 +12,6 @@ data class Exercise(
 
 data class RoutineExercise(
     val exercise: Exercise = Exercise(),
-    val repetitions: Int = 1,
+    val sets: Int = 1,
     val note: String = ""
 )

@@ -23,7 +23,7 @@ class RoutineViewModel : ViewModel() {
         fetchRoutines()
     }
 
-    private fun fetchRoutines() {
+    fun fetchRoutines() {
         viewModelScope.launch {
             val user = FirebaseAuth.getInstance().currentUser
             if (user != null) {
@@ -44,6 +44,14 @@ class RoutineViewModel : ViewModel() {
                 Log.e("RoutineViewModel", "User not authenticated")
             }
         }
+    }
+
+    fun clearRoutines() {
+        _routines.value = emptyList()
+    }
+
+    fun getRoutineById(id: String): Routine? {
+        return _routines.value.find { it.id == id }
     }
 }
 

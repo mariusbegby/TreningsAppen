@@ -218,7 +218,8 @@ fun getCurrentRoute(navController: NavController): String? {
 }
 
 fun isRouteSelected(currentRoute: String?, category: ScreenCategory): Boolean {
-    return currentRoute in category.routes
+    return category.includes(currentRoute)
+
 }
 
 sealed class IconWrapper {
