@@ -9,6 +9,8 @@ class SharedViewModel : ViewModel() {
     private val _selectedExercises = mutableStateOf<List<Exercise>>(emptyList())
     val selectedExercises: State<List<Exercise>> = _selectedExercises
 
+    val routineViewModel = RoutineViewModel()
+
     fun setSelectedExercises(exercises: List<Exercise>) {
         _selectedExercises.value = exercises
     }

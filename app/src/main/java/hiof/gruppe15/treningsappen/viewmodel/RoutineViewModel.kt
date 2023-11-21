@@ -45,6 +45,10 @@ class RoutineViewModel : ViewModel() {
             }
         }
     }
+
+    fun getRoutineById(id: String): Routine? {
+        return _routines.value.find { it.id == id }
+    }
 }
 
 
