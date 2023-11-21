@@ -26,6 +26,7 @@ import hiof.gruppe15.treningsappen.data.RoutineRepository
 import hiof.gruppe15.treningsappen.model.Routine
 import hiof.gruppe15.treningsappen.model.RoutineExercise
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
+import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
 @Composable
@@ -78,7 +79,7 @@ fun SaveRoutineScreen(
                         RoutineRepository().createRoutine(routine) { isSuccess, message ->
                                 if (isSuccess) {
                                     Toast.makeText(context, "Exercise routine has been saved", Toast.LENGTH_SHORT).show()
-                                    navController.popBackStack()
+                                    navController.navigate(Screen.Routines.route)
                                 } else {
                                     Toast.makeText(context, "SaveNewRoutine.kt RoutineRepository.kt saveRoutine", Toast.LENGTH_SHORT).show()
                                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()

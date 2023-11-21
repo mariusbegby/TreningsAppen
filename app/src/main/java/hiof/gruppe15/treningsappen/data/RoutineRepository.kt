@@ -33,8 +33,10 @@ class RoutineRepository {
             // Reference to Firestore
             val firestore = FirebaseFirestore.getInstance()
             // Deleting the document in 'routines' collection under 'users' collection.
-            firestore.collection("users").document(user.uid)
-                .collection("routines").document(routine.id)
+            firestore.collection("users")
+                .document(user.uid)
+                .collection("routines")
+                .document(routine.id)
                 .delete()
                 .addOnSuccessListener {
                     // Successfully deleted from Firestore.

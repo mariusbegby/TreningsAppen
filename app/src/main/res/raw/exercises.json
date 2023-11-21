@@ -1,478 +1,353 @@
 [
   {
     "name": "Barbell Curl",
-    "description": "Barbell curl is a free weights exercise that primarily targets the biceps.",
+    "description": "Standard bicep curl with a barbell.",
     "steps": [
-      "1. Stand up straight while holding a barbell in a shoulder-width grip.",
-      "2. Contract your biceps to curl the weight forward. Your upper arms should remain stationary during this process.",
-      "3. Continue moving the barbell until the biceps are fully contracted and the bar is at shoulder height. Hold this position for a second and then squeeze your biceps.",
-      "4. Bring the barbell back to the starting position. Repeat for the desired number of reps."
+      "Stand with feet shoulder-width.",
+      "Hold barbell with underhand grip.",
+      "Curl barbell towards shoulders.",
+      "Lower slowly to start position."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Biceps"
+  },
+  {
+    "name": "Barbell Bench Press",
+    "description": "Classic exercise for chest strength.",
+    "steps": [
+      "Lie back on a flat bench.",
+      "Grip the barbell with both hands.",
+      "Lower the barbell to your chest.",
+      "Press the bar back to the starting position."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Chest"
+  },
+  {
+    "name": "Bicycle Crunches",
+    "description": "Dynamic abs exercise.",
+    "steps": [
+      "Lie on your back, hands behind head.",
+      "Bring knees in towards chest.",
+      "Lift shoulder blades off ground.",
+      "Rotate to bring elbow to opposite knee."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Abs"
+  },
+  {
+    "name": "Cable Tricep Pushdown",
+    "description": "Tricep exercise using a cable machine.",
+    "steps": [
+      "Stand at cable machine.",
+      "Grip bar, elbows at sides.",
+      "Push down until arms straight.",
+      "Return slowly to start."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Bicep"
-  },
-  {
-    "name": "Hammer Curl",
-    "description": "Hammer curl is a free weights exercise that primarily targets the biceps.",
-    "steps": [
-      "1. Stand up straight with your torso upright. Hold a dumbbell in each hand at arms-length. Your elbows should be close to your torso.",
-      "2. The palms of your hands should be facing your torso. This is the starting position for the exercise.",
-      "3. Curl the weight forward while contracting your biceps. Your upper arm should remain stationary. Continue to lift the weight until your biceps are fully contracted and the dumbbell is at shoulder level. Hold the contraction for a moment as you squeeze your biceps.",
-      "4. Inhale and slowly start to bring the dumbbells back to the starting position.",
-      "5. Repeat for the desired number of reps."
-    ],
-    "difficulty": "Medium",
-    "muscleGroup": "Bicep"
-  },
-  {
-    "name": "Incline Seated Dumbbell Curl",
-    "description": "Incline seated dumbbell curl is a free weights exercise that primarily targets the biceps.",
-    "steps": [
-      "1. Sit on an incline bench that is positioned at a 45-degree angle. Hold a dumbbell in each hand.",
-      "2. Hold a dumbbell and perform an incline bicep curl, keeping your wrists as far back as possible. This will neutralize any stress placed on them.",
-      "3. Let your arms hang down to your sides with your elbows in. Turn the palms of your hands forward and point your thumbs away from your body. This is the starting position.",
-      "4. Curl up the dumbbells at the same time until your biceps are fully contracted. Exhale. Hold the contraction for a second when you get to the top.",
-      "5. Move back to the starting position.",
-      "6. Repeat for the number of reps in your set."
-    ],
-    "difficulty": "Hard",
-    "muscleGroup": "Bicep"
-  },
-  {
-    "name": "Bench Dips",
-    "description": "bench dip is a calisthenics exercise that primarily targets the triceps and to a lesser degree also targets the chest and shoulders.",
-    "steps": [
-      "1. Start the exercise by placing a bench behind your back. Keeping the bench perpendicular to your body and while looking away from it, hold onto the bench with your hands fully extended, shoulder width apart. Your legs will be extended in front of you. Bend forward at the waist. This is the starting position.",
-      "2. Lower your body by bending at the elbows until you have moved down far enough so that the angle between your upper arm and forearm is just under 90 degrees.",
-      "3. Using your triceps, lift yourself back up into the starting position."
-    ],
-    "difficulty": "Medium",
     "muscleGroup": "Triceps"
   },
   {
-    "name": "Tricep Pushdown",
-    "description": "Tricep pushdown is a exercise machine exercise that primarily targets the triceps.",
+    "name": "Calf Raises",
+    "description": "Raises to strengthen calves.",
     "steps": [
-      "1. Feet shoulder width apart, face a high pulley machine with an attached bar at shoulder level height and grasp it with your palms facing down (pronated). Hold the bar close to your chest for your starting position.",
-      "2. Keeping your body stationary, exhale as you lower the bar by completely extending your arms downward until the bar touches your thighs.",
-      "3. Hold for a moment and then inhale as you slowly return the bar to shoulder level.",
-      "4. Repeat for a complete set."
+      "Stand on edge of step.",
+      "Raise heels above step.",
+      "Lower heels below step level."
     ],
-    "difficulty": "Medium",
-    "muscleGroup": "Triceps"
+    "difficulty": "Easy",
+    "muscleGroup": "Calves"
   },
   {
-    "name": "Behind Head Skull Crushers",
-    "description": "Behind head skull crusher is a free weights exercise that primarily targets the triceps.",
+    "name": "Chest Fly",
+    "description": "Exercise to stretch and work chest.",
     "steps": [
-      "1. Lie on your back on a flat bench. Your head should be close to the end of the bench. Grasp a an EZ-bar with your palms facing forward.",
-      "2. Extend your arms in front of you and bring the bar back in a semi-circular motion to a position over your head. Your arms should be over your head and parallel to the floor when you complete this step.",
-      "3. Lower the bar by bending at the elbows, inhaling as you do so. Keep lowering the bar until your forearms are perpendicular to the floor.",
-      "4. Bring the bar back up to the starting position, exhaling as you do so. Contract your triceps when you get to the top of the movement.",
-      "5. Repeat for the number of reps in your set."
-    ],
-    "difficulty": "Medium",
-    "muscleGroup": "Triseps"
-  },
-  {
-    "name": "Bench Press",
-    "description": "Bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
-    "steps": [
-      "1. Lie on your back on a flat bench. Lift the bar off the rack and hold it straight over you, keeping your arms locked. This is the starting position.",
-      "2. Next, inhale and bring the barbell down in a slow and controlled manner until it reaches your mid-chest.",
-      "3. Pause briefly before raising the barbell back to your starting position as you exhale. Your focus should be on using your chest muscles to move the bar. Lock your arms at the top of the movement and squeeze your chest before slowly bringing the barbell down again. This step should take twice as long raising the weight to get the maximum benefit.",
-      "4. Repeat the movement for the desired number of repetitions.",
-      "5. The final step in the exercise is to place the barbell on the rack."
+      "Lie on bench with dumbbells.",
+      "Extend arms above chest.",
+      "Open arms wide, elbows slightly bent.",
+      "Bring weights together."
     ],
     "difficulty": "Medium",
     "muscleGroup": "Chest"
   },
   {
-    "name": "Push Up",
-    "description": "Push-up is a exercise that primarily targets the chest and to a lesser degree also targets the shoulders, triceps and abs.",
+    "name": "Concentration Curl",
+    "description": "Isolated bicep curl, seated.",
     "steps": [
-      "1. Lie on an exercise floor mat, face down.",
-      "2. Press your toes against the floor and place your hands flat on the ground shoulder width apart, fingers extended forward.",
-      "3. Push yourself up so that your arms are nearly extended and your torso and legs are off the floor. This is your starting position.",
-      "4. Inhaling, bend your arms to lower your body and touch your chest nearly to the floor.",
-      "5. Exhaling, contract your chest as you push off the ground and return to the starting position.",
-      "6. Pause for a moment and then repeat for a full set."
+      "Sit on bench, legs apart.",
+      "Rest elbow on inner thigh.",
+      "Curl weight towards shoulder.",
+      "Lower slowly, repeat."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Chest"
-  },
-  {
-    "name": "Incline Bench Press",
-    "description": "Incline bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
-    "steps": [
-      "1. Lie down on an incline bench. Gripping the bar with a medium-width grip, lift the bar off the rack. Hold it straight over your head, keeping your arms locked. This is the starting position for the exercise.",
-      "2. Inhaling slowly, move the bar down toward your upper chest.",
-      "3. After a slight pause, push the bar back to the starting position. Exhale while doing so. Arms should be locked. Squeeze your chest and hold for a second before bringing the bar down again.",
-      "4. Repeat the process for the desired number of repetitions.",
-      "5. Place bar back on rack when the exercise has been completed."
-    ],
-    "difficulty": "Medium",
-    "muscleGroup": "Chest"
-  },
-  {
-    "name": "Incline Dumbbell Bench Press",
-    "description": "Incline dumbbell bench press is a free weights exercise that primarily targets the chest and to a lesser degree also targets the shoulders and triceps.",
-    "steps": [
-      "1. Lie down on an incline bench. Grasp a dumbbell in each hand on top of your thighs. The palms of your hands should be facing each other.",
-      "2. Use your thighs to help you push the dumbbells up. Lift them one at a time so that you can hold them shoulder width apart.",
-      "3. Rotate your wrists forward so that the palms of your hands are facing away from you. This is the starting position.",
-      "4. Push the dumbbells up with your chest, exhaling as you do so.",
-      "5. Lock your arms once you get to the top and hold for a second. Slowly start lowering the weight.",
-      "6. Repeat the movement for the number of reps in your set.",
-      "7. When you have finished your set, put the dumbbells on your thighs and then move the weights to the floor. This is the safest way to bring do so."
-    ],
-    "difficulty": "Medium",
-    "muscleGroup": "Chest"
-  },
-  {
-    "name": "Cable Crossover",
-    "description": "cable crossover is a exercise machine exercise that primarily targets the chest.",
-    "steps": [
-      "1. To get into the starting position for the exercise, place pulleys in position above your head and select the resistance that will be used. Hold one pulley in each hand.",
-      "2. Move forward in an imaginary straight line between the pulleys while pulling your arms together in front of you. You should be be slightly bent forward from your waist. This is the starting position for the exercise.",
-      "3. Bend your elbows slightly and extend your arms to your sides in a wide arc. Continue performing this movement until you feel a stretch in your chest. Inhale while you do so. Tip: Keep in mind that throughout the movement, the arms and torso should remain stationary; the movement should only occur at the shoulder joint.",
-      "4. Bring your arms back to the starting position as you exhale. Be sure to use the same arc you used to lower the weights.",
-      "5. Hold your position for a second when you reach the starting position and repeat the movement for the desired number of reps."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Chest"
-  },
-  {
-    "name": "Cable Fly",
-    "description": "cable fly is a exercise machine exercise that primarily targets the chest and to a lesser degree also targets the middle back, shoulders and biceps.",
-    "steps": [
-      "1. Stand between two high pulley cables with stirrup attachments.",
-      "2. Hold left handle in left hand and right handle in right hand with an overhand grip (palms facing down). Stand upright in a staggered stance with arms outstretched but slightly bent so that knuckles are facing forward.. This is the starting position.",
-      "3. Begin exercise by pushing cables forward and together so that your wrists cross when arms are fully extended. Pause, then slowly reverse movement back to starting position. This completes one rep."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Chest"
-  },
-  {
-    "name": "Bent Over Row",
-    "description": "bent-over row is a free weights exercise that primarily targets the middle back and to a lesser degree also targets the shoulders, biceps, lats and forearms.",
-    "steps": [
-      "1. Hold onto a barbell with your palms facing down. Bend your knees slightly and bend forward at the waist while keeping your back straight. It should be almost parallel with the floor. The barbell should be directly in front of you; your arms should be perpendicular to the floor. This is the starting position.",
-      "2. While keeping your torso stationary, lift the barbell toward you. Your elbows should be kept close to your body. Use only your forearms to hold the weight. When you get to the top, squeeze your back muscles and hold for a few seconds.",
-      "3. Slowly lower the barbell back to the starting position.",
-      "4. Repeat the process for the number of repetitions in your workout routine."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Back"
-  },
-  {
-    "name": "Machine Reverse Fly",
-    "description": "machine reverse fly is a exercise machine exercise that primarily targets the middle back and to a lesser degree also targets the shoulders and traps.",
-    "steps": [
-      "1. Sit down with your upper body flat against the pad and your feet on the floor in front of you.",
-      "2. Next, grab hold of the horizontal handles provided. This is the starting position.",
-      "3. Begin exercise by contracting your rear delts and middle trap muscles while you bring your arms back.",
-      "4. Keep a slight bend in your elbows as you pull the weight back. Pull weight back until your shoulder blades pinch together.",
-      "5. Pause for a brief moment, then slowly return to the starting position. This completes one rep."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Back"
-  },
-  {
-    "name": "Wide Grip Pull Up",
-    "description": "wide-grip pull-up is a calisthenics exercise that primarily targets the middle back and to a lesser degree also targets the forearms, lats, shoulders and traps.",
-    "steps": [
-      "1. Grab onto the bar with your hands 6-8 inches wider then shoulder width apart.",
-      "2. Hang by your arms and then pull yourself all the way up so that your chin goes over the bar.",
-      "3. Lower yourself all the way down.",
-      "4. Repeat this motion for the desired amount of repetitions."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Back"
-  },
-  {
-    "name": "Back Extension",
-    "description": "back extension is a calisthenics exercise that primarily targets the lower back and to a lesser degree also targets the abs, glutes and hamstrings.",
-    "steps": [
-      "1. Begin by positioning yourself in the back-extension station with legs under leg hooks.",
-      "2. Cross arms over chest and lower body at waist as far down to the ground as comfortably possible. Make sure to keep back naturally arched, do not bend over too far and curve back.",
-      "3. Begin exercise by raising upper body at the waist in a smooth controlled manner, until your body forms a straight line. Hold at this position for brief moment and then slowly return back to starting position."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Back"
-  },
-  {
-    "name": "Superman",
-    "description": "superman is a calisthenics and pilates exercise that primarily targets the lower back and to a lesser degree also targets the glutes and hamstrings.",
-    "steps": [
-      "1. Lie face down on an exercise mat with your arms and legs fully extended. This is your starting position.",
-      "2. At the same time, exhale and raise your arms, chest, and legs off the floor for two counts.",
-      "3. At the same time, inhale and slowly lower your arms, chest, and legs back to the starting position.",
-      "4. Repeat for a complete set."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Back"
-  },
-  {
-    "name": "Dumbbell Upright Row",
-    "description": "dumbbell upright row is a free weights exercise that primarily targets the shoulders and to a lesser degree also targets the biceps and traps.",
-    "steps": [
-      "1. Stand upright with your feet shoulder width apart.",
-      "2. With a dumbbell in each hand and keeping your elbows slightly bent, extend your arms downward and in front of you so that your palms are facing you. This is your starting position.",
-      "3. Keeping the dumbbells close to your body, exhale as you bend your elbows and raise the dumbbells straight up to your shoulders. Your elbows should be outward and your bent arms should be parallel with the floor.",
-      "4. Pause for a moment and then inhale as you reverse the motion back to the starting position.",
-      "5. Repeat for a complete set."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "shoulder"
-  },
-  {
-    "name": "Behind Neck Military Press",
-    "description": "behind neck military press is a free weights exercise that primarily targets the shoulders.",
-    "steps": [
-      "1.  Place a barbell behind your shoulders and slightly below your neck. Grasp it with hands shoulder width apart and palms facing forward. Your feet should be shoulder width apart and your toes pointing out slightly. This is your starting position.",
-      "2. Exhale and extend your arms as you raise the barbell straight overhead.",
-      "3. Hold for a moment and then inhale as you lower the barbell back to the starting position.",
-      "4. Repeat for a complete set."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "shoulder"
-  },
-  {
-    "name": "Cable Lateral Raise",
-    "description": "cable lateral raise is a free weights exercise that primarily targets the shoulders.",
-    "steps": [
-      "1. Lower the handle of the cable machine to the lowest notch.",
-      "2. Face the cable machine with your left side and grab the handle with your right hand.",
-      "3. Stand up straight and hold the handle on the right side of your body",
-      "4. Keep your arm straight and pull the handle all the way up to your shoulder. Lower the handle back down to your waist.",
-      "5. Repeat this motion for the desired amount of repetitions and then switch sides."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "shoulder"
-  },
-  {
-    "name": "Incline reverse Fly",
-    "description": "incline reverse fly is a free weights exercise that primarily targets the shoulders.",
-    "steps": [
-      "1. Lie chest down on an inclince bench with a dumbbell in each hand, palms facing in.",
-      "2. Place your arms extended straight out and slightly downward, palms facing each other and elbows slightly bent. Place your feet slightly wider than shoulder width apart and ground your toes for your starting position.",
-      "3. Exhaling, raise the dumbbells out to the sides, squeezing your shoulder blades, until your arms are parallel to the floor and the dummbells are shoulder high.",
-      "4. Inhaling, slowly lower the dumbbells back to the starting position.",
-      "5. Repeat for a complete set."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "shoulder"
-  },
-  {
-    "name": "Farmers Walk",
-    "description": "farmer's walk is a free weights exercise that primarily targets the shoulders and to a lesser degree also targets the traps, forearms, quads, calves, lower back and glutes.",
-    "steps": [
-      "1. Grab a pair of heavy dumbbells and let hang at arm's length next to your sides (do not let your arms come out of their sockets). Palms facing each other.",
-      "2. Next, simply begin to walk for as long as you can while holding the dumbbells at your sides.",
-      "3. You should aim for walking longer no longer than 60 seconds. Use more weight if you can walk longer than 60 seconds."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "shoulder"
+    "muscleGroup": "Biceps"
   },
   {
     "name": "Deadlift",
-    "description": "deadlift is a free weights exercise that primarily targets the hamstrings and to a lesser degree also targets the traps, forearms, quads, calves, middle back, glutes, hip flexors and lower back.",
+    "description": "Compound exercise targeting hamstrings.",
     "steps": [
-      "1. Stand hip-width apart with the bar going over top your shoelaces.",
-      "2. Sit your hips back so that you have a slight bend in your knees, while maintaining an arch in your lower back.",
-      "3. Continue bending your knees and hips down until your hands are able to grasp the bar just outside your shins. Keep your head in a position to where you are looking about 5-10 feet out in front of your body.",
-      "4. Begin exercise by inhaling and bracing your midsection as if you are about to be punched in the stomach (Valsalva maneuver).",
-      "5. Next, begin to raise your hips up slightly as you raise the bar along your shins. As the bar passes your knees, simultaneously start to bring your hips forward until you are standing upright, with your chest out and your shoulder blades pinned back. You should look similar to a solder standing at attention.",
-      "6. To move back to starting position, reverse movement by dropping your hips back and allowing the bar to maintain contact with your legs as you lower it down to the ground.",
-      "7. Repeat the number of reps set out in your program.",
-      "8. PJF: If you do not have access to barbells you can do this exercise with other weights such as dumbbells or kettlebells. If you have no access to weights, you will skip this exercise completely.",
-      "9. PJF: With feet flat beneath bar, squat down and grasp bar with shoulder width or slightly wider alternating grip (one palm facing down, one palm facing up).",
-      "10. PJF: Lift bar by extending hips and knees to full extension. Squeeze shoulder blades together and keep a flat back. Keep the barbell close to the body throughout the exercise."
+      "Stand with feet under bar.",
+      "Bend and grip bar.",
+      "Lift bar, keep back straight.",
+      "Lower bar to ground."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "legs"
+    "difficulty": "Hard",
+    "muscleGroup": "Hamstrings"
   },
   {
-    "name": "Seated Leg Curl",
-    "description": "seated leg curl is a exercise machine exercise that primarily targets the hamstrings.",
+    "name": "Dumbbell Fly",
+    "description": "Chest exercise using dumbbells.",
     "steps": [
-      "1. Sit upright on a leg press machine that is adjusted to your height. Your back should be against the back pad and your feet should be on the foot rests with your thighs under the leg pads.",
-      "2. Grasp the handle bars and raise your legs so that they are fully extended in front of you and parallel to the floor for your starting position.",
-      "3. Exhale and lower your legs, bending at the knees, until your legs form a 90 degree angle.",
-      "4. Pause for a moment and then inhale as you raise your legs back to the starting position.",
-      "5. Repeat for a complete set."
+      "Lie on bench, weights in hands.",
+      "Extend arms out to sides.",
+      "Bring weights together above chest.",
+      "Control weights back to sides."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "legs"
+    "difficulty": "Medium",
+    "muscleGroup": "Chest"
   },
   {
-    "name": "Barbell Hip Thrust",
-    "description": "barbell hip thrust is a free weights exercise that primarily targets the glutes and to a lesser degree also targets the groin, hamstrings, hip flexors, lower back and quads.",
+    "name": "Dumbbell Tricep Extension",
+    "description": "Overhead extension for triceps.",
     "steps": [
-      "1. Start seated with your back supported by the side of a flat bench and your knees bent in front of you. Your feet should be planted in a good position to lift the barbell.",
-      "2.  Place the barbell on your hips and support with your hands.",
-      "3. In one motion, thrust the barbell upwards with your hips.",
-      "4. Return backside to floor and repeat exercise as desired."
+      "Stand holding dumbbell overhead.",
+      "Bend elbows lowering weight.",
+      "Extend arms fully overhead."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "legs"
+    "difficulty": "Medium",
+    "muscleGroup": "Triceps"
   },
   {
-    "name": "Romanian Deadlift",
-    "description": "romanian deadlift is a free weights exercise that primarily targets the hamstrings and to a lesser degree also targets the hip flexors, lower back and glutes.",
+    "name": "Front Raise",
+    "description": "Front shoulder strengthening.",
     "steps": [
-      "1. Start with the barbell in front of your feet and bend over and grab the bar about shoulder width apart.",
-      "2. Bend slightly at the knees, lift the weight upward to your waist.",
-      "3. As you lift the weight to your waist thrust your hips forward.",
-      "4. Lower the weight down to mid-shin level and repeat exercise."
+      "Stand with weights.",
+      "Lift arms straight in front.",
+      "Raise to eye level.",
+      "Lower back slowly."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "legs"
+    "difficulty": "Easy",
+    "muscleGroup": "Shoulders"
   },
   {
-    "name": "Lying Leg Curl",
-    "description": "lying leg curl is a exercise machine exercise that primarily targets the hamstrings.",
+    "name": "Glute-Ham Raise",
+    "description": "Exercise focusing on hamstrings and glutes.",
     "steps": [
-      "1. Lie down on a leg curl machine with the pad on the back of your legs. It should be positioned a few inches under your calves.",
-      "2. Stretch your legs out fully and grasp the side handles of the machine, keeping your torso flat on the bench as you do so. This is the starting position.",
-      "3. Step 3: Curl your lower legs up as far as you can while keeping your upper legs on the pad. Once your legs are fully contracted, hold the position for a second.",
-      "4. Bring your legs back to the starting position, inhaling as you do so. Repeat for the number of reps in your set."
+      "Use GHD machine.",
+      "Secure feet, face down.",
+      "Lift torso with hamstrings.",
+      "Lower back down slowly."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "legs"
+    "difficulty": "Hard",
+    "muscleGroup": "Hamstrings"
   },
   {
-    "name": "Calf Press",
-    "description": "calf press is a exercise machine exercise that primarily targets the calves.",
+    "name": "Hammer Curl",
+    "description": "Bicep curls with a neutral grip.",
     "steps": [
-      "1. Sit down on a leg press machine and place your legs on the platform directly in front of you with your feet approximately shoulder width apart.",
-      "2.  Lower the safety bars holding the platform in place and press it up until your legs are fully extended in front of you. Your torso and legs should be positioned in a 90-degree angle. Place your toes and the balls of your feet on the lower portion of the platform with your heels off the bottom. Your toes may be facing forward, inwards or outwards. This is the starting position.",
-      "3. Push against the platform by raising your heels and extending your ankles as high as possible and flexing your calf. Your knees should be kept stationary. Hold the contracted position for a second and then start to go back down.",
-      "4. Slowly move back to the starting position by lowering your heels and bending your ankles until your calves are fully extended. Inhale as you do so.",
-      "5. Repeat for the desired number of reps in your set."
+      "Stand upright holding dumbbells.",
+      "Keep elbows close to torso.",
+      "Curl weights, keep wrists straight.",
+      "Lower slowly to starting position."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "Calves"
+    "difficulty": "Easy",
+    "muscleGroup": "Biceps"
   },
   {
-    "name": "Standing Barbell Calf Raise",
-    "description": "standing barbell calf raise is a free weights exercise that primarily targets the calves.",
+    "name": "Incline Bench Press",
+    "description": "Upper chest press exercise.",
     "steps": [
-      "1. Grab a barbell and place across upper back and hold with an overhand grip. Stand tall with back straight.",
-      "2. Next, place the balls of your feet on two large weight plates or place both feet on an elevated step up platform. This is the starting position.",
-      "3. Begin exercise by simply allowing your heel to rest on the ground or as close to the ground as possible. Then raise up on your toes as high as possible, pause, then lower back down as far as possible. This completes one rep."
+      "Lie on incline bench.",
+      "Grip barbell, lift off rack.",
+      "Lower to upper chest.",
+      "Push bar back to start."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "Calves"
+    "difficulty": "Medium",
+    "muscleGroup": "Chest"
   },
   {
-    "name": "Jump Rope",
-    "description": "jump rope is a calisthenics and cardiovascular exercise that primarily targets the calves and to a lesser degree also targets the calves, biceps, chest, forearms, glutes, hamstrings, quads, shoulders and triceps.",
+    "name": "Lateral Raise",
+    "description": "Shoulder exercise with dumbbells.",
     "steps": [
-      "1. Stand on a soft surface (rubber gym mat). Do not perform on concrete or other hard surface.",
-      "2. Grab a rope handle in each hand and place feet in front of jump rope, so that the rope is resting on the ground behind your heels.",
-      "3. Hold arms down at arm's length, tuck elbows into sides and bring your hands up so that your forearms are parallel to the ground. This is the starting position.reset",
-      "4. Begin exercises by swinging rope up and over your resethead and then begin to jump up off the ground with both feet as the rope begins to reach your feet. Keep swinging rope around and repeat."
+      "Stand holding dumbbells.",
+      "Lift arms to sides, elbow bent.",
+      "Raise until shoulder height.",
+      "Lower slowly to sides."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "Calves"
+    "difficulty": "Easy",
+    "muscleGroup": "Shoulders"
   },
   {
-    "name": "Incline Treadmill Walking",
-    "description": "incline treadmill walking is a cardiovascular and exercise machine exercise that primarily targets the calves and to a lesser degree also targets the glutes, groin, hamstrings, hip flexors, outer thighs and quads.",
+    "name": "Leg Curl",
+    "description": "Isolated hamstring curl on machine.",
     "steps": [
-      "1. Place the treadmill on the incline angle you desire.",
-      "2. Begin walking on the treadmill and choose the speed.",
-      "3. Walk for the specified distance or time."
+      "Lie face down on machine.",
+      "Curl legs towards body.",
+      "Return to start position slowly."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "Calves"
+    "difficulty": "Easy",
+    "muscleGroup": "Hamstrings"
   },
   {
-    "name": "Seated Machine Calf Raise",
-    "description": "seated machine calf raise is a exercise machine exercise that primarily targets the calves.",
+    "name": "Leg Press",
+    "description": "Quadricep exercise on machine.",
     "steps": [
-      "1. Sit on a calf raise machine and place your toes on the foot platform. You heels should hang off the back of the platform.",
-      "2. Adjust the thigh padding so your lower thighs rest just under the padding.",
-      "3. Grasp the handle bars and then raise up on your toes to release the safety for your starting position.",
-      "4. Inhale as you slowly lower your heels until they are below your toes and your calves are fully stretched.",
-      "5. Exhale as you raise your heels as high as you can until you are on your tippy toes.",
-      "6. Hold for a moment and then repeat for a complete set."
+      "Sit on machine, feet on platform.",
+      "Extend legs fully.",
+      "Lower towards chest slowly.",
+      "Push back to start position."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "Calves"
+    "difficulty": "Easy",
+    "muscleGroup": "Quads"
   },
   {
-    "name": "Air Bicycle",
-    "description": "air bicycle is a total body and calisthenics exercise that primarily targets the abs and to a lesser degree also targets the hip flexors and obliques.",
+    "name": "Leg Raises",
+    "description": "Core exercise lying flat.",
     "steps": [
-      "1. Lie on your back on an exercise mat, keeping your lower back pressed against the mat. Gently support your neck by bracing your hands against the back of your head.",
-      "2. Lift your upper body off the mat while bringing your knees to up above your torso and keeping your legs parallel to the floor.",
-      "3. Extend your right leg straight out without letting it touch the floor. Keep your left knee bent and your left leg parallel to the floor. Using your abdominals, crunch upwards and sideways, extending your right elbow to your left knee.",
-      "4. Alternating elbows and knees, now extend your left leg while bringing your right knee toward your torso (similar to riding a bicycle), and crunch sideways so that your left elbow extends toward your right knee.",
-      "5. Continue to repeat, alternating knees and elbows."
+      "Lie flat on back.",
+      "Lift legs straight up.",
+      "Lower legs without touching floor.",
+      "Raise legs back up."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "Core and Abs"
+    "difficulty": "Medium",
+    "muscleGroup": "Abs"
   },
   {
-    "name": "Mountain Climber",
-    "description": "mountain climber is a calisthenics and cardiovascular exercise that primarily targets the abs and to a lesser degree also targets the calves, chest, hamstrings, lower back, quads and triceps.",
+    "name": "Lunges",
+    "description": "Exercise for leg and glute strength.",
     "steps": [
-      "1. Assume a standard push-up position with arms straight. Hands should be placed below shoulders but just outside of shoulder-width.",
-      "2. Your body should now form a straight line from your heels to your head. This is the starting position.",
-      "3. Begin exercise by lifting your right foot off the ground and bringing your knee as close to your chest as possible. Hold for a moment, then touch foot to the ground. Next, return foot to starting position.",
-      "4. Repeat with opposite leg. Alternate back and forth for 30 seconds or more."
+      "Stand upright.",
+      "Step forward into lunge.",
+      "Lower hip until knee bends.",
+      "Push back to start."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "Core and Abs"
-  },
-  {
-    "name": "Full Hanging Leg Raise",
-    "description": "full hanging leg raise is a calisthenics exercise that primarily targets the abs.",
-    "steps": [
-      "1. Hang with both arms extended at arms' length from a chin-up bar. You can use either a wide or a medium grip. Your legs should be straight down with your pelvis rolled slightly forward. This is the starting position.",
-      "2. Lift your legs forwards and up as high as you can towards your body. Exhale as you do so and hold the contraction for one or two seconds.",
-      "3. Move slowly back to the starting position, inhaling as you do so.",
-      "4. Repeat for the desired number of repetitions."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Core and Abs"
-  },
-  {
-    "name": "Crunch",
-    "description": "crunch is a calisthenics exercise that primarily targets the abs.",
-    "steps": [
-      "1.  Lie down on the floor. Your back should be flat and your knees bent at an approximately 60 degree angle.",
-      "2. Keeping your feet flat on the floor, cross your wrists over your chest. This is the starting position.",
-      "3. Bring your upper body up so that your shoulder blades are just off the floor and your body forms a C-shape. Exhale as you do so and hold the contraction for a second.",
-      "4. Slowly move down to the starting position. Exhale as you do so.",
-      "5. Repeat for the desired number of reps."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Core and Abs"
-  },
-  {
-    "name": "Sit-up",
-    "description": "sit-up is a calisthenics exercise that primarily targets the abs.",
-    "steps": [
-      "1. Lie on the floor on an exercise mat with your your hands behind your head and your legs bent. Your feet should be planted firmly on the floor, shoulder width apart. This is your starting position.",
-      "2. Using just your abdominals, exhale as you raise the upper half of your body straight into a sitting position while keeping your legs stationary.",
-      "3. Hold for a moment and then inhale as you slowly lower your body back to the starting position.",
-      "4. Repeat for a complete set."
-    ],
-    "difficulty": "medium",
-    "muscleGroup": "Core and Abs"
+    "difficulty": "Medium",
+    "muscleGroup": "Quads"
   },
   {
     "name": "Plank",
-    "description": "plank is a calisthenics exercise that primarily targets the abs and to a lesser degree also targets the lower back and shoulders.",
+    "description": "Static hold to strengthen core.",
     "steps": [
-      "1. Assume a standard push-up position. Except instead of resting your weight on your hands, place your elbows and forearms flat on the floor.",
-      "2. Begin exercise by raising hips so that your entire body from your heels to your head is in a straight line. Hold this position for at least 30 seconds. Brace your core as if you were about to be punched in the gut and breath deeply throughout."
+      "Lie face down.",
+      "Lift body on toes and forearms.",
+      "Hold position, keep back straight."
     ],
-    "difficulty": "medium",
-    "muscleGroup": "Core and Abs"
+    "difficulty": "Easy",
+    "muscleGroup": "Abs"
+  },
+  {
+    "name": "Preacher Curl",
+    "description": "Bicep curl using a preacher bench.",
+    "steps": [
+      "Sit at preacher bench.",
+      "Grip bar with underhand hold.",
+      "Curl bar towards chin.",
+      "Lower back with control."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Biceps"
+  },
+  {
+    "name": "Push-ups",
+    "description": "Classic bodyweight exercise for chest.",
+    "steps": [
+      "Start in plank position.",
+      "Lower body by bending elbows.",
+      "Push up to start position."
+    ],
+    "difficulty": "Easy",
+    "muscleGroup": "Chest"
+  },
+  {
+    "name": "Reverse Fly",
+    "description": "Shoulder and upper back exercise.",
+    "steps": [
+      "Bend at hips, chest forward.",
+      "Hold dumbbells, arms extended.",
+      "Lift arms to sides.",
+      "Control back to start."
+    ],
+    "difficulty": "Easy",
+    "muscleGroup": "Shoulders"
+  },
+  {
+    "name": "Russian Twist",
+    "description": "Core exercise with rotational movement.",
+    "steps": [
+      "Sit on floor, knees bent.",
+      "Lean back slightly, hold weight.",
+      "Twist torso side to side."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Abs"
+  },
+  {
+    "name": "Shoulder Press",
+    "description": "Press lifting weights overhead.",
+    "steps": [
+      "Sit or stand with weights.",
+      "Lift weights above head.",
+      "Lower back to shoulder height."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Shoulders"
+  },
+  {
+    "name": "Sit-ups",
+    "description": "Classic abdominal strengthening exercise.",
+    "steps": [
+      "Lie on back, knees bent.",
+      "Tuck chin, lift torso up.",
+      "Touch knees with elbows.",
+      "Lower back to ground."
+    ],
+    "difficulty": "Easy",
+    "muscleGroup": "Abs"
+  },
+  {
+    "name": "Skull Crusher",
+    "description": "Lying tricep extension exercise.",
+    "steps": [
+      "Lie on bench with dumbbells.",
+      "Extend arms above chest.",
+      "Bend elbows, lower weights.",
+      "Extend to start position."
+    ],
+    "difficulty": "Hard",
+    "muscleGroup": "Triceps"
+  },
+  {
+    "name": "Squats",
+    "description": "Basic squat with or without weight.",
+    "steps": [
+      "Stand with feet hip-width.",
+      "Bend knees, lower into squat.",
+      "Keep back straight, return to stand."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Quads"
+  },
+  {
+    "name": "Tricep Dip",
+    "description": "Bodyweight exercise for triceps.",
+    "steps": [
+      "Use parallel bars or bench.",
+      "Lower body by bending elbows.",
+      "Push up to starting position."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Triceps"
+  },
+  {
+    "name": "Wall Sit",
+    "description": "Isometric hold for quads.",
+    "steps": [
+      "Stand against wall.",
+      "Slide down into seated position.",
+      "Hold position, back flat.",
+      "Maintain for time."
+    ],
+    "difficulty": "Medium",
+    "muscleGroup": "Quads"
   }
 ]
