@@ -9,7 +9,8 @@
       "Lower slowly to start position."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Biceps"
+    "muscleGroup": "Biceps",
+    "imageUrl": "https://i.imgur.com/6ssrbXH.png"
   },
   {
     "name": "Barbell Bench Press",
@@ -21,7 +22,8 @@
       "Press the bar back to the starting position."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Chest"
+    "muscleGroup": "Chest",
+    "imageUrl": "https://i.imgur.com/CJrwwGH_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Bicycle Crunches",
@@ -33,7 +35,8 @@
       "Rotate to bring elbow to opposite knee."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Abs"
+    "muscleGroup": "Abs",
+    "imageUrl": "https://i.imgur.com/GvTWkSa.png"
   },
   {
     "name": "Cable Tricep Pushdown",
@@ -45,7 +48,8 @@
       "Return slowly to start."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Triceps"
+    "muscleGroup": "Triceps",
+    "imageUrl": "https://i.imgur.com/GWcozQK_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Calf Raises",
@@ -56,7 +60,8 @@
       "Lower heels below step level."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Calves"
+    "muscleGroup": "Calves",
+    "imageUrl": "https://i.imgur.com/K4mxF8b.png"
   },
   {
     "name": "Chest Fly",
@@ -68,7 +73,8 @@
       "Bring weights together."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Chest"
+    "muscleGroup": "Chest",
+    "imageUrl": "https://i.imgur.com/CJrwwGH_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Concentration Curl",
@@ -80,7 +86,8 @@
       "Lower slowly, repeat."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Biceps"
+    "muscleGroup": "Biceps",
+    "imageUrl": "https://i.imgur.com/6ssrbXH.png"
   },
   {
     "name": "Deadlift",
@@ -92,7 +99,8 @@
       "Lower bar to ground."
     ],
     "difficulty": "Hard",
-    "muscleGroup": "Hamstrings"
+    "muscleGroup": "Hamstrings",
+    "imageUrl": "https://i.imgur.com/Ki2cxni.png"
   },
   {
     "name": "Dumbbell Fly",
@@ -104,7 +112,8 @@
       "Control weights back to sides."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Chest"
+    "muscleGroup": "Chest",
+    "imageUrl": "https://i.imgur.com/CJrwwGH_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Dumbbell Tricep Extension",
@@ -115,7 +124,8 @@
       "Extend arms fully overhead."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Triceps"
+    "muscleGroup": "Triceps",
+    "imageUrl": "https://i.imgur.com/GWcozQK_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Front Raise",
@@ -127,7 +137,8 @@
       "Lower back slowly."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Shoulders"
+    "muscleGroup": "Shoulders",
+    "imageUrl": "https://i.imgur.com/FbMj47W.png"
   },
   {
     "name": "Glute-Ham Raise",
@@ -139,7 +150,8 @@
       "Lower back down slowly."
     ],
     "difficulty": "Hard",
-    "muscleGroup": "Hamstrings"
+    "muscleGroup": "Hamstrings",
+    "imageUrl": "https://i.imgur.com/Ki2cxni.png"
   },
   {
     "name": "Hammer Curl",
@@ -151,7 +163,8 @@
       "Lower slowly to starting position."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Biceps"
+    "muscleGroup": "Biceps",
+    "imageUrl": "https://i.imgur.com/6ssrbXH.png"
   },
   {
     "name": "Incline Bench Press",
@@ -163,7 +176,8 @@
       "Push bar back to start."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Chest"
+    "muscleGroup": "Chest",
+    "imageUrl": "https://i.imgur.com/CJrwwGH_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Lateral Raise",
@@ -175,7 +189,8 @@
       "Lower slowly to sides."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Shoulders"
+    "muscleGroup": "Shoulders",
+    "imageUrl": "https://i.imgur.com/FbMj47W.png"
   },
   {
     "name": "Leg Curl",
@@ -186,7 +201,8 @@
       "Return to start position slowly."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Hamstrings"
+    "muscleGroup": "Hamstrings",
+    "imageUrl": "https://i.imgur.com/Ki2cxni.png"
   },
   {
     "name": "Leg Press",
@@ -198,7 +214,8 @@
       "Push back to start position."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Quads"
+    "muscleGroup": "Quads",
+    "imageUrl": "https://i.imgur.com/MnFaNO9_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Leg Raises",
@@ -210,7 +227,8 @@
       "Raise legs back up."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Abs"
+    "muscleGroup": "Abs",
+    "imageUrl": "https://i.imgur.com/GvTWkSa.png"
   },
   {
     "name": "Lunges",
@@ -222,7 +240,8 @@
       "Push back to start."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Quads"
+    "muscleGroup": "Quads",
+    "imageUrl": "https://i.imgur.com/MnFaNO9_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Plank",
@@ -233,7 +252,8 @@
       "Hold position, keep back straight."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Abs"
+    "muscleGroup": "Abs",
+    "imageUrl": "https://i.imgur.com/GvTWkSa.png"
   },
   {
     "name": "Preacher Curl",
@@ -245,7 +265,8 @@
       "Lower back with control."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Biceps"
+    "muscleGroup": "Biceps",
+    "imageUrl": "https://i.imgur.com/6ssrbXH.png"
   },
   {
     "name": "Push-ups",
@@ -256,7 +277,8 @@
       "Push up to start position."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Chest"
+    "muscleGroup": "Chest",
+    "imageUrl": "https://i.imgur.com/CJrwwGH_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Reverse Fly",
@@ -268,7 +290,8 @@
       "Control back to start."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Shoulders"
+    "muscleGroup": "Shoulders",
+    "imageUrl": "https://i.imgur.com/FbMj47W.png"
   },
   {
     "name": "Russian Twist",
@@ -279,7 +302,8 @@
       "Twist torso side to side."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Abs"
+    "muscleGroup": "Abs",
+    "imageUrl": "https://i.imgur.com/GvTWkSa.png"
   },
   {
     "name": "Shoulder Press",
@@ -290,7 +314,8 @@
       "Lower back to shoulder height."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Shoulders"
+    "muscleGroup": "Shoulders",
+    "imageUrl": "https://i.imgur.com/FbMj47W.png"
   },
   {
     "name": "Sit-ups",
@@ -302,7 +327,8 @@
       "Lower back to ground."
     ],
     "difficulty": "Easy",
-    "muscleGroup": "Abs"
+    "muscleGroup": "Abs",
+    "imageUrl": "https://i.imgur.com/GvTWkSa.png"
   },
   {
     "name": "Skull Crusher",
@@ -314,7 +340,8 @@
       "Extend to start position."
     ],
     "difficulty": "Hard",
-    "muscleGroup": "Triceps"
+    "muscleGroup": "Triceps",
+    "imageUrl": "https://i.imgur.com/GWcozQK_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Squats",
@@ -325,7 +352,8 @@
       "Keep back straight, return to stand."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Quads"
+    "muscleGroup": "Quads",
+    "imageUrl": "https://i.imgur.com/MnFaNO9_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Tricep Dip",
@@ -336,7 +364,8 @@
       "Push up to starting position."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Triceps"
+    "muscleGroup": "Triceps",
+    "imageUrl": "https://i.imgur.com/GWcozQK_d.webp?maxwidth=760&fidelity=grand"
   },
   {
     "name": "Wall Sit",
@@ -348,6 +377,7 @@
       "Maintain for time."
     ],
     "difficulty": "Medium",
-    "muscleGroup": "Quads"
+    "muscleGroup": "Quads",
+    "imageUrl": "https://i.imgur.com/MnFaNO9_d.webp?maxwidth=760&fidelity=grand"
   }
 ]
