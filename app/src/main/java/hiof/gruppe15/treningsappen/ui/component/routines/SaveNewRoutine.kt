@@ -48,8 +48,7 @@ import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
 @Composable
 fun SaveRoutineScreen(
-    navController: NavController,
-    sharedViewModel: SharedViewModel
+    navController: NavController, sharedViewModel: SharedViewModel
 ) {
     var routineName by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -69,10 +68,7 @@ fun SaveRoutineScreen(
                 .padding(it),
             verticalArrangement = Arrangement.Top,
         ) {
-            RoutineNameInputField(
-                routineName = routineName,
-                onValueChange = { routineName = it }
-            )
+            RoutineNameInputField(routineName = routineName, onValueChange = { routineName = it })
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -82,36 +78,39 @@ fun SaveRoutineScreen(
                 SaveRoutineButton(onClick = {
                     if (routineName.isNotEmpty()) {
                         if (selectedExercises.isEmpty()) {
-                            Toast.makeText(context, "No exercises selected", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "No exercises selected", Toast.LENGTH_SHORT)
+                                .show()
                             return@SaveRoutineButton
                         }
 
-                        val routineExercises = selectedExercises.map { exercise ->
-                            RoutineExercise(
-                                exercise = exercise,
-                                sets = 3
-                            )
+                        val routineExercises = selectedExercises.mapNotNull { exercise ->
+                            exerciseDetailsMap[exercise]?.let { routineExercise ->
+                                RoutineExercise(
+                                    exercise = routineExercise.exercise,
+                                    sets = routineExercise.sets,
+                                    note = routineExercise.note
+                                )
+                            }
                         }
 
                         val routine = Routine(
-                            name = routineName,
-                            exercises = routineExercises
+                            name = routineName, exercises = routineExercises
                         )
 
                         RoutineRepository().createRoutine(routine) { isSuccess, message ->
-                                if (isSuccess) {
-                                    Toast.makeText(context, "Exercise routine has been saved", Toast.LENGTH_SHORT).show()
-                                    navController.navigate(Screen.Routines.route)
-                                } else {
-                                    Toast.makeText(context, "SaveNewRoutine.kt RoutineRepository.kt saveRoutine", Toast.LENGTH_SHORT).show()
-                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                                }
-
-                            // TODO: Save routine to Firebase on the logged in user.
+                            if (isSuccess) {
+                                Toast.makeText(
+                                    context, "Exercise routine has been saved", Toast.LENGTH_SHORT
+                                ).show()
+                                navController.navigate(Screen.Routines.route)
+                            } else {
+                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                            }
                         }
                     } else {
-                        Toast.makeText(context, "Routine name cannot be empty", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(
+                            context, "Routine name cannot be empty", Toast.LENGTH_SHORT
+                        ).show()
                     }
                 })
 
@@ -123,20 +122,18 @@ fun SaveRoutineScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Selected exercises",
-                style = MaterialTheme.typography.titleMedium
+                text = "Selected exercises", style = MaterialTheme.typography.titleMedium
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             LazyColumn {
                 items(selectedExercises) { exercise ->
-                    ExerciseCard(
-                        routineExercise = exerciseDetailsMap[exercise] ?: RoutineExercise(exercise = exercise),
-                        onDetailsChange = { updatedDetails ->
-                            exerciseDetailsMap[exercise] = updatedDetails
-                        }
-                    )
+                    ExerciseCard(routineExercise = exerciseDetailsMap[exercise] ?: RoutineExercise(
+                        exercise = exercise
+                    ), onDetailsChange = { updatedDetails ->
+                        exerciseDetailsMap[exercise] = updatedDetails
+                    })
                 }
             }
         }
@@ -145,8 +142,7 @@ fun SaveRoutineScreen(
 
 @Composable
 fun ExerciseCard(
-    routineExercise: RoutineExercise,
-    onDetailsChange: (RoutineExercise) -> Unit
+    routineExercise: RoutineExercise, onDetailsChange: (RoutineExercise) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -173,11 +169,12 @@ fun ExerciseCard(
             var sets by remember { mutableStateOf(routineExercise.sets.toString()) }
 
             NoteInputField(
-                note = notes,
-                onNoteChange = { notes = it },
+                note = notes, onNoteChange = { noteValue ->
+                    notes = noteValue
+                    onDetailsChange(routineExercise.copy(note = noteValue, sets = sets.toInt()))
+                },
                 modifier = Modifier.fillMaxWidth()
             )
-
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -191,9 +188,7 @@ fun ExerciseCard(
 
 @Composable
 fun NumberSlider(
-    value: Float,
-    onValueChange: (Float) -> Unit,
-    range: ClosedFloatingPointRange<Float> = 1f..10f
+    value: Float, onValueChange: (Float) -> Unit, range: ClosedFloatingPointRange<Float> = 1f..10f
 ) {
     Slider(
         value = value,
@@ -206,12 +201,9 @@ fun NumberSlider(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteInputField(
-    note: String,
-    onNoteChange: (String) -> Unit,
-    modifier: Modifier = Modifier
+    note: String, onNoteChange: (String) -> Unit, modifier: Modifier = Modifier
 ) {
-    TextField(
-        value = note,
+    TextField(value = note,
         onValueChange = onNoteChange,
         label = { Text("Notes") },
         placeholder = { Text("Optional") },
@@ -234,8 +226,7 @@ fun NoteInputField(
 
 @Composable
 fun SetsInputField(
-    sets: Int,
-    onValueChange: (Int) -> Unit
+    sets: Int, onValueChange: (Int) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -249,8 +240,7 @@ fun SetsInputField(
         )
 
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
+            verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
         ) {
             // Min label
             Text(
@@ -285,8 +275,7 @@ fun SetsInputField(
 
 @Composable
 fun RoutineNameInputField(
-    routineName: String,
-    onValueChange: (String) -> Unit
+    routineName: String, onValueChange: (String) -> Unit
 ) {
     OutlinedTextField(
         value = routineName,
@@ -304,13 +293,10 @@ fun RoutineNameInputField(
 @Composable
 fun SaveRoutineButton(onClick: () -> Unit) {
     Button(
-        onClick = onClick,
-        modifier = Modifier
-            .height(48.dp)
+        onClick = onClick, modifier = Modifier.height(48.dp)
     ) {
         Text(
-            text = "Save routine",
-            style = MaterialTheme.typography.titleMedium
+            text = "Save routine", style = MaterialTheme.typography.titleMedium
         )
     }
 }
@@ -318,13 +304,10 @@ fun SaveRoutineButton(onClick: () -> Unit) {
 @Composable
 fun CancelButton(onClick: () -> Unit) {
     Button(
-        onClick = onClick,
-        modifier = Modifier
-            .height(48.dp)
+        onClick = onClick, modifier = Modifier.height(48.dp)
     ) {
         Text(
-            text = "Cancel",
-            style = MaterialTheme.typography.titleMedium
+            text = "Cancel", style = MaterialTheme.typography.titleMedium
         )
     }
 }
