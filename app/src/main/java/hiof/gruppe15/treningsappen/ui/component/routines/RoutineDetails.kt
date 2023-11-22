@@ -33,10 +33,12 @@ import com.example.treningsappen.R
 import hiof.gruppe15.treningsappen.data.RoutineRepository
 import hiof.gruppe15.treningsappen.model.RoutineExercise
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
-import hiof.gruppe15.treningsappen.viewmodel.RoutineViewModel
+import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
+import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
 @Composable
-fun RoutineDetailsScreen(navController: NavController, routineId: String, routineViewModel: RoutineViewModel) {
+fun RoutineDetailsScreen(navController: NavController, routineId: String, sharedViewModel: SharedViewModel) {
+    val routineViewModel = sharedViewModel.routineViewModel
     val routine = routineViewModel.getRoutineById(routineId)
 
     AppScaffold(navController = navController, title = routine?.name ?: "Routine") {
@@ -47,6 +49,8 @@ fun RoutineDetailsScreen(navController: NavController, routineId: String, routin
         ) {
             routine?.let {
                 StartRoutineButton(onClick = {
+                    sharedViewModel.startWorkoutSession(routine)
+                    navController.navigate(Screen.WorkoutSession.route)
                 })
 
                 Spacer(modifier = Modifier.height(8.dp))
