@@ -88,7 +88,7 @@ fun StartRoutineButton(onClick: () -> Unit) {
             .height(48.dp)
     ) {
         Text(
-            text = "Start routine (TODO)",
+            text = "Start routine",
             style = MaterialTheme.typography.titleMedium
         )
     }

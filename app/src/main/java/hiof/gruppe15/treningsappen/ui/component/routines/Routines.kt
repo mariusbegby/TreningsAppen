@@ -43,16 +43,29 @@ fun RoutineScreen(navController: NavController, sharedViewModel: SharedViewModel
 
             Spacer(modifier = Modifier.padding(8.dp))
 
+            if(sharedViewModel.workoutSession.value != null) {
+                ContinueSessionButton(onClick = {
+                    navController.navigate(Screen.WorkoutSession.route)
+                })
+
+                Spacer(modifier = Modifier.padding(8.dp))
+            }
+
             CreateRoutineButton(onClick = {
                 navController.navigate(Screen.CreateNewRoutine.route)
             })
 
             Spacer(modifier = Modifier.padding(8.dp))
 
-            LazyColumn(modifier = Modifier
-                .fillMaxSize()) {
-                items(routines) { routine ->
-                    RoutineCard(navController = navController, routine = routine)
+            if(routines.isEmpty()) {
+                Spacer(modifier = Modifier.padding(8.dp))
+                Text(text = "You have no routines yet. Create one by clicking the button above.")
+            } else {
+                LazyColumn(modifier = Modifier
+                    .fillMaxSize()) {
+                    items(routines) { routine ->
+                        RoutineCard(navController = navController, routine = routine)
+                    }
                 }
             }
         }
@@ -78,6 +91,21 @@ fun CreateRoutineButton(onClick: () -> Unit) {
     ) {
         Text(
             text = "Create new routine",
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
+}
+
+@Composable
+fun ContinueSessionButton(onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+    ) {
+        Text(
+            text = "Continue workout session",
             style = MaterialTheme.typography.titleMedium
         )
     }

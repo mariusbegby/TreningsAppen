@@ -1,13 +1,17 @@
 package hiof.gruppe15.treningsappen.model
 
-data class WorkoutSession (
+data class WorkoutSession(
     val routine: Routine,
-    val exercises: List<WorkoutSessionExercise> = routine.exercises.map { WorkoutSessionExercise(it.exercise) }
+    val exercises: List<WorkoutSessionExercise> = routine.exercises.map { WorkoutSessionExercise(it) }
 )
 
 data class WorkoutSessionExercise(
-    val exercise: Exercise,
-    val setLogs: MutableList<SetLog> = mutableListOf()
+    val routineExercise: RoutineExercise,
+    val setLogs: MutableList<SetLog> = MutableList(routineExercise.sets) { SetLog() }
 ) {
-    data class SetLog(var weight: String = "", var reps: String = "")
+    data class SetLog(
+        var weight: String = "",
+        var reps: String = "",
+        var completed: Boolean = false
+    )
 }
