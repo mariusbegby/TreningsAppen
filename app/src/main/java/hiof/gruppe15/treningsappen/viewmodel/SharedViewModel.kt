@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.model.Routine
+import hiof.gruppe15.treningsappen.model.RoutineExercise
 import hiof.gruppe15.treningsappen.model.WorkoutSession
+import hiof.gruppe15.treningsappen.model.WorkoutSessionExercise
 
 class SharedViewModel : ViewModel() {
     private val _selectedExercises = mutableStateOf<List<Exercise>>(emptyList())
@@ -34,5 +36,10 @@ class SharedViewModel : ViewModel() {
     fun completeWorkoutSession() {
         // TODO: Implement logic to save the workout session
         _workoutSession.value = null
+    }
+
+    fun updateSessionExerciseLogs(routineExercise: RoutineExercise, updatedLogs: List<WorkoutSessionExercise.SetLog>) {
+        // Logic to update the logs for the specific exercise
+        // Make sure to trigger a state change to recompose the UI
     }
 }
