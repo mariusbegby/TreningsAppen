@@ -2,6 +2,7 @@ package hiof.gruppe15.treningsappen.ui.component.routines
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,6 +26,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -112,14 +114,15 @@ fun WorkoutSessionExerciseCard(
 
 @Composable
 fun SetInputHeader() {
-    Row(modifier = Modifier.fillMaxWidth()) {
-        Text("SET", style = MaterialTheme.typography.bodyMedium)
-        Spacer(Modifier.width(8.dp)) // Add spacing if needed
-        Text("KG", style = MaterialTheme.typography.bodyMedium)
-        Spacer(Modifier.width(8.dp)) // Add spacing if needed
-        Text("REPS", style = MaterialTheme.typography.bodyMedium)
-        Spacer(Modifier.weight(1f)) // This pushes the checkmark to the end of the row
-        Icon(Icons.Default.Check, contentDescription = "Complete")
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text("SET", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
+        Text("KG", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(64.dp))
+        Text("REPS", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(64.dp))
+        Text("DONE", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(48.dp))
     }
 }
 
@@ -131,20 +134,26 @@ fun SetInputRow(
     onRepsChange: (String) -> Unit,
     onSetComplete: () -> Unit
 ) {
-    Row(modifier = Modifier.fillMaxWidth()) {
-        Text("$setNumber", style = MaterialTheme.typography.bodyMedium)
-        Spacer(Modifier.width(8.dp)) // Add spacing if needed
-        SmallOutlinedTextField(
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text("$setNumber", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
+        Spacer(Modifier.width(8.dp)) // Space between columns
+        SmallTextField(
             value = setLog.weight,
             onValueChange = onWeightChange,
-            label = "Weight"
+            modifier = Modifier.width(64.dp)
         )
-        Spacer(Modifier.width(8.dp)) // Add spacing if needed
-        SmallOutlinedTextField(
+        Spacer(Modifier.width(8.dp)) // Space between columns
+        SmallTextField(
             value = setLog.reps,
             onValueChange = onRepsChange,
-            label = "Reps"
+            modifier = Modifier.width(64.dp)
         )
+        Spacer(Modifier.width(8.dp)) // Space between columns
         IconButton(onClick = onSetComplete) {
             Icon(Icons.Default.Check, contentDescription = "Complete")
         }
@@ -152,13 +161,12 @@ fun SetInputRow(
 }
 
 @Composable
-fun SmallOutlinedTextField(value: String, onValueChange: (String) -> Unit, label: String) {
-    OutlinedTextField(
+fun SmallTextField(value: String, onValueChange: (String) -> Unit, modifier: Modifier) {
+    TextField(
         value = value,
         onValueChange = onValueChange,
-        label = { Text(label) },
         singleLine = true,
-        modifier = Modifier.width(64.dp) // Set a fixed width for a neater appearance
+        modifier = modifier
     )
 }
 
