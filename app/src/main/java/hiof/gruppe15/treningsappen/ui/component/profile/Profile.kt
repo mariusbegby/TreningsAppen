@@ -1,7 +1,5 @@
 package hiof.gruppe15.treningsappen.ui.component.profile
 
-
-
 import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -75,7 +73,7 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
             DeleteAccountButton(onClick = {
                 currentUser?.delete()
                 navController.navigate(Screen.Login.route) {
-                    popUpTo(Screen.Home.route) { inclusive = true }
+                    popUpTo(Screen.Routines.route) { inclusive = true }
                     launchSingleTop = true
                 }
             })
@@ -85,7 +83,7 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
             LogoutButton(onClick = {
                 auth.signOut()
                 navController.navigate(Screen.Login.route) {
-                    popUpTo(Screen.Home.route) { inclusive = true }
+                    popUpTo(Screen.Routines.route) { inclusive = true }
                     launchSingleTop = true
                 }
             })

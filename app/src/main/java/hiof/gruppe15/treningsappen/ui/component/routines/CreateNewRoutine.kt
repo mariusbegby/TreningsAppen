@@ -248,12 +248,3 @@ fun ExerciseNameWithCheckbox(
         })
     }
 }
-
-@Composable
-fun ExerciseList(exercises: List<Exercise>, modifier: Modifier = Modifier) {
-    LazyColumn(userScrollEnabled = true, modifier = modifier) {
-        items(exercises) { exercise ->
-            hiof.gruppe15.treningsappen.ui.component.home.ExerciseCard(exercise = exercise)
-        }
-    }
-}

@@ -102,8 +102,8 @@ fun LoginScreen(navController: NavController, sharedViewModel: SharedViewModel) 
                         auth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    navController.navigate(Screen.Home.route) {
-                                        popUpTo(Screen.Home.route) { inclusive = true }
+                                    navController.navigate(Screen.Routines.route) {
+                                        popUpTo(Screen.Routines.route) { inclusive = true }
                                     }
                                 } else {
                                     Toast.makeText(

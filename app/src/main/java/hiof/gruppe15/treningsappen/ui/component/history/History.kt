@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui.component.analytics
+package hiof.gruppe15.treningsappen.ui.component.history
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,14 +10,14 @@ import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 
 @Composable
-fun AnalyticsScreen(navController: NavController) {
-    AppScaffold(navController = navController, title = "Analytics") {
+fun HistoryScreen(navController: NavController) {
+    AppScaffold(navController = navController, title = "History") {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
-            Text("Analytics")
+            Text("History")
         }
     }
 }
