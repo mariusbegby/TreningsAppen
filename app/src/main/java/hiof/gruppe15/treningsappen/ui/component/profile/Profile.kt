@@ -1,6 +1,9 @@
 package hiof.gruppe15.treningsappen.ui.component.profile
 
+
+
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -32,6 +35,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
@@ -53,10 +57,6 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
             Spacer(modifier = Modifier.height(24.dp))
 
             AddProfileImageButton { uri ->
-                // Save the selected image URI to the user's profile
-                //saveImageToUserProfile(uri)
-                // Handle the selected image URI as needed
-                // For now, let's print the URI
                 println("Selected Image URI: $uri")
             }
 
@@ -101,22 +101,32 @@ fun AddProfileImageButton(
 ) {
     var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
 
-    // Function to save the image URI to the user's profile
     val saveImageToUserProfile: (Uri) -> Unit = { uri ->
         val userId = FirebaseAuth.getInstance().currentUser?.uid
         if (userId != null) {
-            val database = FirebaseDatabase.getInstance().reference
-            database.child("users").child(userId).child("profileImageUri").setValue(uri.toString())
+            val storageRef = FirebaseStorage.getInstance().reference.child("profile_images/$userId.jpg")
+
+            storageRef.putFile(uri)
+                .addOnSuccessListener { taskSnapshot ->
+
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { downloadUri ->
+                        val imageUrl = downloadUri.toString()
+
+                        val database = FirebaseDatabase.getInstance().reference
+                        database.child("users").child(userId).child("profileImageUri").setValue(imageUrl)
+                    }
+                }
+                .addOnFailureListener { exception: Exception ->
+                    Log.e("ProfileImageUpload", "Upload failed", exception)
+                    // Additional handling for the failure
+                }
         }
-        onImageAdded(uri)
     }
 
     val getContent = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
             selectedImageUri = uri
-            // Save the selected image URI to the user's profile
             saveImageToUserProfile(uri)
-            // Call the callback to handle the selected image URI
             onImageAdded(uri)
         }
     }

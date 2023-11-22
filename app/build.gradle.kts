@@ -53,6 +53,8 @@ android {
 
 
 dependencies {
+    implementation ("com.google.firebase:firebase-storage:19.2.0")
+
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
     // ViewModel utilities for Compose
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
