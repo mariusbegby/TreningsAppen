@@ -54,11 +54,11 @@ fun SaveRoutineScreen(
     var routineName by remember { mutableStateOf("") }
     val context = LocalContext.current
     val selectedExercises = sharedViewModel.selectedExercises.value
-    val exerciseDetailsMap = remember { mutableMapOf<Exercise, ExerciseDetails>() }
+    val exerciseDetailsMap = remember { mutableMapOf<Exercise, RoutineExercise>() }
 
     selectedExercises.forEach { exercise ->
         if (exercise !in exerciseDetailsMap) {
-            exerciseDetailsMap[exercise] = ExerciseDetails()
+            exerciseDetailsMap[exercise] = RoutineExercise(exercise = exercise)
         }
     }
 
@@ -132,8 +132,7 @@ fun SaveRoutineScreen(
             LazyColumn {
                 items(selectedExercises) { exercise ->
                     ExerciseCard(
-                        exercise = exercise,
-                        exerciseDetails = exerciseDetailsMap[exercise] ?: ExerciseDetails(),
+                        routineExercise = exerciseDetailsMap[exercise] ?: RoutineExercise(exercise = exercise),
                         onDetailsChange = { updatedDetails ->
                             exerciseDetailsMap[exercise] = updatedDetails
                         }
@@ -146,9 +145,8 @@ fun SaveRoutineScreen(
 
 @Composable
 fun ExerciseCard(
-    exercise: Exercise,
-    exerciseDetails: ExerciseDetails,
-    onDetailsChange: (ExerciseDetails) -> Unit
+    routineExercise: RoutineExercise,
+    onDetailsChange: (RoutineExercise) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -158,21 +156,21 @@ fun ExerciseCard(
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = exercise.name,
+                text = routineExercise.exercise.name,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
 
             Text(
-                text = exercise.muscleGroup,
+                text = routineExercise.exercise.muscleGroup,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            var notes by remember { mutableStateOf(exerciseDetails.notes) }
-            var sets by remember { mutableStateOf(exerciseDetails.sets.toString()) }
+            var notes by remember { mutableStateOf(routineExercise.note) }
+            var sets by remember { mutableStateOf(routineExercise.sets.toString()) }
 
             NoteInputField(
                 note = notes,
@@ -180,21 +178,13 @@ fun ExerciseCard(
                 modifier = Modifier.fillMaxWidth()
             )
 
+
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                SetsInputField( sets.toInt()) { sets = it.toString() }
+            SetsInputField(sets.toInt()) { setsValue ->
+                sets = setsValue.toString()
+                onDetailsChange(routineExercise.copy(sets = setsValue, note = notes))
             }
-
-            onDetailsChange(
-                exerciseDetails.copy(
-                    notes = notes,
-                    sets = sets.toIntOrNull() ?: 1,
-                )
-            )
         }
     }
 }
@@ -292,13 +282,6 @@ fun SetsInputField(
         }
     }
 }
-
-data class ExerciseDetails(
-    var sets: Int = 1,
-    var kg: Int = 0,
-    var reps: Int = 10,
-    var notes: String = ""
-)
 
 @Composable
 fun RoutineNameInputField(
