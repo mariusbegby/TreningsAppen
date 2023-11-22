@@ -5,7 +5,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -14,12 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -28,13 +23,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -55,6 +49,16 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
         ) {
 
             TitleTexts("Profile", "View your profile details and settings")
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            AddProfileImageButton { uri ->
+                // Save the selected image URI to the user's profile
+                //saveImageToUserProfile(uri)
+                // Handle the selected image URI as needed
+                // For now, let's print the URI
+                println("Selected Image URI: $uri")
+            }
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -87,14 +91,6 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
             })
 
             Spacer(modifier = Modifier.height(24.dp))
-
-            AddProfileImageButton { uri ->
-                // Save the selected image URI to the user's profile
-                //saveImageToUserProfile(uri)
-                // Handle the selected image URI as needed
-                // For now, let's print the URI
-                println("Selected Image URI: $uri")
-            }
         }
     }
 }
@@ -104,7 +100,6 @@ fun AddProfileImageButton(
     onImageAdded: (Uri) -> Unit
 ) {
     var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
-    var isImagePickerVisible by remember { mutableStateOf(false) }
 
     // Function to save the image URI to the user's profile
     val saveImageToUserProfile: (Uri) -> Unit = { uri ->
@@ -126,39 +121,32 @@ fun AddProfileImageButton(
         }
     }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        selectedImageUri?.let { uri ->
-            Image(
-                painter = rememberImagePainter(uri),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(30.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.primary, shape = CircleShape)
-                    .aspectRatio(0.75f)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            onClick = {
-                getContent.launch("image/*")
-            },
+    selectedImageUri?.let { uri ->
+        Image(
+            painter = rememberAsyncImagePainter(uri),
+            contentDescription = null,
             modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp)
-        ) {
-            Icon(imageVector = Icons.Default.Add, contentDescription = null)
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(text = "Add Profile Picture", style = MaterialTheme.typography.titleMedium)
-        }
+                .size(30.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.primary, shape = CircleShape)
+                .aspectRatio(0.75f)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+    }
+
+    Button(
+        onClick = {
+            getContent.launch("image/*")
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+    ) {
+        Text(
+            text = "Add profile image",
+            style = MaterialTheme.typography.titleMedium
+        )
     }
 }
 
