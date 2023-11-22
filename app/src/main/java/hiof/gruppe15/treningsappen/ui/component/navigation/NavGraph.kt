@@ -65,17 +65,17 @@ fun NavGraph(
         composable(Screen.Home.route) { HomeScreen(navController) }
         composable(Screen.Testing.route) { TestingScreen(navController) }
 
-        composable(Screen.Routines.route) { RoutineScreen(navController, sharedViewModel.routineViewModel) }
+        composable(Screen.Routines.route) { RoutineScreen(navController, sharedViewModel) }
         composable(
             route = Screen.RoutineDetails.route,
             arguments = listOf(navArgument("routineId") { type = NavType.StringType })
         ) { backStackEntry ->
             val routineId = backStackEntry.arguments?.getString("routineId")
             if (routineId != null) {
-                RoutineDetailsScreen(navController, routineId, sharedViewModel.routineViewModel)
+                RoutineDetailsScreen(navController, routineId, sharedViewModel)
             }
         }
-        composable(Screen.WorkoutSession.route) { WorkoutSessionScreen(navController) }
+        composable(Screen.WorkoutSession.route) { WorkoutSessionScreen(navController, sharedViewModel) }
         composable(Screen.CreateNewRoutine.route) { CreateRoutineScreen(navController, sharedViewModel) }
         composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController, sharedViewModel) }
 

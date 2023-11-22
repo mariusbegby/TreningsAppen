@@ -20,10 +20,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
-import hiof.gruppe15.treningsappen.viewmodel.RoutineViewModel
+import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
 @Composable
-fun RoutineScreen(navController: NavController, routineViewModel: RoutineViewModel) {
+fun RoutineScreen(navController: NavController, sharedViewModel: SharedViewModel) {
+    val routineViewModel = sharedViewModel.routineViewModel
     routineViewModel.fetchRoutines()
     val routines by routineViewModel.routines.collectAsState()
     val error by routineViewModel.errorState.collectAsState()
