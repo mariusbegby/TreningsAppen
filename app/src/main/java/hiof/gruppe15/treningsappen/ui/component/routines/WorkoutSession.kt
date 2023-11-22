@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,10 +22,11 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -35,6 +37,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
@@ -49,31 +53,32 @@ fun WorkoutSessionScreen(navController: NavController, sharedViewModel: SharedVi
     val workoutSession = sharedViewModel.workoutSession.value ?: return
 
     AppScaffold(navController = navController, title = "Session: ${workoutSession.routine.name}") {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
-            LazyColumn {
-                itemsIndexed(workoutSession.exercises) { exerciseIndex, sessionExercise ->
-                    WorkoutSessionExerciseCard(
-                        sessionExercise = sessionExercise,
-                        exerciseIndex = exerciseIndex,
-                        sharedViewModel = sharedViewModel
-                    )
-                }
+            itemsIndexed(workoutSession.exercises) { exerciseIndex, sessionExercise ->
+                WorkoutSessionExerciseCard(
+                    sessionExercise = sessionExercise,
+                    exerciseIndex = exerciseIndex,
+                    sharedViewModel = sharedViewModel
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
-            Spacer(modifier = Modifier.weight(1f))
+            item {
+                Spacer(modifier = Modifier.height(8.dp))
 
-            CompleteWorkoutButton(
-                onClick = {
-                    sharedViewModel.completeWorkoutSession()
-                    navController.popBackStack()
-                }
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
+                CompleteWorkoutButton(
+                    onClick = {
+                        sharedViewModel.completeWorkoutSession()
+                        navController.popBackStack()
+                    }
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+            }
         }
     }
 }
@@ -119,10 +124,10 @@ fun SetInputHeader() {
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text("SET", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
-        Text("KG", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(64.dp))
-        Text("REPS", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(64.dp))
-        Text("DONE", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(48.dp))
+        Text("SET", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(48.dp))
+        Text("KG", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(48.dp))
+        Text("REPS", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(48.dp))
+        Text("DONE", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(40.dp))
     }
 }
 
@@ -140,33 +145,47 @@ fun SetInputRow(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text("$setNumber", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
+        Text("  $setNumber", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
+
         Spacer(Modifier.width(8.dp)) // Space between columns
+
         SmallTextField(
             value = setLog.weight,
             onValueChange = onWeightChange,
             modifier = Modifier.width(64.dp)
         )
+
         Spacer(Modifier.width(8.dp)) // Space between columns
+
         SmallTextField(
             value = setLog.reps,
             onValueChange = onRepsChange,
             modifier = Modifier.width(64.dp)
         )
+
         Spacer(Modifier.width(8.dp)) // Space between columns
-        IconButton(onClick = onSetComplete) {
+
+        IconButton(onClick = onSetComplete, modifier = Modifier.width(40.dp)) {
             Icon(Icons.Default.Check, contentDescription = "Complete")
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SmallTextField(value: String, onValueChange: (String) -> Unit, modifier: Modifier) {
+fun SmallTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier
+) {
     TextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        modifier = modifier
+        modifier = modifier.height(IntrinsicSize.Min), // Set height to wrap content
+        textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center), // Center text
+        shape = RoundedCornerShape(4.dp), // Set a smaller corner radius
+        visualTransformation = VisualTransformation.None // No visual transformation
     )
 }
 
