@@ -8,6 +8,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -22,12 +23,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -44,6 +47,19 @@ import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel) {
     val auth = FirebaseAuth.getInstance()
     val currentUser = auth.currentUser
+    var imageUri by remember { mutableStateOf<Uri?>(null) }
+
+    val userId = FirebaseAuth.getInstance().currentUser?.uid
+    val storageRef = FirebaseStorage.getInstance().reference.child("profile_images/$userId.jpg")
+
+    LaunchedEffect(key1 = userId) {
+        val storageRef = FirebaseStorage.getInstance().reference.child("profile_images/$userId.jpg")
+        storageRef.downloadUrl.addOnSuccessListener { uri ->
+            imageUri = uri
+        }.addOnFailureListener {
+            // Handle the error, show a placeholder or a default image
+        }
+    }
 
     AppScaffold(navController = navController, title = "Profile") {
         Column(
@@ -56,7 +72,12 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            ProfileImage(imageUri = imageUri)
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             AddProfileImageButton { uri ->
+                imageUri = uri
                 println("Selected Image URI: $uri")
             }
 
@@ -96,6 +117,31 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
 }
 
 @Composable
+fun ProfileImage(imageUri: Uri?)  {
+    val userId = FirebaseAuth.getInstance().currentUser?.uid
+    val storageRef = FirebaseStorage.getInstance().reference.child("profile_images/$userId.jpg")
+
+    if (imageUri == null) {
+        // Display a placeholder
+        Box(
+            modifier = Modifier
+                .size(120.dp)
+                .clip(CircleShape)
+                .background(Color.LightGray, shape = CircleShape)
+        )
+    } else {
+        Image(
+            painter = rememberAsyncImagePainter(imageUri),
+            contentDescription = "Profile Image",
+            modifier = Modifier
+                .size(120.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.primary, shape = CircleShape)
+        )
+    }
+}
+
+@Composable
 fun AddProfileImageButton(
     onImageAdded: (Uri) -> Unit
 ) {
@@ -118,18 +164,28 @@ fun AddProfileImageButton(
                 }
                 .addOnFailureListener { exception: Exception ->
                     Log.e("ProfileImageUpload", "Upload failed", exception)
-                    // Additional handling for the failure
                 }
         }
     }
 
     val getContent = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        if (uri != null) {
-            selectedImageUri = uri
-            saveImageToUserProfile(uri)
-            onImageAdded(uri)
+        uri?.let {
+            selectedImageUri = it
+            saveImageToUserProfile(it) { downloadUri ->
+                onImageAdded(downloadUri)
+            }
         }
     }
+
+    Button(
+        onClick = { getContent.launch("image/*") },
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+    ) {
+        Text("Add profile image", style = MaterialTheme.typography.titleMedium)
+    }
+
 
     selectedImageUri?.let { uri ->
         Image(
@@ -144,21 +200,23 @@ fun AddProfileImageButton(
 
         Spacer(modifier = Modifier.height(8.dp))
     }
+    }
 
-    Button(
-        onClick = {
-            getContent.launch("image/*")
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp)
-    ) {
-        Text(
-            text = "Add profile image",
-            style = MaterialTheme.typography.titleMedium
-        )
+
+fun saveImageToUserProfile(uri: Uri, onImageUploaded: (Uri) -> Unit) {
+    val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
+    val storageRef = FirebaseStorage.getInstance().reference.child("profile_images/$userId.jpg")
+
+    storageRef.putFile(uri).addOnSuccessListener { taskSnapshot ->
+        taskSnapshot.storage.downloadUrl.addOnSuccessListener { downloadUri ->
+
+            onImageUploaded(downloadUri)
+        }
+    }.addOnFailureListener { exception ->
+        Log.e("ProfileImageUpload", "Upload failed", exception)
     }
 }
+
 
 @Composable
 fun TitleTexts(title: String, subtitle: String) {
