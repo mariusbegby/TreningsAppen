@@ -22,7 +22,6 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
@@ -30,6 +29,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -96,14 +97,12 @@ fun WorkoutSessionExerciseCard(
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            ExerciseDetailsView(sessionExercise.routineExercise) // Display image, name, muscle group
+            ExerciseDetailsView(sessionExercise.routineExercise)
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Header Row
             SetInputHeader()
 
-            // Input Fields for each set
             sessionExercise.setLogs.forEachIndexed { setIndex, setLog ->
                 SetInputRow(
                     setNumber = setIndex + 1,
@@ -139,6 +138,9 @@ fun SetInputRow(
     onRepsChange: (String) -> Unit,
     onSetComplete: () -> Unit
 ) {
+    val weightState = remember(setNumber) { mutableStateOf(setLog.weight) }
+    val repsState = remember(setNumber) { mutableStateOf(setLog.reps) }
+
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -147,23 +149,29 @@ fun SetInputRow(
     ) {
         Text("  $setNumber", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
 
-        Spacer(Modifier.width(8.dp)) // Space between columns
+        Spacer(Modifier.width(8.dp))
 
         SmallTextField(
-            value = setLog.weight,
-            onValueChange = onWeightChange,
+            value = weightState.value,
+            onValueChange = {
+                weightState.value = it
+                onWeightChange(it)
+            },
             modifier = Modifier.width(64.dp)
         )
 
-        Spacer(Modifier.width(8.dp)) // Space between columns
+        Spacer(Modifier.width(8.dp))
 
         SmallTextField(
-            value = setLog.reps,
-            onValueChange = onRepsChange,
+            value = repsState.value,
+            onValueChange = {
+                repsState.value = it
+                onRepsChange(it)
+            },
             modifier = Modifier.width(64.dp)
         )
 
-        Spacer(Modifier.width(8.dp)) // Space between columns
+        Spacer(Modifier.width(8.dp))
 
         IconButton(onClick = onSetComplete, modifier = Modifier.width(40.dp)) {
             Icon(Icons.Default.Check, contentDescription = "Complete")
@@ -171,7 +179,6 @@ fun SetInputRow(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SmallTextField(
     value: String,
@@ -182,10 +189,10 @@ fun SmallTextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        modifier = modifier.height(IntrinsicSize.Min), // Set height to wrap content
-        textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center), // Center text
-        shape = RoundedCornerShape(4.dp), // Set a smaller corner radius
-        visualTransformation = VisualTransformation.None // No visual transformation
+        modifier = modifier.height(IntrinsicSize.Min),
+        textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
+        shape = RoundedCornerShape(4.dp),
+        visualTransformation = VisualTransformation.None
     )
 }
 
