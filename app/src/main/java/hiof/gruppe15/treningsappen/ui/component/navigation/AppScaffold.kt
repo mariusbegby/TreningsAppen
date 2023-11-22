@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -58,7 +58,7 @@ fun AppScaffold(
                     )
                 },
                 navigationIcon = {
-                    if (title != "Home" && title != "Profile" && title != "Analytics" && title != "Routines") {
+                    if (title != "Profile" && title != "History" && title != "Routines") {
                         IconButton(onClick = {
                             navController.navigateUp()
                         }) {
@@ -100,18 +100,13 @@ private fun BottomNavigationRow(navController: NavController) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        HomeNavButton(
-            navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Home)
-        )
-        Spacer(modifier = Modifier.width(12.dp))
-
         WorkoutPlanNavButton(
             navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Routines)
         )
         Spacer(modifier = Modifier.width(12.dp))
 
-        AnalyticsNavButton(
-            navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Analytics)
+        HistoryNavButton(
+            navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.History)
         )
         Spacer(modifier = Modifier.width(12.dp))
 
@@ -119,18 +114,6 @@ private fun BottomNavigationRow(navController: NavController) {
             navController, isSelected = isRouteSelected(currentRoute, ScreenCategory.Profile)
         )
     }
-}
-
-@Composable
-private fun HomeNavButton(navController: NavController, isSelected: Boolean) {
-    NavButton(
-        navController = navController,
-        isSelected = isSelected,
-        iconWrapper = IconWrapper.ImageVectorIcon(Icons.Default.Home),
-        contentDescription = "Home Icon",
-        route = Screen.Home.route,
-        label = "Home"
-    )
 }
 
 @Composable
@@ -147,14 +130,14 @@ private fun WorkoutPlanNavButton(navController: NavController, isSelected: Boole
 
 
 @Composable
-private fun AnalyticsNavButton(navController: NavController, isSelected: Boolean) {
+private fun HistoryNavButton(navController: NavController, isSelected: Boolean) {
     NavButton(
         navController = navController,
         isSelected = isSelected,
-        iconWrapper = IconWrapper.PainterIcon(painterResource(id = R.drawable.trendingup)),
+        iconWrapper = IconWrapper.ImageVectorIcon(Icons.Default.List),
         contentDescription = "Arrow Chart Increase Icon",
-        route = Screen.Analytics.route,
-        label = "Analytics"
+        route = Screen.History.route,
+        label = "History"
     )
 }
 
