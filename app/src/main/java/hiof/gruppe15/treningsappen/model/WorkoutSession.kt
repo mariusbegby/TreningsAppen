@@ -9,5 +9,9 @@ data class WorkoutSessionExercise(
     val routineExercise: RoutineExercise,
     val setLogs: MutableList<SetLog> = MutableList(routineExercise.sets) { SetLog() }
 ) {
-    data class SetLog(var weight: String = "", var reps: String = "")
+    data class SetLog(
+        var weight: String = "",
+        var reps: String = "",
+        var completed: Boolean = false
+    )
 }

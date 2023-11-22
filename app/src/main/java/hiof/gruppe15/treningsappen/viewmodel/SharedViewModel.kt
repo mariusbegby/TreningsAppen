@@ -42,4 +42,39 @@ class SharedViewModel : ViewModel() {
         // Logic to update the logs for the specific exercise
         // Make sure to trigger a state change to recompose the UI
     }
+
+    fun updateWeight(setIndex: Int, exerciseIndex: Int, updatedWeight: String) {
+        val currentSession = _workoutSession.value ?: return
+        val exercises = currentSession.exercises.toMutableList()
+        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
+
+        setLogs[setIndex] = setLogs[setIndex].copy(weight = updatedWeight)
+
+        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+        _workoutSession.value = currentSession.copy(exercises = exercises)
+    }
+
+    fun updateReps(setIndex: Int, exerciseIndex: Int, updatedReps: String) {
+        val currentSession = _workoutSession.value ?: return
+        val exercises = currentSession.exercises.toMutableList()
+        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
+
+        setLogs[setIndex] = setLogs[setIndex].copy(reps = updatedReps)
+
+        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+        _workoutSession.value = currentSession.copy(exercises = exercises)
+    }
+
+    fun markSetComplete(setIndex: Int, exerciseIndex: Int) {
+        val currentSession = _workoutSession.value ?: return
+        val exercises = currentSession.exercises.toMutableList()
+        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
+
+        // Assuming SetLog has a 'completed' property, toggle it
+        val currentLog = setLogs[setIndex]
+        setLogs[setIndex] = currentLog.copy(completed = !currentLog.completed)
+
+        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+        _workoutSession.value = currentSession.copy(exercises = exercises)
+    }
 }

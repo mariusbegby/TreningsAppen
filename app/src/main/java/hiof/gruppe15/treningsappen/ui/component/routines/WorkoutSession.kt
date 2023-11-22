@@ -2,7 +2,6 @@ package hiof.gruppe15.treningsappen.ui.component.routines
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,12 +13,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -31,7 +33,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
@@ -52,8 +53,12 @@ fun WorkoutSessionScreen(navController: NavController, sharedViewModel: SharedVi
                 .padding(it)
         ) {
             LazyColumn {
-                items(workoutSession.exercises) { sessionExercise ->
-                    WorkoutSessionExerciseCard(sessionExercise, sharedViewModel)
+                itemsIndexed(workoutSession.exercises) { exerciseIndex, sessionExercise ->
+                    WorkoutSessionExerciseCard(
+                        sessionExercise = sessionExercise,
+                        exerciseIndex = exerciseIndex,
+                        sharedViewModel = sharedViewModel
+                    )
                 }
             }
 
@@ -72,9 +77,11 @@ fun WorkoutSessionScreen(navController: NavController, sharedViewModel: SharedVi
 }
 
 @Composable
-fun WorkoutSessionExerciseCard(sessionExercise: WorkoutSessionExercise, sharedViewModel: SharedViewModel) {
-    val routineExercise = sessionExercise.routineExercise
-
+fun WorkoutSessionExerciseCard(
+    sessionExercise: WorkoutSessionExercise,
+    sharedViewModel: SharedViewModel,
+    exerciseIndex: Int
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -86,29 +93,73 @@ fun WorkoutSessionExerciseCard(sessionExercise: WorkoutSessionExercise, sharedVi
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Text("Sets:", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+            // Header Row
+            SetInputHeader()
 
-            SetInputFields(
-                routineExercise = sessionExercise.routineExercise,
-                sessionExercise = sessionExercise,
-                onLogChange = { index, newLog ->
-                    // Create a new list with the updated log
-                    val updatedLogs = sessionExercise.setLogs.toMutableList().apply {
-                        this[index] = newLog
-                    }
-                    // Update the state with the new list
-                    sharedViewModel.updateSessionExerciseLogs(sessionExercise.routineExercise, updatedLogs)
-                }
-            )
-
-            if (sessionExercise.setLogs.size < routineExercise.sets) {
-                // Button to add a new set, only if less than specified sets
-                Button(onClick = { sessionExercise.setLogs.add(WorkoutSessionExercise.SetLog()) }) {
-                    Text("Add Set")
-                }
+            // Input Fields for each set
+            sessionExercise.setLogs.forEachIndexed { setIndex, setLog ->
+                SetInputRow(
+                    setNumber = setIndex + 1,
+                    setLog = setLog,
+                    onWeightChange = { updatedWeight -> sharedViewModel.updateWeight(exerciseIndex, setIndex, updatedWeight) },
+                    onRepsChange = { updatedReps -> sharedViewModel.updateReps(exerciseIndex, setIndex, updatedReps) },
+                    onSetComplete = { sharedViewModel.markSetComplete(exerciseIndex, setIndex) }
+                )
             }
         }
     }
+}
+
+@Composable
+fun SetInputHeader() {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Text("SET", style = MaterialTheme.typography.bodyMedium)
+        Spacer(Modifier.width(8.dp)) // Add spacing if needed
+        Text("KG", style = MaterialTheme.typography.bodyMedium)
+        Spacer(Modifier.width(8.dp)) // Add spacing if needed
+        Text("REPS", style = MaterialTheme.typography.bodyMedium)
+        Spacer(Modifier.weight(1f)) // This pushes the checkmark to the end of the row
+        Icon(Icons.Default.Check, contentDescription = "Complete")
+    }
+}
+
+@Composable
+fun SetInputRow(
+    setNumber: Int,
+    setLog: WorkoutSessionExercise.SetLog,
+    onWeightChange: (String) -> Unit,
+    onRepsChange: (String) -> Unit,
+    onSetComplete: () -> Unit
+) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Text("$setNumber", style = MaterialTheme.typography.bodyMedium)
+        Spacer(Modifier.width(8.dp)) // Add spacing if needed
+        SmallOutlinedTextField(
+            value = setLog.weight,
+            onValueChange = onWeightChange,
+            label = "Weight"
+        )
+        Spacer(Modifier.width(8.dp)) // Add spacing if needed
+        SmallOutlinedTextField(
+            value = setLog.reps,
+            onValueChange = onRepsChange,
+            label = "Reps"
+        )
+        IconButton(onClick = onSetComplete) {
+            Icon(Icons.Default.Check, contentDescription = "Complete")
+        }
+    }
+}
+
+@Composable
+fun SmallOutlinedTextField(value: String, onValueChange: (String) -> Unit, label: String) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        singleLine = true,
+        modifier = Modifier.width(64.dp) // Set a fixed width for a neater appearance
+    )
 }
 
 @Composable
@@ -163,74 +214,6 @@ fun ExerciseDetailsView(routineExercise: RoutineExercise) {
     }
 }
 
-@Composable
-fun SetInputFields(
-    routineExercise: RoutineExercise,
-    sessionExercise: WorkoutSessionExercise,
-    onLogChange: (Int, WorkoutSessionExercise.SetLog) -> Unit
-) {
-    Column {
-        // Display a row for each set log
-        sessionExercise.setLogs.forEachIndexed { index, setLog ->
-            SetInputRow(setNumber = index + 1, setLog = setLog) { updatedSetLog ->
-                onLogChange(index, updatedSetLog)
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-    }
-}
-
-@Composable
-fun SetInputRow(
-    setNumber: Int,
-    setLog: WorkoutSessionExercise.SetLog,
-    onLogChange: (WorkoutSessionExercise.SetLog) -> Unit
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(text = "Set $setNumber", style = MaterialTheme.typography.bodyMedium)
-
-        WeightAndRepsInputFields(setLog = setLog) {
-            onLogChange(it)
-        }
-    }
-}
-
-@Composable
-fun WeightAndRepsInputFields(
-    setLog: WorkoutSessionExercise.SetLog,
-    onLogChange: (WorkoutSessionExercise.SetLog) -> Unit
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        // Weight Input
-        OutlinedTextField(
-            value = setLog.weight,
-            onValueChange = { updatedWeight ->
-                onLogChange(setLog.copy(weight = updatedWeight))
-            },
-            label = { Text("Weight") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.weight(1f) // Give weight input a flex basis
-        )
-        Spacer(modifier = Modifier.width(8.dp)) // Spacing between the text fields
-
-        // Reps Input
-        OutlinedTextField(
-            value = setLog.reps,
-            onValueChange = { updatedReps ->
-                onLogChange(setLog.copy(reps = updatedReps))
-            },
-            label = { Text("Reps") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.weight(1f) // Give reps input a flex basis
-        )
-    }
-}
 
 @Composable
 fun CompleteWorkoutButton(onClick: () -> Unit) {
