@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddAPhoto
@@ -55,9 +56,7 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     val userId = FirebaseAuth.getInstance().currentUser?.uid
     val storageRef = FirebaseStorage.getInstance().reference.child("profile_images/$userId.jpg")
-    var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
     var isImageLoading by remember { mutableStateOf(false) }
-
 
     val imagePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
@@ -72,7 +71,6 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
             }
         }
     )
-    ProfileImage(imageUri = imageUri ?: selectedImageUri, imagePickerLauncher)
 
     LaunchedEffect(key1 = userId) {
         storageRef.downloadUrl.addOnSuccessListener { uri ->
@@ -83,37 +81,53 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
     }
 
     AppScaffold(navController = navController, title = "Profile") {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
-            TitleTexts("Profile", "View your profile details and settings")
-            Spacer(modifier = Modifier.height(24.dp))
-            ProfileImage(imageUri = imageUri, imagePickerLauncher)
-            Spacer(modifier = Modifier.height(24.dp))
-            if (currentUser != null) {
-                ProfileDetails(currentUser = currentUser)
+            item {
+                TitleTexts("Profile", "View your profile details and settings")
+                Spacer(modifier = Modifier.height(24.dp))
             }
-            Spacer(modifier = Modifier.height(24.dp))
-            ToggleDarkMode(sharedViewModel)
-            Spacer(modifier = Modifier.weight(1f))
-            DeleteAccountButton(onClick = {
-                currentUser?.delete()
-                navController.navigate(Screen.Login.route) {
-                    popUpTo(Screen.Login.route) { inclusive = true }
-                    launchSingleTop = true
+
+            item {
+                ProfileImage(imageUri = imageUri, imagePickerLauncher)
+                Spacer(modifier = Modifier.height(24.dp))
+            }
+
+            if (currentUser != null) {
+                item {
+                    ProfileDetails(currentUser = currentUser)
+                    Spacer(modifier = Modifier.height(24.dp))
                 }
-            })
-            Spacer(modifier = Modifier.height(24.dp))
-            LogoutButton(onClick = {
-                auth.signOut()
-                navController.navigate(Screen.Login.route) {
-                    popUpTo(Screen.Login.route) { inclusive = true }
-                    launchSingleTop = true
-                }
-            })
-            Spacer(modifier = Modifier.height(24.dp))
+            }
+
+            item { ToggleDarkMode(sharedViewModel) }
+
+            item { Spacer(modifier = Modifier.height(24.dp)) }
+
+            item {
+                DeleteAccountButton(onClick = {
+                    currentUser?.delete()
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                })
+                Spacer(modifier = Modifier.height(24.dp))
+            }
+
+            item {
+                LogoutButton(onClick = {
+                    auth.signOut()
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                })
+                Spacer(modifier = Modifier.height(24.dp))
+            }
         }
     }
 }

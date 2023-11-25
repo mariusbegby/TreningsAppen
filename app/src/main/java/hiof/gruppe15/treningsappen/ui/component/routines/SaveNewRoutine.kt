@@ -62,79 +62,82 @@ fun SaveRoutineScreen(
     }
 
     AppScaffold(navController = navController, title = "Save routine") {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it),
-            verticalArrangement = Arrangement.Top,
+                .padding(it)
         ) {
-            RoutineNameInputField(routineName = routineName, onValueChange = { routineName = it })
+            item {
+                RoutineNameInputField(routineName = routineName,
+                    onValueChange = { routineName = it })
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                SaveRoutineButton(onClick = {
-                    if (routineName.isNotEmpty()) {
-                        if (selectedExercises.isEmpty()) {
-                            Toast.makeText(context, "No exercises selected", Toast.LENGTH_SHORT)
-                                .show()
-                            return@SaveRoutineButton
-                        }
-
-                        val routineExercises = selectedExercises.mapNotNull { exercise ->
-                            exerciseDetailsMap[exercise]?.let { routineExercise ->
-                                RoutineExercise(
-                                    exercise = routineExercise.exercise,
-                                    sets = routineExercise.sets,
-                                    note = routineExercise.note
-                                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    SaveRoutineButton(onClick = {
+                        if (routineName.isNotEmpty()) {
+                            if (selectedExercises.isEmpty()) {
+                                Toast.makeText(context, "No exercises selected", Toast.LENGTH_SHORT)
+                                    .show()
+                                return@SaveRoutineButton
                             }
-                        }
 
-                        val routine = Routine(
-                            name = routineName, exercises = routineExercises
-                        )
-
-                        RoutineRepository().createRoutine(routine) { isSuccess, message ->
-                            if (isSuccess) {
-                                Toast.makeText(
-                                    context, "Exercise routine has been saved", Toast.LENGTH_SHORT
-                                ).show()
-                                navController.navigate(Screen.Routines.route)
-                            } else {
-                                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                            val routineExercises = selectedExercises.mapNotNull { exercise ->
+                                exerciseDetailsMap[exercise]?.let { routineExercise ->
+                                    RoutineExercise(
+                                        exercise = routineExercise.exercise,
+                                        sets = routineExercise.sets,
+                                        note = routineExercise.note
+                                    )
+                                }
                             }
+
+                            val routine = Routine(
+                                name = routineName, exercises = routineExercises
+                            )
+
+                            RoutineRepository().createRoutine(routine) { isSuccess, message ->
+                                if (isSuccess) {
+                                    Toast.makeText(
+                                        context,
+                                        "Exercise routine has been saved",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    navController.navigate(Screen.Routines.route)
+                                } else {
+                                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        } else {
+                            Toast.makeText(
+                                context, "Routine name cannot be empty", Toast.LENGTH_SHORT
+                            ).show()
                         }
-                    } else {
-                        Toast.makeText(
-                            context, "Routine name cannot be empty", Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
+                    })
 
-                CancelButton(onClick = {
-                    navController.popBackStack()
-                })
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Text(
-                text = "Selected exercises", style = MaterialTheme.typography.titleMedium
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            LazyColumn {
-                items(selectedExercises) { exercise ->
-                    ExerciseCard(routineExercise = exerciseDetailsMap[exercise] ?: RoutineExercise(
-                        exercise = exercise
-                    ), onDetailsChange = { updatedDetails ->
-                        exerciseDetailsMap[exercise] = updatedDetails
+                    CancelButton(onClick = {
+                        navController.popBackStack()
                     })
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "Selected exercises", style = MaterialTheme.typography.titleMedium
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            items(selectedExercises) { exercise ->
+                ExerciseCard(routineExercise = exerciseDetailsMap[exercise] ?: RoutineExercise(
+                    exercise = exercise
+                ), onDetailsChange = { updatedDetails ->
+                    exerciseDetailsMap[exercise] = updatedDetails
+                })
             }
         }
     }
@@ -172,8 +175,7 @@ fun ExerciseCard(
                 note = notes, onNoteChange = { noteValue ->
                     notes = noteValue
                     onDetailsChange(routineExercise.copy(note = noteValue, sets = sets.toInt()))
-                },
-                modifier = Modifier.fillMaxWidth()
+                }, modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -203,7 +205,8 @@ fun NumberSlider(
 fun NoteInputField(
     note: String, onNoteChange: (String) -> Unit, modifier: Modifier = Modifier
 ) {
-    TextField(value = note,
+    TextField(
+        value = note,
         onValueChange = onNoteChange,
         label = { Text("Notes") },
         placeholder = { Text("Optional") },

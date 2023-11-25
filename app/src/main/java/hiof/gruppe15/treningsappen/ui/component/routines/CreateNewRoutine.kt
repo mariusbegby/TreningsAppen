@@ -75,10 +75,6 @@ fun CreateRoutineScreen(
                     .padding(it)
             ) {
 
-                Description()
-
-                Spacer(modifier = Modifier.padding(8.dp))
-
                 ExerciseSearchInputField(exerciseName = searchText, onNext = {
                     if (selectedExercises.value.isNotEmpty()) {
                         sharedViewModel.setSelectedExercises(selectedExercises.value.toList())
@@ -92,30 +88,28 @@ fun CreateRoutineScreen(
                     }
                 }, onValueChange = { searchText = it })
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.padding(8.dp))
 
-                if (searchText.isNotEmpty()) {
-                    ExercisesWithCheckboxList(exercises = filteredExercises,
-                        selectedExercises = selectedExercises.value,
-                        onExerciseCheckedChange = { exercise, isChecked ->
+                LazyColumn {
+                    item {
+                        Description()
+                        Spacer(modifier = Modifier.height(16.dp))
+                    }
 
-                            selectedExercises.value = if (isChecked) {
-                                selectedExercises.value + exercise
-                            } else {
-                                selectedExercises.value - exercise
+                    val exercisesToShow = if (searchText.isNotEmpty()) filteredExercises else loadedExercises
+                    items(exercisesToShow) { exercise ->
+                        ExerciseNameWithCheckbox(
+                            exercise = exercise,
+                            isChecked = selectedExercises.value.contains(exercise),
+                            onCheckedChange = { isChecked ->
+                                selectedExercises.value = if (isChecked) {
+                                    selectedExercises.value + exercise
+                                } else {
+                                    selectedExercises.value - exercise
+                                }
                             }
-                        })
-                } else {
-                    ExercisesWithCheckboxList(exercises = loadedExercises,
-                        selectedExercises = selectedExercises.value,
-                        onExerciseCheckedChange = { exercise, isChecked ->
-
-                            selectedExercises.value = if (isChecked) {
-                                selectedExercises.value + exercise
-                            } else {
-                                selectedExercises.value - exercise
-                            }
-                        })
+                        )
+                    }
                 }
             }
 
