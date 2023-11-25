@@ -21,8 +21,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun ChangePasswordScreen(navController: NavController) {
-    var newPassword by remember { mutableStateOf("test@gmail.com") }
-    var confirmPassword by remember { mutableStateOf("777999abc") }
+    var newPassword by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
     var passwordChangeStatus by remember { mutableStateOf<String?>(null) }
 
     Column(modifier = Modifier.padding(16.dp)) {
