@@ -55,13 +55,12 @@ android {
 dependencies {
     implementation ("androidx.compose.material:material-icons-extended:1.0.0")
 
+    implementation("androidx.compose.runtime:runtime-livedata:<compose_version>")
 
     implementation ("com.google.firebase:firebase-storage:19.2.0")
 
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1")
-    // ViewModel utilities for Compose
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:YOUR_VERSION")
 
     implementation ("com.google.firebase:firebase-firestore-ktx")
     implementation ("com.google.firebase:firebase-auth:latestVersion")
