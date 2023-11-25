@@ -46,6 +46,8 @@ import hiof.gruppe15.treningsappen.ui.component.navigation.AppScaffold
 import hiof.gruppe15.treningsappen.ui.component.navigation.Screen
 import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
+
+
 @Composable
 fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel) {
     val auth = FirebaseAuth.getInstance()
