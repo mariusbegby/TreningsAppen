@@ -161,7 +161,7 @@ fun SetInputRow(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text("  $setIndex + 1", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
+        Text("${setIndex + 1}", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
 
         Spacer(Modifier.width(8.dp))
 
