@@ -5,9 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.model.Routine
-import hiof.gruppe15.treningsappen.model.RoutineExercise
 import hiof.gruppe15.treningsappen.model.WorkoutSession
-import hiof.gruppe15.treningsappen.model.WorkoutSessionExercise
 
 class SharedViewModel : ViewModel() {
     private val _selectedExercises = mutableStateOf<List<Exercise>>(emptyList())
@@ -38,43 +36,53 @@ class SharedViewModel : ViewModel() {
         _workoutSession.value = null
     }
 
-    fun updateSessionExerciseLogs(routineExercise: RoutineExercise, updatedLogs: List<WorkoutSessionExercise.SetLog>) {
-        // Logic to update the logs for the specific exercise
-        // Make sure to trigger a state change to recompose the UI
-    }
-
-    fun updateWeight(setIndex: Int, exerciseIndex: Int, updatedWeight: String) {
+    fun updateWeight(exerciseIndex: Int, setIndex: Int, updatedWeight: String) {
         val currentSession = _workoutSession.value ?: return
         val exercises = currentSession.exercises.toMutableList()
-        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        setLogs[setIndex] = setLogs[setIndex].copy(weight = updatedWeight)
+        if (exerciseIndex in exercises.indices) {
+            val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
-        _workoutSession.value = currentSession.copy(exercises = exercises)
+            if (setIndex in setLogs.indices) {
+                setLogs[setIndex] = setLogs[setIndex].copy(weight = updatedWeight)
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+                _workoutSession.value = currentSession.copy(exercises = exercises)
+            }
+        }
     }
 
-    fun updateReps(setIndex: Int, exerciseIndex: Int, updatedReps: String) {
+    fun updateReps(exerciseIndex: Int, setIndex: Int, updatedReps: String) {
         val currentSession = _workoutSession.value ?: return
         val exercises = currentSession.exercises.toMutableList()
-        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        setLogs[setIndex] = setLogs[setIndex].copy(reps = updatedReps)
+        if (exerciseIndex in exercises.indices) {
+            val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
-        _workoutSession.value = currentSession.copy(exercises = exercises)
+            if (setIndex in setLogs.indices) {
+                setLogs[setIndex] = setLogs[setIndex].copy(reps = updatedReps)
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+                _workoutSession.value = currentSession.copy(exercises = exercises)
+            } else {
+                // Log an error or handle the case where the set index is out of bounds
+            }
+        } else {
+            // Log an error or handle the case where the exercise index is out of bounds
+        }
     }
 
-    fun markSetComplete(setIndex: Int, exerciseIndex: Int) {
+    fun markSetComplete(exerciseIndex: Int, setIndex: Int) {
         val currentSession = _workoutSession.value ?: return
         val exercises = currentSession.exercises.toMutableList()
-        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        // Assuming SetLog has a 'completed' property, toggle it
-        val currentLog = setLogs[setIndex]
-        setLogs[setIndex] = currentLog.copy(completed = !currentLog.completed)
+        if (exerciseIndex in exercises.indices) {
+            val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
-        _workoutSession.value = currentSession.copy(exercises = exercises)
+            if (setIndex in setLogs.indices) {
+                val currentLog = setLogs[setIndex]
+                setLogs[setIndex] = currentLog.copy(completed = !currentLog.completed)
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+                _workoutSession.value = currentSession.copy(exercises = exercises)
+            }
+        }
     }
 }

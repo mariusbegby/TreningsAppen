@@ -17,13 +17,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -105,11 +102,13 @@ fun WorkoutSessionExerciseCard(
 
             sessionExercise.setLogs.forEachIndexed { setIndex, setLog ->
                 SetInputRow(
-                    setNumber = setIndex + 1,
+                    setIndex = setIndex,
+                    exerciseIndex = exerciseIndex,
                     setLog = setLog,
                     onWeightChange = { updatedWeight -> sharedViewModel.updateWeight(exerciseIndex, setIndex, updatedWeight) },
                     onRepsChange = { updatedReps -> sharedViewModel.updateReps(exerciseIndex, setIndex, updatedReps) },
-                    onSetComplete = { sharedViewModel.markSetComplete(exerciseIndex, setIndex) }
+                    onSetComplete = { sharedViewModel.markSetComplete(exerciseIndex, setIndex) },
+                    sharedViewModel = sharedViewModel
                 )
             }
         }
@@ -132,14 +131,18 @@ fun SetInputHeader() {
 
 @Composable
 fun SetInputRow(
-    setNumber: Int,
+    setNumber : Int = 1,
+    setIndex: Int,
+    exerciseIndex: Int,
     setLog: WorkoutSessionExercise.SetLog,
     onWeightChange: (String) -> Unit,
     onRepsChange: (String) -> Unit,
-    onSetComplete: () -> Unit
+    onSetComplete: () -> Unit,
+    sharedViewModel: SharedViewModel
 ) {
-    val weightState = remember(setNumber) { mutableStateOf(setLog.weight) }
-    val repsState = remember(setNumber) { mutableStateOf(setLog.reps) }
+    val weightState = remember(setIndex, exerciseIndex) { mutableStateOf(setLog.weight) }
+    val repsState = remember(setIndex, exerciseIndex) { mutableStateOf(setLog.reps) }
+    val isChecked = setLog.completed
 
     Row(
         modifier = Modifier
@@ -147,7 +150,7 @@ fun SetInputRow(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text("  $setNumber", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
+        Text("  $setIndex + 1", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
 
         Spacer(Modifier.width(8.dp))
 
@@ -173,9 +176,12 @@ fun SetInputRow(
 
         Spacer(Modifier.width(8.dp))
 
-        IconButton(onClick = onSetComplete, modifier = Modifier.width(40.dp)) {
-            Icon(Icons.Default.Check, contentDescription = "Complete")
-        }
+        Checkbox(
+            checked = isChecked,
+            onCheckedChange = {
+                sharedViewModel.markSetComplete(exerciseIndex, setIndex)
+            }
+        )
     }
 }
 
