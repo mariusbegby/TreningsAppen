@@ -22,14 +22,14 @@ sealed class Screen(val route: String) {
     object Login : Screen("login")
     object Register : Screen("register")
     object ForgotPassword : Screen("forgotPassword")
-    object Routines : Screen(route = "workoutPlan")
-    object RoutineDetails : Screen(route = "routineDetails/{routineId}") {
+    object Routines : Screen("workoutPlan")
+    object RoutineDetails : Screen("routineDetails/{routineId}") {
         fun createRoute(routineId: String) = "routineDetails/$routineId"
     }
-    object WorkoutSession : Screen(route = "workoutSession")
+    object WorkoutSession : Screen("workoutSession")
     object CreateNewRoutine : Screen("createNewRoutine")
     object SaveNewRoutine : Screen("saveNewRoutine")
-    object History : Screen(route = "history")
+    object History : Screen("history")
     object Profile : Screen("profile")
 }
 
@@ -71,7 +71,7 @@ fun NavGraph(
         composable(Screen.CreateNewRoutine.route) { CreateRoutineScreen(navController, sharedViewModel) }
         composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController, sharedViewModel) }
 
-        composable(Screen.History.route) { HistoryScreen(navController) }
+        composable(Screen.History.route) { HistoryScreen(navController, sharedViewModel) }
 
         composable(Screen.Profile.route) { ProfileScreen(navController, sharedViewModel) }
     }

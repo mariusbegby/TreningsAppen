@@ -1,12 +1,17 @@
 package hiof.gruppe15.treningsappen.model
 
+import java.util.UUID
+
 data class WorkoutSession(
-    val routine: Routine,
-    val exercises: List<WorkoutSessionExercise> = routine.exercises.map { WorkoutSessionExercise(it) }
+    val id: String = UUID.randomUUID().toString(),
+    val routine: Routine = Routine(),
+    val exercises: List<WorkoutSessionExercise> = routine.exercises.map { WorkoutSessionExercise(it) },
+    val startTime: Long = System.currentTimeMillis(),
+    val endTime: Long = System.currentTimeMillis()
 )
 
 data class WorkoutSessionExercise(
-    val routineExercise: RoutineExercise,
+    val routineExercise: RoutineExercise = RoutineExercise(),
     val setLogs: MutableList<SetLog> = MutableList(routineExercise.sets) { SetLog() }
 ) {
     data class SetLog(

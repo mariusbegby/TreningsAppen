@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import hiof.gruppe15.treningsappen.data.WorkoutSessionRepository
 import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.model.Routine
 import hiof.gruppe15.treningsappen.model.WorkoutSession
@@ -17,6 +18,7 @@ class SharedViewModel : ViewModel() {
     val workoutSession: State<WorkoutSession?> = _workoutSession
 
     val routineViewModel = RoutineViewModel()
+    val historyViewModel = HistoryViewModel()
 
     private val _isDarkModeEnabled = mutableStateOf(false)
     val isDarkModeEnabled: State<Boolean> = _isDarkModeEnabled
@@ -25,6 +27,8 @@ class SharedViewModel : ViewModel() {
     val workoutDuration: State<String> = _workoutDuration
 
     private var timerJob: Job? = null
+
+    private val workoutSessionRepository = WorkoutSessionRepository()
 
     fun setSelectedExercises(exercises: List<Exercise>) {
         _selectedExercises.value = exercises
@@ -35,12 +39,15 @@ class SharedViewModel : ViewModel() {
     }
 
     fun startWorkoutSession(routine: Routine) {
-        _workoutSession.value = WorkoutSession(routine)
+        _workoutSession.value = WorkoutSession(routine = routine)
         startTimer()
     }
 
     fun completeWorkoutSession() {
-        // TODO: Implement logic to save the workout session
+        _workoutSession.value?.let { workoutSession ->
+            workoutSessionRepository.saveCompletedSession(workoutSession) { isSuccess, message ->
+            }
+        }
         _workoutSession.value = null
         stopTimer()
     }
