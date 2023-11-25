@@ -1,5 +1,6 @@
 package hiof.gruppe15.treningsappen.ui.component.navigation
 
+
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -7,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import hiof.gruppe15.treningsappen.ui.component.history.HistoryScreen
+import hiof.gruppe15.treningsappen.ui.component.login.ChangePasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.login.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.login.LoginScreen
 import hiof.gruppe15.treningsappen.ui.component.login.RegisterScreen
@@ -67,12 +69,31 @@ fun NavGraph(
                 RoutineDetailsScreen(navController, routineId, sharedViewModel)
             }
         }
-        composable(Screen.WorkoutSession.route) { WorkoutSessionScreen(navController, sharedViewModel) }
-        composable(Screen.CreateNewRoutine.route) { CreateRoutineScreen(navController, sharedViewModel) }
-        composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController, sharedViewModel) }
+        composable(Screen.WorkoutSession.route) {
+            WorkoutSessionScreen(
+                navController,
+                sharedViewModel
+            )
+        }
+        composable(Screen.CreateNewRoutine.route) {
+            CreateRoutineScreen(
+                navController,
+                sharedViewModel
+            )
+        }
+        composable(Screen.SaveNewRoutine.route) {
+            SaveRoutineScreen(
+                navController,
+                sharedViewModel
+            )
+        }
 
         composable(Screen.History.route) { HistoryScreen(navController) }
 
         composable(Screen.Profile.route) { ProfileScreen(navController, sharedViewModel) }
+        composable("editProfile") { ProfileScreen(navController, sharedViewModel) }
+
+        composable("changePassword") { ChangePasswordScreen(navController) }
+
     }
-}
+    }
