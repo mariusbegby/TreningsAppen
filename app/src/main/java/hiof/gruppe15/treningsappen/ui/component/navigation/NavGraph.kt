@@ -28,7 +28,6 @@ sealed class Screen(val route: String) {
     object RoutineDetails : Screen("routineDetails/{routineId}") {
         fun createRoute(routineId: String) = "routineDetails/$routineId"
     }
-
     object WorkoutSession : Screen("workoutSession")
     object CreateNewRoutine : Screen("createNewRoutine")
     object SaveNewRoutine : Screen("saveNewRoutine")
@@ -45,7 +44,7 @@ sealed class ScreenCategory(private val baseRoutes: List<String>) {
     )
 
     object History : ScreenCategory(listOf("history"))
-    object Profile : ScreenCategory(listOf("profile", "editProfile", "changePassword"))
+    object Profile : ScreenCategory(listOf("profile", "changePassword"))
 
     fun includes(route: String?): Boolean {
         if (route == null) return false
@@ -76,21 +75,9 @@ fun NavGraph(
                 RoutineDetailsScreen(navController, routineId, sharedViewModel)
             }
         }
-        composable(Screen.WorkoutSession.route) {
-            WorkoutSessionScreen(
-                navController, sharedViewModel
-            )
-        }
-        composable(Screen.CreateNewRoutine.route) {
-            CreateRoutineScreen(
-                navController, sharedViewModel
-            )
-        }
-        composable(Screen.SaveNewRoutine.route) {
-            SaveRoutineScreen(
-                navController, sharedViewModel
-            )
-        }
+        composable(Screen.WorkoutSession.route) { WorkoutSessionScreen(navController, sharedViewModel) }
+        composable(Screen.CreateNewRoutine.route) { CreateRoutineScreen(navController, sharedViewModel) }
+        composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController, sharedViewModel)}
 
         composable(Screen.History.route) { HistoryScreen(navController, sharedViewModel) }
 
