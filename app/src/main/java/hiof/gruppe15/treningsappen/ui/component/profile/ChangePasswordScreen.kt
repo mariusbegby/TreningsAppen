@@ -1,4 +1,4 @@
-package hiof.gruppe15.treningsappen.ui.component.login
+package hiof.gruppe15.treningsappen.ui.component.profile
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
