@@ -1,6 +1,5 @@
 package hiof.gruppe15.treningsappen
 
-
 import androidx.activity.viewModels
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -26,7 +25,6 @@ class MainActivity : ComponentActivity() {
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
 
         setContent {
-            // Observe the dark mode state and apply the theme accordingly
             val darkTheme = sharedViewModel.isDarkModeEnabled.value
             AppTheme(useDarkTheme = darkTheme) {
                 navController = rememberNavController()

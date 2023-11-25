@@ -1,7 +1,5 @@
 package hiof.gruppe15.treningsappen.ui.component.profile
 
-
-
 import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.ManagedActivityResultLauncher
@@ -18,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddAPhoto
@@ -81,59 +78,59 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
     }
 
     AppScaffold(navController = navController, title = "Profile") {
-        LazyColumn(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
-            item {
-                TitleTexts("Profile", "View your profile details and settings")
-                Spacer(modifier = Modifier.height(24.dp))
-            }
+            TitleTexts("Profile", "View your profile details and settings")
+            Spacer(modifier = Modifier.height(24.dp))
 
-            item {
-                ProfileImage(imageUri = imageUri, imagePickerLauncher)
-                Spacer(modifier = Modifier.height(24.dp))
-            }
+            ProfileImage(imageUri = imageUri, imagePickerLauncher)
+            Spacer(modifier = Modifier.height(24.dp))
 
             if (currentUser != null) {
-                item {
-                    ProfileDetails(currentUser = currentUser)
-                    Spacer(modifier = Modifier.height(24.dp))
+                ProfileDetails(currentUser = currentUser)
+            }
+            Spacer(modifier = Modifier.height(24.dp))
+
+            ToggleDarkMode(sharedViewModel)
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            DeleteAccountButton(onClick = {
+                currentUser?.delete()
+                navController.navigate(Screen.Login.route) {
+                    popUpTo(Screen.Login.route) { inclusive = true }
+                    launchSingleTop = true
                 }
-            }
+            })
 
-            item { ToggleDarkMode(sharedViewModel) }
+            Spacer(modifier = Modifier.height(24.dp))
 
-            item { Spacer(modifier = Modifier.height(24.dp)) }
+            LogoutButton(onClick = {
+                auth.signOut()
+                navController.navigate(Screen.Login.route) {
+                    popUpTo(Screen.Login.route) { inclusive = true }
+                    launchSingleTop = true
+                }
+            })
 
-            item {
-                DeleteAccountButton(onClick = {
-                    currentUser?.delete()
-                    navController.navigate(Screen.Login.route) {
-                        popUpTo(Screen.Login.route) { inclusive = true }
-                        launchSingleTop = true
-                    }
-                })
-                Spacer(modifier = Modifier.height(24.dp))
-            }
-
-            item {
-                LogoutButton(onClick = {
-                    auth.signOut()
-                    navController.navigate(Screen.Login.route) {
-                        popUpTo(Screen.Login.route) { inclusive = true }
-                        launchSingleTop = true
-                    }
-                })
-                Spacer(modifier = Modifier.height(24.dp))
-            }
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
 
 @Composable
 fun ProfileImage(imageUri: Uri?, imagePickerLauncher: ManagedActivityResultLauncher<String, Uri?>) {
+    Text(
+        text = "Profile image",
+        style = MaterialTheme.typography.titleMedium,
+        fontWeight = FontWeight.Bold
+    )
+
+    Spacer(modifier = Modifier.height(4.dp))
+
     Box(
         modifier = Modifier
             .size(120.dp)

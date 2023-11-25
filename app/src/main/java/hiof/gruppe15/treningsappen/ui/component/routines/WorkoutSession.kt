@@ -49,6 +49,7 @@ import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 @Composable
 fun WorkoutSessionScreen(navController: NavController, sharedViewModel: SharedViewModel) {
     val workoutSession = sharedViewModel.workoutSession.value ?: return
+    val workoutDuration = sharedViewModel.workoutDuration.value
 
     AppScaffold(navController = navController, title = "Session: ${workoutSession.routine.name}") {
         LazyColumn(
@@ -56,6 +57,16 @@ fun WorkoutSessionScreen(navController: NavController, sharedViewModel: SharedVi
                 .fillMaxSize()
                 .padding(it)
         ) {
+            item {
+                Text(
+                    text = "Workout duration: $workoutDuration",
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+
             itemsIndexed(workoutSession.exercises) { exerciseIndex, sessionExercise ->
                 WorkoutSessionExerciseCard(
                     sessionExercise = sessionExercise,

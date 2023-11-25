@@ -3,9 +3,11 @@ package hiof.gruppe15.treningsappen.viewmodel
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.model.Routine
 import hiof.gruppe15.treningsappen.model.WorkoutSession
+import kotlinx.coroutines.*
 
 class SharedViewModel : ViewModel() {
     private val _selectedExercises = mutableStateOf<List<Exercise>>(emptyList())
@@ -19,6 +21,11 @@ class SharedViewModel : ViewModel() {
     private val _isDarkModeEnabled = mutableStateOf(false)
     val isDarkModeEnabled: State<Boolean> = _isDarkModeEnabled
 
+    private val _workoutDuration = mutableStateOf("0")
+    val workoutDuration: State<String> = _workoutDuration
+
+    private var timerJob: Job? = null
+
     fun setSelectedExercises(exercises: List<Exercise>) {
         _selectedExercises.value = exercises
     }
@@ -29,11 +36,43 @@ class SharedViewModel : ViewModel() {
 
     fun startWorkoutSession(routine: Routine) {
         _workoutSession.value = WorkoutSession(routine)
+        startTimer()
     }
 
     fun completeWorkoutSession() {
         // TODO: Implement logic to save the workout session
         _workoutSession.value = null
+        stopTimer()
+    }
+
+    private fun startTimer() {
+        _workoutDuration.value = "0"
+        timerJob?.cancel()
+        timerJob = viewModelScope.launch(Dispatchers.Default) {
+            var time = 0L
+            while (isActive) {
+                delay(1000)
+                time++
+                _workoutDuration.value = formatDuration(time)
+            }
+        }
+    }
+
+    private fun stopTimer() {
+        timerJob?.cancel()
+        _workoutDuration.value = "0"
+    }
+
+    private fun formatDuration(seconds: Long): String {
+        val hours = seconds / 3600
+        val minutes = (seconds % 3600) / 60
+        val secs = seconds % 60
+
+        return when {
+            hours > 0 -> String.format("%02d:%02d:%02d", hours, minutes, secs)
+            minutes > 0 -> String.format("%02d:%02d", minutes, secs)
+            else -> secs.toString()
+        }
     }
 
     fun updateWeight(exerciseIndex: Int, setIndex: Int, updatedWeight: String) {
