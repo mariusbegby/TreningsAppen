@@ -8,10 +8,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import hiof.gruppe15.treningsappen.ui.component.history.HistoryScreen
-import hiof.gruppe15.treningsappen.ui.component.profile.ChangePasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.login.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.login.LoginScreen
 import hiof.gruppe15.treningsappen.ui.component.login.RegisterScreen
+import hiof.gruppe15.treningsappen.ui.component.profile.ChangePasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.profile.ProfileScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.CreateRoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.RoutineDetailsScreen
@@ -35,7 +35,6 @@ sealed class Screen(val route: String) {
     object History : Screen("history")
     object Profile : Screen("profile")
     object ChangePassword : Screen("changePassword")
-    object EditProfile : Screen("editProfile")
 }
 
 sealed class ScreenCategory(private val baseRoutes: List<String>) {
@@ -96,7 +95,6 @@ fun NavGraph(
         composable(Screen.History.route) { HistoryScreen(navController, sharedViewModel) }
 
         composable(Screen.Profile.route) { ProfileScreen(navController, sharedViewModel) }
-        composable(Screen.EditProfile.route) { ProfileScreen(navController, sharedViewModel) }
         composable(Screen.ChangePassword.route) { ChangePasswordScreen(navController) }
     }
 }
