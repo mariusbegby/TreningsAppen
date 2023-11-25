@@ -1,7 +1,5 @@
 package hiof.gruppe15.treningsappen.ui.component.routines
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,39 +31,39 @@ fun RoutineScreen(navController: NavController, sharedViewModel: SharedViewModel
     }
 
     AppScaffold(navController = navController, title = "Routines") {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it),
-            verticalArrangement = Arrangement.Top
+                .padding(it)
         ) {
-            Description()
+            item { Description() }
 
-            Spacer(modifier = Modifier.padding(8.dp))
+            item { Spacer(modifier = Modifier.padding(8.dp)) }
 
-            if(sharedViewModel.workoutSession.value != null) {
-                ContinueSessionButton(onClick = {
-                    navController.navigate(Screen.WorkoutSession.route)
-                })
+            if (sharedViewModel.workoutSession.value != null) {
+                item {
+                    ContinueSessionButton(onClick = {
+                        navController.navigate(Screen.WorkoutSession.route)
+                    })
+                }
 
-                Spacer(modifier = Modifier.padding(8.dp))
+                item { Spacer(modifier = Modifier.padding(8.dp)) }
             }
 
-            CreateRoutineButton(onClick = {
-                navController.navigate(Screen.CreateNewRoutine.route)
-            })
+            item {
+                CreateRoutineButton(onClick = {
+                    navController.navigate(Screen.CreateNewRoutine.route)
+                })
+            }
 
-            Spacer(modifier = Modifier.padding(8.dp))
+            item { Spacer(modifier = Modifier.padding(8.dp)) }
 
-            if(routines.isEmpty()) {
-                Spacer(modifier = Modifier.padding(8.dp))
-                Text(text = "You have no routines yet. Create one by clicking the button above.")
+            if (routines.isEmpty()) {
+                item { Spacer(modifier = Modifier.padding(8.dp)) }
+                item { Text(text = "You have no routines yet. Create one by clicking the button above.") }
             } else {
-                LazyColumn(modifier = Modifier
-                    .fillMaxSize()) {
-                    items(routines) { routine ->
-                        RoutineCard(navController = navController, routine = routine)
-                    }
+                items(routines) { routine ->
+                    RoutineCard(navController = navController, routine = routine)
                 }
             }
         }

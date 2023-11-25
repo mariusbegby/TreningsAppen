@@ -1,7 +1,5 @@
 package hiof.gruppe15.treningsappen.ui.component.profile
 
-
-
 import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.ManagedActivityResultLauncher
@@ -55,9 +53,7 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
     var imageUri by remember { mutableStateOf<Uri?>(null) }
     val userId = FirebaseAuth.getInstance().currentUser?.uid
     val storageRef = FirebaseStorage.getInstance().reference.child("profile_images/$userId.jpg")
-    var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
     var isImageLoading by remember { mutableStateOf(false) }
-
 
     val imagePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
@@ -72,7 +68,6 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
             }
         }
     )
-    ProfileImage(imageUri = imageUri ?: selectedImageUri, imagePickerLauncher)
 
     LaunchedEffect(key1 = userId) {
         storageRef.downloadUrl.addOnSuccessListener { uri ->
@@ -90,14 +85,19 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
         ) {
             TitleTexts("Profile", "View your profile details and settings")
             Spacer(modifier = Modifier.height(24.dp))
+
             ProfileImage(imageUri = imageUri, imagePickerLauncher)
             Spacer(modifier = Modifier.height(24.dp))
+
             if (currentUser != null) {
                 ProfileDetails(currentUser = currentUser)
             }
             Spacer(modifier = Modifier.height(24.dp))
+
             ToggleDarkMode(sharedViewModel)
+
             Spacer(modifier = Modifier.weight(1f))
+
             DeleteAccountButton(onClick = {
                 currentUser?.delete()
                 navController.navigate(Screen.Login.route) {
@@ -105,7 +105,9 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
                     launchSingleTop = true
                 }
             })
+
             Spacer(modifier = Modifier.height(24.dp))
+
             LogoutButton(onClick = {
                 auth.signOut()
                 navController.navigate(Screen.Login.route) {
@@ -113,6 +115,7 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
                     launchSingleTop = true
                 }
             })
+
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
@@ -120,6 +123,14 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
 
 @Composable
 fun ProfileImage(imageUri: Uri?, imagePickerLauncher: ManagedActivityResultLauncher<String, Uri?>) {
+    Text(
+        text = "Profile image",
+        style = MaterialTheme.typography.titleMedium,
+        fontWeight = FontWeight.Bold
+    )
+
+    Spacer(modifier = Modifier.height(4.dp))
+
     Box(
         modifier = Modifier
             .size(120.dp)
