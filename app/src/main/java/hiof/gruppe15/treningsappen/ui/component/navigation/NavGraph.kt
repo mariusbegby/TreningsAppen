@@ -1,5 +1,6 @@
 package hiof.gruppe15.treningsappen.ui.component.navigation
 
+
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -10,6 +11,7 @@ import hiof.gruppe15.treningsappen.ui.component.history.HistoryScreen
 import hiof.gruppe15.treningsappen.ui.component.login.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.login.LoginScreen
 import hiof.gruppe15.treningsappen.ui.component.login.RegisterScreen
+import hiof.gruppe15.treningsappen.ui.component.profile.ChangePasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.profile.ProfileScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.CreateRoutineScreen
 import hiof.gruppe15.treningsappen.ui.component.routines.RoutineDetailsScreen
@@ -31,15 +33,21 @@ sealed class Screen(val route: String) {
     object SaveNewRoutine : Screen("saveNewRoutine")
     object History : Screen("history")
     object Profile : Screen("profile")
+    object ChangePassword : Screen("changePassword")
 }
 
 sealed class ScreenCategory(private val baseRoutes: List<String>) {
-    object Routines : ScreenCategory(listOf("workoutPlan", "workoutSession", "createNewRoutine", "saveNewRoutine", "routineDetails"))
+    object Routines : ScreenCategory(
+        listOf(
+            "workoutPlan", "workoutSession", "createNewRoutine", "saveNewRoutine", "routineDetails"
+        )
+    )
+
     object History : ScreenCategory(listOf("history"))
-    object Profile : ScreenCategory(listOf("profile"))
+    object Profile : ScreenCategory(listOf("profile", "changePassword"))
 
     fun includes(route: String?): Boolean {
-        if(route == null) return false
+        if (route == null) return false
         return baseRoutes.any { baseRoute -> route.startsWith(baseRoute) }
     }
 }
@@ -69,10 +77,11 @@ fun NavGraph(
         }
         composable(Screen.WorkoutSession.route) { WorkoutSessionScreen(navController, sharedViewModel) }
         composable(Screen.CreateNewRoutine.route) { CreateRoutineScreen(navController, sharedViewModel) }
-        composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController, sharedViewModel) }
+        composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController, sharedViewModel)}
 
         composable(Screen.History.route) { HistoryScreen(navController, sharedViewModel) }
 
         composable(Screen.Profile.route) { ProfileScreen(navController, sharedViewModel) }
+        composable(Screen.ChangePassword.route) { ChangePasswordScreen(navController) }
     }
 }

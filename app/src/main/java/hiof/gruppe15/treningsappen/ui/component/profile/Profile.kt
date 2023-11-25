@@ -98,6 +98,15 @@ fun ProfileScreen(navController: NavController, sharedViewModel: SharedViewModel
 
             Spacer(modifier = Modifier.weight(1f))
 
+            ChangePasswordButton(onClick = {
+                navController.navigate(Screen.ChangePassword.route) {
+                    popUpTo(Screen.Login.route) { inclusive = true }
+                    launchSingleTop = true
+                }
+            })
+
+            Spacer(modifier = Modifier.height(24.dp))
+
             DeleteAccountButton(onClick = {
                 currentUser?.delete()
                 navController.navigate(Screen.Login.route) {
@@ -226,6 +235,21 @@ fun DeleteAccountButton(onClick: () -> Unit) {
     ) {
         Text(
             text = "Delete my account",
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
+}
+
+@Composable
+fun ChangePasswordButton(onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp)
+    ) {
+        Text(
+            text = "Change password",
             style = MaterialTheme.typography.titleMedium
         )
     }
