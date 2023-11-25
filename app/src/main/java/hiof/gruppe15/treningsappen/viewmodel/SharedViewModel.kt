@@ -3,11 +3,11 @@ package hiof.gruppe15.treningsappen.viewmodel
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import hiof.gruppe15.treningsappen.model.Exercise
 import hiof.gruppe15.treningsappen.model.Routine
-import hiof.gruppe15.treningsappen.model.RoutineExercise
 import hiof.gruppe15.treningsappen.model.WorkoutSession
-import hiof.gruppe15.treningsappen.model.WorkoutSessionExercise
+import kotlinx.coroutines.*
 
 class SharedViewModel : ViewModel() {
 
@@ -22,6 +22,11 @@ class SharedViewModel : ViewModel() {
     private val _isDarkModeEnabled = mutableStateOf(false)
     val isDarkModeEnabled: State<Boolean> = _isDarkModeEnabled
 
+    private val _workoutDuration = mutableStateOf("0")
+    val workoutDuration: State<String> = _workoutDuration
+
+    private var timerJob: Job? = null
+
     fun setSelectedExercises(exercises: List<Exercise>) {
         _selectedExercises.value = exercises
     }
@@ -32,50 +37,92 @@ class SharedViewModel : ViewModel() {
 
     fun startWorkoutSession(routine: Routine) {
         _workoutSession.value = WorkoutSession(routine)
+        startTimer()
     }
 
     fun completeWorkoutSession() {
         // TODO: Implement logic to save the workout session
         _workoutSession.value = null
+        stopTimer()
     }
 
-    fun updateSessionExerciseLogs(routineExercise: RoutineExercise, updatedLogs: List<WorkoutSessionExercise.SetLog>) {
-        // Logic to update the logs for the specific exercise
-        // Make sure to trigger a state change to recompose the UI
+    private fun startTimer() {
+        _workoutDuration.value = "0"
+        timerJob?.cancel()
+        timerJob = viewModelScope.launch(Dispatchers.Default) {
+            var time = 0L
+            while (isActive) {
+                delay(1000)
+                time++
+                _workoutDuration.value = formatDuration(time)
+            }
+        }
     }
 
-    fun updateWeight(setIndex: Int, exerciseIndex: Int, updatedWeight: String) {
+    private fun stopTimer() {
+        timerJob?.cancel()
+        _workoutDuration.value = "0"
+    }
+
+    private fun formatDuration(seconds: Long): String {
+        val hours = seconds / 3600
+        val minutes = (seconds % 3600) / 60
+        val secs = seconds % 60
+
+        return when {
+            hours > 0 -> String.format("%02d:%02d:%02d", hours, minutes, secs)
+            minutes > 0 -> String.format("%02d:%02d", minutes, secs)
+            else -> secs.toString()
+        }
+    }
+
+    fun updateWeight(exerciseIndex: Int, setIndex: Int, updatedWeight: String) {
         val currentSession = _workoutSession.value ?: return
         val exercises = currentSession.exercises.toMutableList()
-        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        setLogs[setIndex] = setLogs[setIndex].copy(weight = updatedWeight)
+        if (exerciseIndex in exercises.indices) {
+            val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
-        _workoutSession.value = currentSession.copy(exercises = exercises)
+            if (setIndex in setLogs.indices) {
+                setLogs[setIndex] = setLogs[setIndex].copy(weight = updatedWeight)
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+                _workoutSession.value = currentSession.copy(exercises = exercises)
+            }
+        }
     }
 
-    fun updateReps(setIndex: Int, exerciseIndex: Int, updatedReps: String) {
+    fun updateReps(exerciseIndex: Int, setIndex: Int, updatedReps: String) {
         val currentSession = _workoutSession.value ?: return
         val exercises = currentSession.exercises.toMutableList()
-        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        setLogs[setIndex] = setLogs[setIndex].copy(reps = updatedReps)
+        if (exerciseIndex in exercises.indices) {
+            val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
-        _workoutSession.value = currentSession.copy(exercises = exercises)
+            if (setIndex in setLogs.indices) {
+                setLogs[setIndex] = setLogs[setIndex].copy(reps = updatedReps)
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+                _workoutSession.value = currentSession.copy(exercises = exercises)
+            } else {
+                // Log an error or handle the case where the set index is out of bounds
+            }
+        } else {
+            // Log an error or handle the case where the exercise index is out of bounds
+        }
     }
 
-    fun markSetComplete(setIndex: Int, exerciseIndex: Int) {
+    fun markSetComplete(exerciseIndex: Int, setIndex: Int) {
         val currentSession = _workoutSession.value ?: return
         val exercises = currentSession.exercises.toMutableList()
-        val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        // Assuming SetLog has a 'completed' property, toggle it
-        val currentLog = setLogs[setIndex]
-        setLogs[setIndex] = currentLog.copy(completed = !currentLog.completed)
+        if (exerciseIndex in exercises.indices) {
+            val setLogs = exercises[exerciseIndex].setLogs.toMutableList()
 
-        exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
-        _workoutSession.value = currentSession.copy(exercises = exercises)
+            if (setIndex in setLogs.indices) {
+                val currentLog = setLogs[setIndex]
+                setLogs[setIndex] = currentLog.copy(completed = !currentLog.completed)
+                exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
+                _workoutSession.value = currentSession.copy(exercises = exercises)
+            }
+        }
     }
 }
