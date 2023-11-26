@@ -33,8 +33,8 @@ sealed class Screen(val route: String) {
     object CreateNewRoutine : Screen("createNewRoutine")
     object SaveNewRoutine : Screen("saveNewRoutine")
     object History : Screen("history")
-    object HistoryDetails : Screen("history/{sessionId}") {
-        fun createRoute(sessionId: String) = "history/$sessionId"
+    object HistoryDetails : Screen("historyDetails/{sessionId}") {
+        fun createRoute(sessionId: String) = "historyDetails/$sessionId"
     }
     object Profile : Screen("profile")
     object ChangePassword : Screen("changePassword")
@@ -47,7 +47,7 @@ sealed class ScreenCategory(private val baseRoutes: List<String>) {
         )
     )
 
-    object History : ScreenCategory(listOf("history"))
+    object History : ScreenCategory(listOf("history", "historyDetails"))
     object Profile : ScreenCategory(listOf("profile", "changePassword"))
 
     fun includes(route: String?): Boolean {
