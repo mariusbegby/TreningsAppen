@@ -23,7 +23,7 @@ class SharedViewModel : ViewModel() {
     private val _isDarkModeEnabled = mutableStateOf(false)
     val isDarkModeEnabled: State<Boolean> = _isDarkModeEnabled
 
-    private val _workoutDuration = mutableStateOf("0")
+    private val _workoutDuration = mutableStateOf("00:00")
     val workoutDuration: State<String> = _workoutDuration
 
     private var timerJob: Job? = null
@@ -39,13 +39,15 @@ class SharedViewModel : ViewModel() {
     }
 
     fun startWorkoutSession(routine: Routine) {
-        _workoutSession.value = WorkoutSession(routine = routine)
+        _workoutSession.value = WorkoutSession(routine = routine, startTime = System.currentTimeMillis())
         startTimer()
     }
 
     fun completeWorkoutSession() {
         _workoutSession.value?.let { workoutSession ->
-            workoutSessionRepository.saveCompletedSession(workoutSession) { isSuccess, message ->
+            val completedSession = workoutSession.copy(endTime = System.currentTimeMillis())
+
+            workoutSessionRepository.saveCompletedSession(completedSession) { isSuccess, message ->
             }
         }
         _workoutSession.value = null
@@ -53,7 +55,7 @@ class SharedViewModel : ViewModel() {
     }
 
     private fun startTimer() {
-        _workoutDuration.value = "0"
+        _workoutDuration.value = "00:00"
         timerJob?.cancel()
         timerJob = viewModelScope.launch(Dispatchers.Default) {
             var time = 0L
@@ -67,7 +69,7 @@ class SharedViewModel : ViewModel() {
 
     private fun stopTimer() {
         timerJob?.cancel()
-        _workoutDuration.value = "0"
+        _workoutDuration.value = "00:00"
     }
 
     private fun formatDuration(seconds: Long): String {
@@ -77,8 +79,7 @@ class SharedViewModel : ViewModel() {
 
         return when {
             hours > 0 -> String.format("%02d:%02d:%02d", hours, minutes, secs)
-            minutes > 0 -> String.format("%02d:%02d", minutes, secs)
-            else -> secs.toString()
+            else -> String.format("%02d:%02d", minutes, secs)
         }
     }
 

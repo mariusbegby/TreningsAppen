@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import hiof.gruppe15.treningsappen.ui.component.history.HistoryDetailsScreen
 import hiof.gruppe15.treningsappen.ui.component.history.HistoryScreen
 import hiof.gruppe15.treningsappen.ui.component.login.ForgotPasswordScreen
 import hiof.gruppe15.treningsappen.ui.component.login.LoginScreen
@@ -32,6 +33,9 @@ sealed class Screen(val route: String) {
     object CreateNewRoutine : Screen("createNewRoutine")
     object SaveNewRoutine : Screen("saveNewRoutine")
     object History : Screen("history")
+    object HistoryDetails : Screen("history/{sessionId}") {
+        fun createRoute(sessionId: String) = "history/$sessionId"
+    }
     object Profile : Screen("profile")
     object ChangePassword : Screen("changePassword")
 }
@@ -80,6 +84,15 @@ fun NavGraph(
         composable(Screen.SaveNewRoutine.route) { SaveRoutineScreen(navController, sharedViewModel)}
 
         composable(Screen.History.route) { HistoryScreen(navController, sharedViewModel) }
+        composable(
+            route = Screen.HistoryDetails.route,
+            arguments = listOf(navArgument("sessionId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val sessionId = backStackEntry.arguments?.getString("sessionId")
+            if (sessionId != null) {
+                HistoryDetailsScreen(navController, sessionId, sharedViewModel)
+            }
+        }
 
         composable(Screen.Profile.route) { ProfileScreen(navController, sharedViewModel) }
         composable(Screen.ChangePassword.route) { ChangePasswordScreen(navController) }

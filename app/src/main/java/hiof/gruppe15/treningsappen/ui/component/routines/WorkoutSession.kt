@@ -51,22 +51,12 @@ fun WorkoutSessionScreen(navController: NavController, sharedViewModel: SharedVi
     val workoutSession = sharedViewModel.workoutSession.value ?: return
     val workoutDuration = sharedViewModel.workoutDuration.value
 
-    AppScaffold(navController = navController, title = "Session: ${workoutSession.routine.name}") {
+    AppScaffold(navController = navController, title = "Session: ${workoutSession.routine.name} - $workoutDuration") {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
         ) {
-            item {
-                Text(
-                    text = "Workout duration: $workoutDuration",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold,
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-
             itemsIndexed(workoutSession.exercises) { exerciseIndex, sessionExercise ->
                 WorkoutSessionExerciseCard(
                     sessionExercise = sessionExercise,
@@ -161,7 +151,7 @@ fun SetInputRow(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text("${setIndex + 1}", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
+        Text("  ${setIndex + 1}", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(32.dp))
 
         Spacer(Modifier.width(8.dp))
 
@@ -206,10 +196,10 @@ fun SmallTextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = true,
-        modifier = modifier.height(IntrinsicSize.Min),
+        modifier = modifier.height(IntrinsicSize.Min).padding(vertical = 0.dp),
         textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
         shape = RoundedCornerShape(4.dp),
-        visualTransformation = VisualTransformation.None
+        visualTransformation = VisualTransformation.None,
     )
 }
 

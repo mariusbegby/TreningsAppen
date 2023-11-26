@@ -41,7 +41,7 @@ fun RoutineDetailsScreen(navController: NavController, routineId: String, shared
     val routineViewModel = sharedViewModel.routineViewModel
     val routine = routineViewModel.getRoutineById(routineId)
 
-    AppScaffold(navController = navController, title = routine?.name ?: "Routine") {
+    AppScaffold(navController = navController, title = "Routine: ${routine?.name}") {
         Column(
             modifier = Modifier
                 .fillMaxSize()

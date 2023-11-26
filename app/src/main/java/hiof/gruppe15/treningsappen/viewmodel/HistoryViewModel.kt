@@ -28,7 +28,6 @@ class HistoryViewModel : ViewModel() {
                         doc.toObject(WorkoutSession::class.java)?.copy(id = doc.id)
                     }
 
-                    Log.d("HistoryViewModel", "Fetched sessions count: ${sessions.size}")
                     _workoutSessions.value = sessions
                 } catch (e: Exception) {
                     Log.e("HistoryViewModel", "Error fetching sessions", e)
@@ -37,5 +36,9 @@ class HistoryViewModel : ViewModel() {
                 Log.e("HistoryViewModel", "User not authenticated")
             }
         }
+    }
+
+    fun getSessionById(id: String): WorkoutSession? {
+        return _workoutSessions.value.find { it.id == id }
     }
 }
