@@ -244,7 +244,6 @@ fun ExerciseDetailsView(routineExercise: RoutineExercise) {
                 style = MaterialTheme.typography.bodyMedium
             )
 
-            // Display notes if available
             if (routineExercise.note.isNotEmpty()) {
                 Text(
                     text = "Notes: ${routineExercise.note}",

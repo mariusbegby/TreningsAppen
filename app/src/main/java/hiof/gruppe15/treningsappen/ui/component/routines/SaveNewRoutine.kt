@@ -211,10 +211,10 @@ fun NoteInputField(
         label = { Text("Notes") },
         placeholder = { Text("Optional") },
         singleLine = false,
-        maxLines = 3, // Adjust based on your needs
+        maxLines = 3,
         textStyle = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.onSurface),
         colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color.Transparent, // Removes the TextField's background
+            focusedContainerColor = Color.Transparent,
             unfocusedContainerColor = Color.Transparent,
             disabledContainerColor = Color.Transparent,
             cursorColor = MaterialTheme.colorScheme.onSurface,
@@ -223,7 +223,7 @@ fun NoteInputField(
         ),
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp) // Further reduce the vertical size if needed
+            .padding(vertical = 4.dp)
     )
 }
 
@@ -245,7 +245,6 @@ fun SetsInputField(
         Row(
             verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
         ) {
-            // Min label
             Text(
                 text = sliderRange.start.toInt().toString(),
                 style = MaterialTheme.typography.bodySmall,
@@ -266,7 +265,6 @@ fun SetsInputField(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            // Max label
             Text(
                 text = sliderRange.endInclusive.toInt().toString(),
                 style = MaterialTheme.typography.bodySmall,

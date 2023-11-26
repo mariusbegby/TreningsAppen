@@ -109,12 +109,8 @@ class SharedViewModel : ViewModel() {
                 setLogs[setIndex] = setLogs[setIndex].copy(reps = updatedReps)
                 exercises[exerciseIndex] = exercises[exerciseIndex].copy(setLogs = setLogs)
                 _workoutSession.value = currentSession.copy(exercises = exercises)
-            } else {
-                // Log an error or handle the case where the set index is out of bounds
             }
-        } else {
-            // Log an error or handle the case where the exercise index is out of bounds
-        }
+        } 
     }
 
     fun markSetComplete(exerciseIndex: Int, setIndex: Int) {

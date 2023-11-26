@@ -182,14 +182,14 @@ private fun NavButton(
                     imageVector = iconWrapper.imageVector,
                     contentDescription = contentDescription,
                     tint = selectedColor,
-                    modifier = Modifier.size(24.dp) // Control the size of the Icon
+                    modifier = Modifier.size(24.dp)
                 )
 
                 is IconWrapper.PainterIcon -> Icon(
                     painter = iconWrapper.painter,
                     contentDescription = contentDescription,
                     tint = selectedColor,
-                    modifier = Modifier.size(24.dp) // Control the size of the Icon
+                    modifier = Modifier.size(24.dp)
                 )
             }
 

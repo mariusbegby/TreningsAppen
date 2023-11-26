@@ -213,7 +213,7 @@ fun ExerciseNameWithCheckbox(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        if(exercise.imageUrl.isNullOrEmpty()) { // If no image is provided, use the default logo
+        if(exercise.imageUrl.isNullOrEmpty()) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Muscle Group Image",

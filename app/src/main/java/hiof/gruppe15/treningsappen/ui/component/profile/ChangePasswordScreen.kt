@@ -82,8 +82,7 @@ fun ChangePasswordScreen(navController: NavController) {
                     user?.updatePassword(newPassword)?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             passwordChangeStatus = "Password Updated Successfully"
-                            // Navigate back to profile screen after a successful password update
-                            navController.navigate("profile") { // Assuming "profile" is the route name
+                            navController.navigate("profile") {
                                 popUpTo("profile") { inclusive = true }
                             }
                         } else {
