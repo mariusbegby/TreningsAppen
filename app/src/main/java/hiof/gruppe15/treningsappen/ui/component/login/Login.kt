@@ -48,7 +48,7 @@ import hiof.gruppe15.treningsappen.viewmodel.SharedViewModel
 
 @Composable
 fun LoginScreen(navController: NavController, sharedViewModel: SharedViewModel) {
-    var email by remember { mutableStateOf("user@example.com") }
+    var email by remember { mutableStateOf("demo@treningsappen.no") }
     var password by remember { mutableStateOf("123abc123") }
     var passwordVisibility by remember { mutableStateOf(false) }
     val context = LocalContext.current
