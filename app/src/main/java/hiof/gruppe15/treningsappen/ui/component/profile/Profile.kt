@@ -7,6 +7,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -142,20 +144,21 @@ fun ProfileImage(imageUri: Uri?, imagePickerLauncher: ManagedActivityResultLaunc
 
     Box(
         modifier = Modifier
-            .size(120.dp)
+            .size(64.dp)
             .clip(CircleShape)
             .background(if (imageUri == null) Color.LightGray else MaterialTheme.colorScheme.primary, shape = CircleShape)
-            .clickable { imagePickerLauncher.launch("image/*") },
+            .clickable { imagePickerLauncher.launch("image/*") }
+            .border(2.dp, MaterialTheme.colorScheme.onBackground, shape = CircleShape),
         contentAlignment = Alignment.Center
     ) {
         if (imageUri != null) {
             Image(
                 painter = rememberAsyncImagePainter(imageUri),
                 contentDescription = "Profile Image",
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillBounds
             )
         } else {
-            // Display the icon and text when no image is selected
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(
                     imageVector = Icons.Default.AddAPhoto,
